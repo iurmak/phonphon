@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Редактирование сообщения{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <div class="card">
+            <form action="" method="post">
+                <div class="card-body">
+                    <dl class="row">
+                    {% if question %}
+                        <dt class="col-sm-2">Вопрос</dt>
+                        <dd class="col-sm-10">
+                            {{ question }}
+                        </dd>
+                    {% endif %}
+                        {% if session.get('status') == 2 %}
+                            <dt class="col-sm-2">Автор вопроса</dt>
+                            <dd class="col-sm-10">
+                                {{ question_author }}
+                            </dd>
+                            {% if question %}<hr>{% endif %}
+                        {% endif %}
+
+                        <dt class="col-sm-2"><label for="new_text">Изменяемое сообщение</label></dt>
+                        <dd class="col-sm-10">
+                            <textarea required class="form-control" name="changed_text" id="new_text">{{ current_text }}</textarea>
+                        </dd>
+                        {% if session.get('status') == 2 and answer_author %}
+                            <dt class="col-sm-2">Автор сообщения</dt>
+                            <dd class="col-sm-10">
+                                {{ answer_author }}
+                            </dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="card-footer text-end">
+                    <button type="submit" class="btn btn-primary">Внести изменения</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

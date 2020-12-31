@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Задание № {{ assignment.assignment_id }}{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <div class="card">
+            <div class="card-header">
+                <div class="row text-center">
+                    <div class="col align-self-center"><span class="h5">{{ assignment.title }}</span>{% if not assignment.datetime %}<span class="text-danger"> черновик</span>{% endif %}</div>
+                    <div class="col-3 align-self-center align-content-end">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Описание</dt>
+                    <dd class="col-sm-9">
+                        <p>{{ assignment.description }}</p>
+                    </dd>
+                    {% if assignment.datetime %}
+                        <dt class="col-sm-3">Когда опубликовано</dt>
+                        <dd class="col-sm-9">
+                            <p><span class="text-dark">{{ Amend.datetime(assignment.datetime) }}</span></p>
+                        </dd>
+                    {% endif %}
+                    <dt class="col-sm-3">Дедлайн</dt>
+                    <dd class="col-sm-9">
+                        <p class="text-info">{{ assignment.deadline }}</p>
+                    </dd>
+                    {% if session.get('status') == 2 %}
+                        <dt class="col-sm-3">Кто добавил</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ assignment.assigner }}</p>
+                        </dd>
+                        <dt class="col-sm-3">Кому адресовано</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ assignment.assignees }}</p>
+                        </dd>
+                    {% endif %}
+                    <dt class="col-sm-3">Тип</dt>
+                    <dd class="col-sm-9">
+                        <p>{{ assignment.type.text }}{% if assignment.is_grade %} <span class="text-info">(не требует выполнения)</span>{% endif %}</p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer">
+                <div class="container-fluid">
+                    <div class="row justify-content-between text-center">
+                        {% if session.get('status') == 2 %}
+                            <div class="col-3">
+                                <a class="btn btn-outline-success" href="{{ url_for('massive_assessment', id=assignment.assignment_id) }}">Отметки</a>
+                            </div>
+                            <div class="col-3">
+                                <a class="btn btn-outline-primary" href="{{ url_for('edit', type='assignment', id=assignment.assignment_id) }}">Редактировать</a>
+                            </div>
+                            <div class="col-3">
+                                <form action="" method="post" id="deletion">
+                                    <button class="btn btn-outline-danger" value="{{ assignment.assignment_id }}" type="submit" name="delete" form="deletion">Удалить</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

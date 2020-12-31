@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Проверка задания № {{ assignment.source_assignment_id }}{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <div class="card">
+            <form action="" method="post" id="check">
+                <div class="card-header">
+                    <div class="row text-center">
+                        <div class="col align-self-center"><a class="h5 link-dark" href="{{ url_for('assignment', id=assignment.source_assignment_id) }}">{{ assignment.assignment.title }}</a></div>
+                        <div class="col-2 align-self-center align-content-end">
+                            <span><label for="grade">Отметка <input class="col-4" value="{{ assignment.grade }}" id="grade" type="number" name="grade"></label></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Описание</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ assignment.assignment.description }}</p>
+                        </dd>
+                        <dt class="col-sm-3">Тип и статус</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ assignment.assignment.type.text }}, {{ Amend.assignment_status(assignment.status_id) }}</p>
+                        </dd>
+                        <dt class="col-sm-3">Когда опубликовано</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ assignment.assignment.datetime }}</p>
+                        </dd>
+                        <dt class="col-sm-3">Когда сдано</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ assignment.datetime }}</p>
+                        </dd>
+                        <dt class="col-sm-3">Ответ студента</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ Amend.md(assignment.answer) }}</p>
+                        </dd>
+                        <dt class="col-sm-3"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}({{ Amend.username(User.query.get(assignment.is_checked).username) }}, {{ Amend.datetime(assignment.when_checked) }}){% endif %}</label></dt>
+                        <dd class="col-sm-9">
+                            <p><textarea class="form-control" id="main_comment" name="main_comment">{{ assignment.main_comment }}</textarea></p>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <div class="row justify-content-between text-center">
+                        <span class="col-3 border border-danger rounded align-self-center">Дедлайн: <b>{{ assignment.assignment.deadline }}</b></span>
+                        <div class="col-3 align-self-center align-content-end">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit" form="check">Завершить проверку</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><br>
+        <div class="card">
+            <div class="card-header">
+                <div class="align-self-center"><span class="h6">Переписка со студентом</span></div>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" id="add_comment">
+                    <dl class="row">
+                        <dt class="col-sm-2 align-self-center text-center"><p>
+                            <span class="align-self-center"><button class="btn btn-primary" type="submit" form="add_comment">Отправить</button></span>
+                        </p></dt>
+                        <dd class="col-sm-10 align-self-center"><textarea class="form-control" name="new_comment"></textarea></dd>
+                    </dl>
+                </form>
+            </div>
+            {% if assignment.discussion %}
+                <div class="card-footer">
+                    {% for comment in assignment.discussion %}
+                            <blockquote class="blockquote">
+                                {{ Amend.md(comment.text) }}
+                            </blockquote>
+                            <figcaption class="blockquote-footer">
+                                {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
+                            </figcaption>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

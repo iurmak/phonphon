@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <div class="card">
+            <div class="card-header">
+                <div class="row justify-content-between">
+                    <span class="h5 col align-self-center">{{ user }}: сведения о профиле</span>
+                    <div class="row justify-content-end col-4">
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#questions">
+                                Вопросы
+                            </button>
+                            <div class="modal fade" id="questions" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ user }}: заданные вопросы</h5>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                            {% for question in questions %}
+                                                <ul>
+                                                    <li>
+                                                        <a href="{{ url_for('question', question_id=question.question_id) }}">{{ question.title }}</a>
+                                                    </li>
+                                                </ul>
+                                            {% endfor %}
+                                            {% if questions == [] %}
+                                                <p>Отсутствуют.</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#answers">
+                                Ответы
+                            </button>
+                            <div class="modal fade" id="answers" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ user }}: данные ответы</h5>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                            {% for answer in answers %}
+                                                <ul>
+                                                    <li>
+                                                        <a href="{{ url_for('question', question_id=answer.question_id) }}">{{ answer.question.title }}</a>
+                                                    </li>
+                                                </ul>
+                                            {% endfor %}
+                                            {% if answers == [] %}
+                                                <p>Отсутствуют.</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#grades">
+                                Отметки
+                            </button>
+                            <div class="modal fade" id="grades" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ user }}: отметки</h5>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                            <div class="container">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col-2">Задание</th>
+                                                        <th scope="col-1">Отметка</th>
+                                                    </tr>
+                                                  </thead>
+                                                <tbody>
+                                                    {% for student in handed_assignments %}
+                                                        {% set value = student.user.surname + student.user.firstname + '_' + student.user.email %}
+                                                        <tr>
+                                                            <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{% if session.get('status') == 2 %}{{ url_for('check_assignment', id=student.assignment_id) }}{% else %}{{ url_for('assignment', id=student.source_assignment_id) }}{% endif %}">{{ student.assignment.title }}</a></label></td>
+                                                            <td class="col-1"><span class="text-dark h6">{{ student.grade }}</span></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="card-body">
+                    <form action="" method="post" id="profile_changes">
+                        <dl class="row">
+                            <dt class="col-sm-3"><label for="username">Отображаемое имя</label></dt>
+                            <dd class="col-sm-9">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="{{ user }}" minlength="3" maxlength="40" pattern="[А-ЯЁа-яё\w_]+">
+                            </dd>
+                            <dt class="col-sm-3"><label for="firstname">Настоящее имя</label></dt>
+                            <dd class="col-sm-9">
+                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="{{ firstname }}" minlength="3" maxlength="40" pattern="[А-Яа-яЁё]+">
+                            </dd>
+                            <dt class="col-sm-3"><label for="surname">Настоящая фамилия</label></dt>
+                            <dd class="col-sm-9">
+                                <input type="text" class="form-control" name="surname" id="surname" placeholder="{{ surname }}" minlength="3" maxlength="40" pattern="[А-Яа-яЁё]+">
+                            </dd>
+                            <dt class="col-sm-3">
+                                <label for="email">
+                                    Имейл {% if emails.query.get(user_id).confirmed == 1 %}<span class="text-success">(подтверждён)</span>{% else %}<span class="text-warning">(не подтверждён)</span>{% endif %}
+                                </label>
+                            </dt>
+                            <dd class="col-sm-9">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="{{ email }}" minlength="3" maxlength="100">
+                            </dd>
+                            <dt class="col-sm-3"><label for="group">Группа</label></dt>
+                            <dd class="col-sm-9">
+                                <input type="text" class="form-control" name="group" id="group" placeholder="{{ group }}" pattern="\d{3}">
+                            </dd>
+                            <dt class="col-sm-3"><label for="role">Статус</label></dt>
+                            <dd class="col-sm-9">
+                                {% if session.get('user') == user %}
+                                    <p>{{ role }}</p>
+                                {% else %}
+                                    <select class="form-select" name="role" id="role">
+                                        {% for available_role in roles %}
+                                            {% if available_role.type == role %}
+                                                <option selected value="{{ available_role.id }}">{{ role }}</option>
+                                            {% else %}
+                                                <option value="{{ available_role.id }}">{{ available_role.type }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                {% endif %}
+                            </dd>
+                            <dt class="col-sm-3"><label for="group">Когда зарегистрирован</label></dt>
+                            <dd class="col-sm-9">
+                                {{ date }}
+                            </dd>
+                        </dl>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#password">
+                                Сменить пароль
+                            </button>
+                            <div class="modal fade" id="password" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">{{ user }}: смена пароля</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="" method="post" id="password_changes">
+                                                {% if session.get('status') == 2 %}
+                                                    <div class="text-center">
+                                                        <label for="new_password" class="h6">Новый пароль</label>
+                                                    </div>
+                                                    <input required type="password" maxlength="100" name="new_password" id="new_password" class="form-control">
+                                                {% else %}
+                                                    <div class="text-center">
+                                                        <label for="current_password" class="h6">Текущий пароль</label>
+                                                    </div>
+                                                    <input required type="password" name="current_password" id="current_password" maxlength="100" class="form-control">
+                                                    <div class="text-center">
+                                                        <label for="new_password" class="h6">Новый пароль</label>
+                                                    </div>
+                                                    <input required type="password" name="new_password" id="new_password" maxlength="100" class="form-control">
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col-8 align-self-start">
+                                                    <button type="submit" class="btn btn-danger" form="password_changes">Изменить пароль</button>
+                                                </div>
+                                                <div class="col-4 align-self-end">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if session.get('status') == 2 and not user.startswith('Пользователь ') %}
+                            <div class="col-4">
+                                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ban">
+                                    Заблокировать
+                                </button>
+                                <div class="modal fade" id="ban" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{ user }}: блокировка</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="" method="post" id="confirm_ban">
+                                                    <p><span class="text-center text-danger">Имейл будет удалён из базы данных, отображаемое имя изменится на «Пользователь {{ user_id }}», а хозяин профиля не сможет больше войти в свой аккаунт.</span></p>
+                                                    <input class="btn btn-danger" type="submit" form="confirm_ban" name="ban" value="Подтвердить блокировку">
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="row">
+                                                    <div class="col-4 align-self-end">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% elif session.get('status') == 2 %}
+                                <div class="col-4">
+                                    <button disabled type="button" class="btn btn-dark">Заблокирован</button>
+                                </div>
+                            {% endif %}
+                        <div class="col-4">
+                            <button form="profile_changes" type="submit" class="btn btn-primary">Внести изменения</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

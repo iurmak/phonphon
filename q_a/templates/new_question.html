@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Новый вопрос{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <form action="" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-2"><label for="essence">Суть вопроса</label></dt>
+                        <dd class="col-sm-10">
+                            <input required type="text" class="form-control" name="essence" id="essence" placeholder="Как произнести звук [i]?" maxlength="150">
+                        </dd>
+                        <dt class="col-sm-2"><label for="question">Вопрос целиком</label></dt>
+                        <dd class="col-sm-10">
+                            <textarea required class="form-control" name="question" id="question" placeholder="Исчерпывающе опишите вопрос" maxlength="20000"></textarea>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <div class="container-fluid">
+                        <div class="row justify-content-between">
+                            <div class="col-4 align-self-center">
+                                <label class="form-check-label" for="anon">Опубликовать анонимно</label>
+                                <input type="checkbox" class="form-check-input" name="anon" id="anon">
+                            </div>
+                            <div class="col-3 align-self-center text-end">
+                                <button type="submit" class="btn btn-primary">Задать вопрос</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

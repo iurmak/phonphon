@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Список вопросов{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <form action="" method="post" id="login_form">
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4"><label for="login">Имейл или отображаемое имя</label></dt>
+                        <dd class="col-sm-8">
+                            <input required type="text" class="form-control" name="login" id="login" placeholder="student@edu.hse.ru" maxlength="100">
+                        </dd>
+                        <dt class="col-sm-4"><label for="password">Пароль</label></dt>
+                        <dd class="col-sm-8">
+                            <input type="password" required class="form-control" name="password" id="password" maxlength="100">
+                        </dd>
+                    </dl>
+                </div>
+            </form>
+                <div class="card-footer text-center">
+                    <div class="row">
+                        <div class="col text-start">
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#password_recover">
+                                Восстановить пароль
+                            </button>
+                            <div class="modal fade" id="password_recover" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Восстановление пароля</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="" method="post" id="new_credentials">
+                                                <div class="text-center">
+                                                    <label for="email" class="h6">Имейл</label>
+                                                </div>
+                                                <input required type="email" maxlength="100" name="email" id="email" class="form-control">
+                                                <div class="text-center">
+                                                    <label for="new_password" class="h6">Новый пароль</label>
+                                                </div>
+                                                <input required type="password" name="new_password" id="new_password" maxlength="100" class="form-control">
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col-8 align-self-start">
+                                                    <button type="submit" class="btn btn-danger" form="new_credentials">Отправить запрос</button>
+                                                </div>
+                                                <div class="col-4 align-self-end">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-end">
+                            <button type="submit" class="btn btn-primary" form="login_form">Войти</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}

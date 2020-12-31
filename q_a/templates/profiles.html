@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Профили{% endblock %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Группа</th>
+                <th scope="col">Отображаемое имя</th>
+                <th scope="col">Настоящая фамилия</th>
+                <th scope="col">Настоящее имя</th>
+                <th scope="col">Имейл</th>
+            </tr>
+          </thead>
+        <tbody>
+            {% for profile in profiles %}
+                    <tr>
+                        <td>{{ profile.id }}</td>
+                        <td>{{ profile.group.group }}</td>
+                        <td><a href="{{ url_for('profile', user_id=profile.id)}}">{{ profile.username }}</a></td>
+                        <td>{{ profile.surname }}</td>
+                        <td>{{ profile.firstname }}</td>
+                        <td>{% if Email.query.get(profile.id).confirmed %}<span class="text-success">{{ profile.email }}</span>{% else %}<span class="text-warning">{{ profile.email }}</span>{% endif %}</td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% if items.has_prev or items.has_next %}
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                {% if items.has_prev %}
+                    <div class="col-4">
+                        <a class="btn btn-outline-secondary" href="{{ url_for('profiles', page=items.prev_num) }}">Предыдущие профили</a>
+                    </div>
+                {% endif %}
+                {% if items.has_next %}
+                    <div class="col-4">
+                        <a class="btn btn-outline-secondary" href="{{ url_for('profiles', page=items.next_num) }}">Следующие профили</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

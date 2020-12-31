@@ -1,0 +1,6 @@
+Flask~=1.1.2
+itsdangerous~=1.1.0
+Markdown~=3.3.3
+bs4~=0.0.1
+beautifulsoup4~=4.9.3
+setuptools~=51.1.0

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Редактирование задания{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <div class="card">
+            <form action="" method="post">
+                <div class="card-header text-end">
+                     Сейчас: {{ Amend.datetime(Check.time()) }}
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3"><label for="title">Заголовок</label></dt>
+                        <dd class="col-sm-9">
+                            <input required type="text" class="form-control" name="title" id="title" value="{{ title }}" maxlength="200">
+                        </dd>
+                        <dt class="col-sm-3"><label for="description">Описание</label></dt>
+                        <dd class="col-sm-9">
+                            <textarea required class="form-control" name="description" id="description" maxlength="20000">{{ description }}</textarea>
+                        </dd>
+                        <dt class="col-sm-3"><label for="deadline">Дедлайн</label></dt>
+                        <dd class="col-sm-9">
+                            <input class="form-control" name="deadline" id="deadline" value="{{ deadline }}" pattern="[0-3]\d\.[01]\d\.20\d\d [0-2]\d:\d\d">
+                        </dd>
+                        <dt class="col-sm-3">
+                            <p title="Всем студентам: all. Группам: 201, 202. Индивидуально: *username."><label for="assignees">Добавить адресатов</label>
+                        </dt>
+                        <dd class="col-sm-9">
+                            <input class="form-control" name="assignees" id="assignees" placeholder="{{ assignees }}">
+                        </dd>
+                        <dt class="col-sm-3"><label for="type">Тип</label></dt>
+                        <dd class="col-sm-9">
+                            <select class="form-select" name="type_id" id="type">
+                                {% for type in types %}
+                                    {% if type.id == current_type %}
+                                        <option selected value="{{ type.id }}">{{ type.text }}</option>
+                                    {% else %}
+                                        <option value="{{ type.id }}">{{ type.text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    <div class="row justify-content-between">
+                        {% if not is_grade %}
+                            <div class="col-4 align-self-center">
+                                <label class="form-check-label" for="is_grade">Не требует выполнения (просто отметка)</label>
+                                <input class="form-check-input text-dark" type="checkbox" name="is_grade" id="is_grade">
+                            </div>
+                        {% endif %}
+                        {% if is_draft %}
+                            <div class="col-2 align-self-center">
+                                <label class="form-check-label" for="is_draft">Черновик</label>
+                                <input checked class="form-check-input text-dark" type="checkbox" name="is_draft" id="is_draft">
+                            </div>
+                        {% endif %}
+                        <div class="col-3">
+                            <button type="submit" class="btn btn-warning">Внести изменения</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Задания на проверку{% endblock %}
+{% block content %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Тип</th>
+                <th scope="col">Заголовок</th>
+                <th scope="col">Кто сдал</th>
+                <th scope="col">Когда сдано</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Дедлайн</th>
+                <th scope="col">Когда опубликовано</th>
+            </tr>
+          </thead>
+        <tbody>
+            {% for assignment in assignments %}
+                    <tr>
+                        <td>{{ assignment.assignment.type.text }}</td>
+                        <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ assignment.assignment.title }}</a></td>
+                        <td>{{ Amend.username(assignment.user.username) }}</td>
+                        <td>{{ Amend.datetime(assignment.datetime) }}</td>
+                        <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
+                        <td>{{ assignment.assignment.deadline }}</td>
+                        <td>{{ assignment.assignment.datetime }}</td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    {% if items.has_prev or items.has_next %}
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                {% if items.has_prev %}
+                    <div class="col-4">
+                        <a class="btn btn-outline-secondary" href="{{ url_for('todo_teacher', page=items.prev_num) }}">Предыдущие задания</a>
+                    </div>
+                {% endif %}
+                {% if items.has_next %}
+                    <div class="col-4">
+                        <a class="btn btn-outline-secondary" href="{{ url_for('todo_teacher', page=items.next_num) }}">Следующие задания</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

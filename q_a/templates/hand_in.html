@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Задание № {{ assignment.source_assignment_id }}{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <div class="card">
+            <div class="card-header">
+                <div class="row text-center">
+                    <div class="col align-self-center"><span class="h5">{{ assignment.assignment.title }}</span></div>
+                    {% if assignment.grade != None %}
+                        <div class="col-3 align-self-center align-content-end">
+                            <span>Отметка: <span class="h6">{{ assignment.grade }}</span></span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Описание</dt>
+                    <dd class="col-sm-9">
+                        <p>{{ assignment.assignment.description }}</p>
+                    </dd>
+                    <dt class="col-sm-3">Тип и статус</dt>
+                    <dd class="col-sm-9">
+                        <p>{{ assignment.assignment.type.text }}, {{ Amend.assignment_status(assignment.status_id) }}</p>
+                    </dd>
+                    <dt class="col-sm-3">Когда опубликовано</dt>
+                    <dd class="col-sm-9">
+                        <p>{{ assignment.assignment.datetime }}</p>
+                    </dd>
+                    {% if assignment.datetime %}
+                        <dt class="col-sm-3">Когда сдано</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ Amend.datetime(assignment.datetime) }}</p>
+                        </dd>
+                    {% endif %}
+                    {% if assignment.answer %}
+                        <dt class="col-sm-3">Ваш ответ</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ Amend.md(assignment.answer) }}</p>
+                        </dd>
+                    {% elif not assignment.assignment.is_grade %}
+                        <dt class="col-sm-3"><label for="answer">Ваш ответ</label></dt>
+                        <dd class="col-sm-9">
+                            <form id="add_answer" action="" method="post">
+                                <textarea class="form-control" id="answer" name="answer"></textarea>
+                            </form>
+                        </dd>
+                    {% endif %}
+                    {% if assignment.main_comment %}
+                            <dt class="col-sm-3">Комментарий проверяющего</dt>
+                            <dd class="col-sm-9">
+                                <div class="container-md border border-success rounded align-self-center">
+                                    <span class="text-start">{{ Amend.md(assignment.main_comment) }}</span>
+                                </div>
+                            </dd>
+                    {% endif %}
+                </dl>
+            </div>
+            <div class="card-footer">
+                <div class="row justify-content-between text-center">
+                    {% if not assignment.assignment.is_grade and assignment.assignment.deadline %}
+                        <span class="col-3 border border-danger rounded align-self-center">Дедлайн: <b>{{ assignment.assignment.deadline }}</b></span>
+                    {% endif %}
+                    <div class="col-3 align-self-center align-content-end">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
+                    {% if not assignment.answer and not assignment.assignment.is_grade %}
+                        <div class="col-3">
+                            <button class="btn btn-primary" type="submit" form="add_answer">Отправить ответ</button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div><br>
+        <div class="card">
+            <div class="card-header">
+                <div class="align-self-center"><span class="h6">Остались вопросы? Задайте их проверяющему!</span></div>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" id="add_comment">
+                    <dl class="row">
+                        <dt class="col-sm-2 align-self-center text-center"><p>
+                            <span class="align-self-center"><button class="btn btn-primary" type="submit" form="add_comment">Отправить</button></span>
+                        </p></dt>
+                        <dd class="col-sm-10 align-self-center"><textarea form="add_comment" class="form-control" name="new_comment"></textarea></dd>
+                    </dl>
+                </form>
+            </div>
+            {% if assignment.discussion %}
+                <div class="card-footer">
+                    {% for comment in assignment.discussion %}
+                            <blockquote class="blockquote">
+                                {{ Amend.md(comment.text) }}
+                            </blockquote>
+                            <figcaption class="blockquote-footer">
+                                {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
+                            </figcaption>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

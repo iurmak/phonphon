@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Уведомления{% endblock %}
+{% block content %}
+    {% if Email.query.get(session.get('user_id')).confirmed %}
+        <div class="container text-center">
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#settings">
+                Настроить имейл-уведомления
+            </button>
+            <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Настройка имейл-уведомлений</h5>
+                        </div>
+                        <div class="modal-body text-start">
+                            <form action="" method="post" id="new_settings">
+                                <ul>
+                                    <li>
+                                        <label class="form-check-label" for="new_assignments">Новые задания</label>
+                                        <input {% if Email.query.get(session.get('user_id')).new_assignments %}checked{% endif %} class="form-check-input" type="checkbox" name="new_assignments" id="new_assignments">
+                                    </li>
+                                    <li>
+                                        <label class="form-check-label" for="new_mentions">Новые упоминания</label>
+                                        <input {% if Email.query.get(session.get('user_id')).new_mentions %}checked{% endif %} class="form-check-input" type="checkbox" name="new_mentions" id="new_mentions">
+                                    </li>
+                                    {% if Subscription.query.filter_by(user_id=session.get('user_id')).first() %}
+                                        <li>
+                                            <label>Отписаться от новых ответов</label>
+                                            <ul>
+                                                {% for subscription in Subscription.query.filter_by(user_id=session.get('user_id')).all() %}
+                                                    {% set question=Question.query.get(subscription.event.target_id) %}
+                                                    <li>
+                                                        <label class="form-check-label" for="question_{{ question.question_id }}"><a class="link-dark" href="{{ url_for('question', question_id=question.question_id) }}">{{ question.title }}</a></label>
+                                                        <input class="form-check-input" type="checkbox" name="{{ question.question_id }}" id="question_{{ question.question_id }}">
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-8 align-self-start">
+                                    <button type="submit" class="btn btn-primary" form="new_settings">Сохранить настройки</button>
+                                </div>
+                                <div class="col-4 align-self-end">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <p>Вы не подтвердили имейл. Нажмите <a href="{{ url_for('notification', user_id=session.get('user_id')) }}">сюда</a>, чтобы выслать ссылку повторно.</p>
+        </div>
+    {% endif %}
+{% endblock %}
