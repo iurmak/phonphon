@@ -3,7 +3,7 @@ from flask import render_template, Markup
 from q_a.models import Question
 from q_a.supplement import Amend, Check
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/questions/', methods=['GET', 'POST'])
 @app.route('/questions/<int:page>', methods=['GET', 'POST'])
 def questions(page=1):
     Check.update()

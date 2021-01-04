@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col text-end">
+                        {% if role_id != 2 %}<div class="col text-end">
                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#grades">
                                 Отметки
                             </button>
@@ -85,11 +85,11 @@
                                                     </tr>
                                                   </thead>
                                                 <tbody>
-                                                    {% for student in handed_assignments %}
-                                                        {% set value = student.user.surname + student.user.firstname + '_' + student.user.email %}
+                                                    {% for assignment in handed_assignments %}
+                                                        {% set value = assignment.user.surname + assignment.user.firstname + '_' + assignment.user.email %}
                                                         <tr>
-                                                            <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{% if session.get('status') == 2 %}{{ url_for('check_assignment', id=student.assignment_id) }}{% else %}{{ url_for('assignment', id=student.source_assignment_id) }}{% endif %}">{{ student.assignment.title }}</a></label></td>
-                                                            <td class="col-1"><span class="text-dark h6">{{ student.grade }}</span></td>
+                                                            <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{% if session.get('status') == 2 %}{{ url_for('check_assignment', id=assignment.assignment_id) }}{% else %}{{ url_for('assignment', id=assignment.source_assignment_id) }}{% endif %}">{{ assignment.assignment.title }}</a></label></td>
+                                                            <td class="col-1"><span class="text-dark h6">{{ assignment.grade }}</span></td>
                                                         </tr>
                                                     {% endfor %}
                                                 </tbody>
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>{% endif %}
                     </div>
                 </div>
             </div>

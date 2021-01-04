@@ -24,7 +24,7 @@
         <tbody>
             <form action="" method="post" id="grades">
                 {% for student in handed_assignments %}
-                    {% set value = student.user.surname + student.user.firstname + '_' + student.user.email %}
+                    {% set value = student.user.id %}
                     <tr>
                             <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{{ url_for('check_assignment', id=student.assignment_id) }}">{{ student.user.surname }}</a></label></td>
                             <td class="col-2">{{ student.user.firstname }}</td>

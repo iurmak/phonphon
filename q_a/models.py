@@ -22,7 +22,7 @@ class User(db.Model):
     created_assignments = db.relationship('Assignment', backref='author')
     comments = db.relationship('Comment', backref='user')
     assignments = db.relationship('Handed_assignment', backref='user')
-    actions = db.relationship('Log', backref='actor')
+    posts = db.relationship('Post', backref='user')
 
 
 class Role_assignment(db.Model):
@@ -49,16 +49,13 @@ class Email(db.Model):
 
 class Subscription(db.Model):
     subscription_id = db.Column(db.Integer, primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey('log.event_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.question_id'))
-    event = db.relationship('Log', backref='subscription')
 
 
 class Action_types(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.Text)
-    logged = db.relationship('Log', backref='action')
 
 
 class Question(db.Model):
@@ -104,7 +101,7 @@ class Handed_assignment(db.Model):
     assignee = db.Column(db.Integer, db.ForeignKey('user.id'))
     answer = db.Column(db.Text(20000))
     checked_by = db.Column(db.Integer)
-    is_checked = db.Column(db.Boolean)
+    is_checked = db.Column(db.Boolean, default=False)
     when_checked = db.Column(db.Integer)
     main_comment = db.Column(db.Text)
     grade = db.Column(db.Integer, default=None)
@@ -132,10 +129,25 @@ class Comment(db.Model):
     text = db.Column(db.Text, nullable=False)
 
 
-class Log(db.Model):
+class Ping(db.Model):
+    ping_id = db.Column(db.Integer, primary_key=True)
     datetime = db.Column(db.Integer)
-    event_id = db.Column(db.Integer, primary_key=True)
-    actor_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    target_id = db.Column(db.Integer)
-    action_id = db.Column(db.Integer, db.ForeignKey('action_types.id'), nullable=False)
+    target_id = db.Column(db.Integer, nullable=False)
+    actor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    action_id = db.Column(db.Integer, db.ForeignKey('action_types.id'))
     result_url = db.Column(db.Text)
+    seen = db.Column(db.Boolean, default=False)
+
+
+class Post(db.Model):
+    post_id = db.Column(db.Integer, primary_key=True)
+    datetime = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    text = db.Column(db.Text)
+    tag = db.Column(db.Integer, db.ForeignKey('tags.id'))
+
+
+class Tags(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text, unique=True)
+    host = db.Column(db.Text)

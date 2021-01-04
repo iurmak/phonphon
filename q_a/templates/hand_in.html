@@ -38,11 +38,11 @@
                         <dd class="col-sm-9">
                             <p>{{ Amend.md(assignment.answer) }}</p>
                         </dd>
-                    {% elif not assignment.assignment.is_grade %}
+                    {% elif not assignment.is_checked and not assignment.assignment.is_grade %}
                         <dt class="col-sm-3"><label for="answer">Ваш ответ</label></dt>
                         <dd class="col-sm-9">
                             <form id="add_answer" action="" method="post">
-                                <textarea class="form-control" id="answer" name="answer"></textarea>
+                                <textarea required class="form-control" id="answer" name="answer"></textarea>
                             </form>
                         </dd>
                     {% endif %}
@@ -72,7 +72,7 @@
         </div><br>
         <div class="card">
             <div class="card-header">
-                <div class="align-self-center"><span class="h6">Остались вопросы? Задайте их проверяющему!</span></div>
+                <div class="align-self-center"><span class="h6">Есть вопросы? Задайте их проверяющему!</span></div>
             </div>
             <div class="card-body">
                 <form action="" method="post" id="add_comment">

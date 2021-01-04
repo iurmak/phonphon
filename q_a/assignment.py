@@ -1,9 +1,10 @@
 from q_a import app
 from flask import request, render_template, \
     url_for, session
-from q_a.models import Assignment, db, Handed_assignment, Comment
+from q_a.models import Assignment, db, Handed_assignment, Comment, User, Ping
 from time import localtime, strftime
 from q_a.supplement import Amend, Check
+from re import sub
 
 @app.route('/assignments/<int:id>', methods=['GET', 'POST'])
 def assignment(id):
@@ -66,6 +67,30 @@ def assignment(id):
                     db.session.commit()
                     return Amend.flash('Ответ отправлен.', 'success', url_for('assignment', id=id))
             if request.form.get('new_comment'):
+                text = request.form.get('new_comment')
+                user_id = session.get('user_id')
+                url = url_for('check_assignment', id=id)
+                if handed_assignment.checked_by:
+                    teacher = handed_assignment.checked_by
+                else:
+                    teacher = handed_assignment.assignment.assigner
+                if '@' in text:
+                    for token in text.split():
+                        if token.startswith('@'):
+                            username = sub(r'\W', '', token)
+                            if User.query.filter_by(username=username).first() and username != teacher:
+                                db.session.add(Ping(datetime=Check.time(),
+                                                    actor_id=user_id,
+                                                    action_id=2,
+                                                    target_id=User.query.filter_by(username=username).first().id,
+                                                    result_url=url
+                                                    ))
+                db.session.add(Ping(datetime=Check.time(),
+                                    actor_id=user_id,
+                                    action_id=4,
+                                    target_id=teacher,
+                                    result_url=url
+                                    ))
                 db.session.add(Comment(assignment_id=handed_assignment.assignment_id,
                                        user_id=session.get('user_id'),
                                        datetime=Check.time(),

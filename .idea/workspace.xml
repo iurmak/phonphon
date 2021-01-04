@@ -14,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -242,7 +242,7 @@
       <updated>1608771008833</updated>
       <workItem from="1608771027829" duration="332000" />
       <workItem from="1608771877310" duration="2535000" />
-      <workItem from="1608797048198" duration="215814000" />
+      <workItem from="1608797048198" duration="243981000" />
     </task>
     <servers />
   </component>
@@ -258,34 +258,38 @@
       <screen x="0" y="25" width="1440" height="799" />
     </state>
     <state x="555" y="171" key="EnvironmentVariablesDialog/0.25.1440.799@0.25.1440.799" timestamp="1608922767556" />
-    <state width="1293" height="203" key="GridCell.Tab.0.bottom" timestamp="1609439448866">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1227" height="203" key="GridCell.Tab.0.bottom" timestamp="1609802313967">
+      <screen x="0" y="25" width="1440" height="805" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.bottom/0.25.1440.799@0.25.1440.799" timestamp="1609328103079" />
     <state width="1248" height="203" key="GridCell.Tab.0.bottom/0.25.1440.800@0.25.1440.800" timestamp="1609346668151" />
-    <state width="1293" height="203" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1609439448866" />
-    <state width="1293" height="203" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1609428815681" />
-    <state width="1293" height="203" key="GridCell.Tab.0.center" timestamp="1609439448865">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1183" height="203" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1609799989668" />
+    <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1609802313967" />
+    <state width="1293" height="203" key="GridCell.Tab.0.bottom/0.25.1440.806@0.25.1440.806" timestamp="1609792857778" />
+    <state width="1227" height="203" key="GridCell.Tab.0.center" timestamp="1609802313966">
+      <screen x="0" y="25" width="1440" height="805" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.center/0.25.1440.799@0.25.1440.799" timestamp="1609328103078" />
     <state width="1248" height="203" key="GridCell.Tab.0.center/0.25.1440.800@0.25.1440.800" timestamp="1609346668150" />
-    <state width="1293" height="203" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1609439448865" />
-    <state width="1293" height="203" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1609428815681" />
-    <state width="1293" height="203" key="GridCell.Tab.0.left" timestamp="1609439448865">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1183" height="203" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1609799989665" />
+    <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1609802313966" />
+    <state width="1293" height="203" key="GridCell.Tab.0.center/0.25.1440.806@0.25.1440.806" timestamp="1609792857777" />
+    <state width="1227" height="203" key="GridCell.Tab.0.left" timestamp="1609802313965">
+      <screen x="0" y="25" width="1440" height="805" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.left/0.25.1440.799@0.25.1440.799" timestamp="1609328103077" />
     <state width="1248" height="203" key="GridCell.Tab.0.left/0.25.1440.800@0.25.1440.800" timestamp="1609346668149" />
-    <state width="1293" height="203" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1609439448865" />
-    <state width="1293" height="203" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1609428815681" />
-    <state width="1293" height="203" key="GridCell.Tab.0.right" timestamp="1609439448866">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1183" height="203" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1609799989664" />
+    <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1609802313965" />
+    <state width="1293" height="203" key="GridCell.Tab.0.left/0.25.1440.806@0.25.1440.806" timestamp="1609792857776" />
+    <state width="1227" height="203" key="GridCell.Tab.0.right" timestamp="1609802313966">
+      <screen x="0" y="25" width="1440" height="805" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.right/0.25.1440.799@0.25.1440.799" timestamp="1609328103079" />
     <state width="1248" height="203" key="GridCell.Tab.0.right/0.25.1440.800@0.25.1440.800" timestamp="1609346668150" />
-    <state width="1293" height="203" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1609439448866" />
-    <state width="1293" height="203" key="GridCell.Tab.0.right/0.25.1440.805@0.25.1440.805" timestamp="1609428815681" />
+    <state width="1183" height="203" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1609799989666" />
+    <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.805@0.25.1440.805" timestamp="1609802313966" />
+    <state width="1293" height="203" key="GridCell.Tab.0.right/0.25.1440.806@0.25.1440.806" timestamp="1609792857777" />
     <state x="300" y="60" key="SettingsEditor" timestamp="1609341069376">
       <screen x="0" y="25" width="1440" height="800" />
     </state>
@@ -306,11 +310,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/q_a/new_question.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="jinja2-line">
           <url>file://$PROJECT_DIR$/q_a/templates/questions.html</url>
           <line>21</line>
@@ -324,7 +323,7 @@
     <SUITE FILE_PATH="coverage/q_a$Flask__q_a___init___py_.coverage" NAME="Flask (q_a/__init__.py) Coverage Results" MODIFIED="1608925150497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/q_a$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1608819592134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$app.coverage" NAME="app Coverage Results" MODIFIED="1608922241893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1609439448793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1609801744848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$create_all.coverage" NAME="create_all Coverage Results" MODIFIED="1608840404118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1608922256734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/q_a" />
   </component>

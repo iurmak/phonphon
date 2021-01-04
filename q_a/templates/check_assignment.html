@@ -30,6 +30,10 @@
                         <dd class="col-sm-9">
                             <p>{{ assignment.datetime }}</p>
                         </dd>
+                        <dt class="col-sm-3">Студент</dt>
+                        <dd class="col-sm-9">
+                            <p>{{ Amend.username(assignment.user.username) }}</p>
+                        </dd>
                         <dt class="col-sm-3">Ответ студента</dt>
                         <dd class="col-sm-9">
                             <p>{{ Amend.md(assignment.answer) }}</p>
@@ -40,10 +44,10 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="card-footer">
-                    <div class="row justify-content-between text-center">
-                        <span class="col-3 border border-danger rounded align-self-center">Дедлайн: <b>{{ assignment.assignment.deadline }}</b></span>
-                        <div class="col-3 align-self-center align-content-end">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
+                <div class="card-footer text-center">
+                    <div class="row">
+                        <span class="col align-self-center container border border-danger rounded">Дедлайн: <b>{{ assignment.assignment.deadline }}</b></span>
+                        <div class="col align-self-center">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
                         <div class="col">
                             <button class="btn btn-primary" type="submit" form="check">Завершить проверку</button>
                         </div>
@@ -68,12 +72,23 @@
             {% if assignment.discussion %}
                 <div class="card-footer">
                     {% for comment in assignment.discussion %}
-                            <blockquote class="blockquote">
-                                {{ Amend.md(comment.text) }}
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
-                            </figcaption>
+                        <div class="row">
+                            <div class="col">
+                                <blockquote class="blockquote">
+                                    {{ Amend.md(comment.text) }}
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                    {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
+                                </figcaption>
+                            </div>
+                            {% if session.get('status') == 2 %}
+                                <div class="col-2">
+                                    <form action="" method="post" id="comment_actions" class="btn-group">
+                                        <button class="btn btn-outline-danger" type="submit" form="comment_actions" name="delete_comment" value="{{ comment.comment_id }}">удалить</button>
+                                        <button class="btn btn-outline-warning" type="submit" form="comment_actions" name="edit_comment" value="{{ comment.comment_id }}">править</button>
+                                    </form>
+                                </div>
+                            {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}

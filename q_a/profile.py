@@ -44,6 +44,7 @@ def profile(user_id=None):
                                group=group,
                                role=role,
                                roles=roles,
+                               role_id=User.query.get(user_id).role.role,
                                questions=questions,
                                answers=answers,
                                date=date,

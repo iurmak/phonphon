@@ -2,7 +2,7 @@ from q_a import app
 from flask import request, render_template, redirect, \
     url_for, Markup, session
 from q_a.models import db, Question, Answer, Assignment, Assignment_types, Role_assignment, Handed_assignment, User,\
-    Group
+    Group, Comment
 from q_a.supplement import Amend, Check
 from time import mktime, strptime
 
@@ -31,32 +31,23 @@ def edit(type, id):
                                    question_author=Amend.username(Question.query.get(id).user.username),
                                    answer_author=None
                                    )
-        if type == 'assignment':
+        if type == 'q':
+            if session.get('status') != 2 and session.get('user_id') != Question.query.get(id).user_id:
+                return Check.status()
+            return render_template('edit.html',
+                                   question=None,
+                                   current_text=Question.query.get(id).text,
+                                   question_author=Amend.username(Question.query.get(id).user.username),
+                                   answer_author=None
+                                   )
+        if type == 'comment':
             if session.get('status') != 2:
                 return Check.status()
-            assignment = Assignment.query.get(id)
-            if assignment.datetime:
-                datetime = assignment.datetime
-                is_draft = False
-            else:
-                datetime = None
-                is_draft = True
-            if assignment.deadline:
-                deadline = Amend.datetime(assignment.deadline)
-            else:
-                deadline = ''
-            return render_template('edit_assignment.html',
-                                   title=assignment.title,
-                                   description=assignment.description,
-                                   datetime=datetime,
-                                   deadline=deadline,
-                                   assignees=assignment.assignees,
-                                   types=Assignment_types.query.all(),
-                                   current_type=assignment.type_id,
-                                   is_grade=assignment.is_grade,
-                                   is_draft=is_draft,
-                                   Check=Check,
-                                   Amend=Amend
+            return render_template('edit.html',
+                                   question=None,
+                                   current_text=Comment.query.get(id).text,
+                                   question_author=None,
+                                   answer_author=Amend.username(Comment.query.get(id).user.username)
                                    )
     if request.method == 'POST':
         if type == 'a' and (session.get('user_id') == Answer.query.get(id).user_id or session.get('status') == 2):
@@ -73,6 +64,12 @@ def edit(type, id):
             db.session.commit()
             return redirect(url_for('question',
                                     question_id=question.question_id))
+        if type == 'comment' and session.get('status') == 2:
+            changed_text = request.form.get('changed_text')
+            comment = Comment.query.get(id)
+            comment.text = changed_text
+            db.session.commit()
+            return Amend.flash('Сообщение изменено.', 'success', url_for('check_assignment', id=comment.assignment_id))
         if type == 'assignment' and session.get('status') == 2:
             changed_assignment = Assignment.query.get(id)
             changed_assignment.title = request.form.get('title')

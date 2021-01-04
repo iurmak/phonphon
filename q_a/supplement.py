@@ -1,6 +1,6 @@
 from markdown import markdown
 from flask import session, url_for, Markup, redirect, flash
-from q_a.models import User, Assignment_status, Log, Action_types
+from q_a.models import User, Assignment_status, Ping, Handed_assignment
 from flask_mail import Mail, Message
 from q_a import app
 from bs4 import BeautifulSoup
@@ -66,38 +66,17 @@ class Check():
         if session.get('user_id'):
             session['user'] = User.query.filter_by(id=session.get('user_id')).first().username
             session['status'] = User.query.filter_by(id=session.get('user_id')).first().role.role
+            session['notifications'] = Ping.query.filter_by(target_id=session.get('user_id'), seen=False).count()
+            if session.get('status') == 2:
+                session['todo'] = Handed_assignment.query.filter(Handed_assignment.status_id.in_([2, 3]), Handed_assignment.is_checked == 0, Handed_assignment.grade == None).count()
+            else:
+                session['todo'] = Handed_assignment.query.filter_by(status_id=1, assignee=session.get('user_id')).count()
     def status(self=None):
         return Amend.flash('У вас недостаточно прав для этого действия.', 'danger', url_for('profile'))
     def login(self=None):
         return Amend.flash('Для выполнения этого действия нужно войти.', 'danger', url_for('login'))
     def page(url='/'):
         return Amend.flash('Такой страницы не существует.', 'danger', url)
-    def log(actor_id, action_id, target_id=None, result_url=None):
-        log = Log(actor_id=actor_id,
-                  target_id=target_id,
-                  action_id=action_id,
-                  result_url=result_url,
-                  datetime=Check.time())
-        return log
-    def notify(log):
-        if log.action.subscribed.filter_by(user_id=log.target_id, action_id=log.action_id):
-            return Emails.send(f'Уведомление: {Action_types.get(log.action_id).type}',
-                               f'''Так как вы подписались на уведомления, сообщаем о новом событии:\
-                               <table class="table table-hover"><thead>
-                <tr>
-                    <th>Кто</th>
-                    <th>Действие</th>
-                    <th>Ссылка</th>
-                </tr>
-              </thead>
-            <tbody>
-                <tr>
-                    <td>{User.query.get(log.actor_id).username}</td>
-                    <td>{log.action.type}</td>
-                    <td>{log.result_url}</td>
-                </tr>
-            </tbody>
-            </table>''', User.query.get(log.target_id).email)
 
 
 class Emails():

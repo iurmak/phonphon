@@ -1,9 +1,10 @@
 from q_a import app
 from flask import request, render_template, redirect, \
     url_for, Markup, session
-from q_a.models import db, Question, Answer, Log, Subscription
+from q_a.models import db, Question, Answer, Ping, Subscription, User
 from time import localtime, strftime
 from q_a.supplement import Amend, Check
+from re import sub
 
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
 @app.route('/question/<int:question_id>/<int:page>', methods=['GET', 'POST'])
@@ -32,52 +33,52 @@ def question(question_id, page=1):
     if request.method == 'POST':
         if request.form.get('subscribe'):
             user_id = session.get('user_id')
-            log = Log(actor_id=user_id,
-                    target_id=question_id,
-                    action_id=4,
-                    result_url=url_for('question', question_id=question_id, _external=True)
-                    )
-            db.session.add(log)
-            db.session.commit()
             db.session.add(Subscription(
-                event_id=log.event_id,
-                user_id=log.actor_id,
+                user_id=user_id,
                 question_id=question_id
             ))
             db.session.commit()
             return Amend.flash('Подписка на новые ответы оформлена.', 'success', url_for('question', question_id=question_id))
         elif request.form.get('unsubscribe'):
             user_id = session.get('user_id')
-            log = Log(actor_id=user_id,
-                      target_id=question_id,
-                      action_id=5,
-                      result_url=url_for('question', question_id=question_id, _external=True)
-                      )
-            db.session.add(log)
-            db.session.commit()
             db.session.delete(Subscription.query.filter_by(
-                user_id=log.actor_id,
+                user_id=user_id,
                 question_id=question_id
             ).first())
             db.session.commit()
             return Amend.flash('Подписка на новые ответы отменена.', 'success', url_for('question', question_id=question_id))
         if request.form.get('new_answer'):
             if session.get('user_id'):
+                user_id = session.get('user_id')
+                url = url_for('question', question_id=question_id)
                 if request.form.get('anon'):
                     anon = True
                 else:
                     anon = False
-                db.session.add(Answer(user_id=session.get('user_id'),
+                text = request.form.get('new_answer')
+                if '@' in text:
+                    for token in text.split():
+                        if token.startswith('@'):
+                            username = sub(r'\W', '', token)
+                            if User.query.filter_by(username=username).first():
+                                db.session.add(Ping(datetime=Check.time(),
+                                                    actor_id=user_id,
+                                                    action_id=2,
+                                                    target_id=User.query.filter_by(username=username).first().id,
+                                                    result_url=url
+                                ))
+                db.session.add(Answer(user_id=user_id,
                                       question_id=question_id,
-                                      text=request.form.get('new_answer'),
+                                      text=text,
                                       is_anon=anon,
                                       datetime=Check.time()))
-                log = Log(actor_id=session.get('user_id'),
-                          target_id=question_id,
-                          action_id=2,
-                          result_url=url_for('question', question_id=question_id, _external=True)
-                          )
-                db.session.add(log)
+                for user in Subscription.query.filter_by(question_id=question_id).all():
+                    db.session.add(Ping(datetime=Check.time(),
+                                        actor_id=user_id,
+                                        action_id=1,
+                                        target_id=user.user_id,
+                                        result_url=url
+                                        ))
                 db.session.commit()
                 return redirect(url_for('question', question_id=question_id))
             else:

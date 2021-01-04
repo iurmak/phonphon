@@ -23,7 +23,7 @@
                         <td>{{ Amend.datetime(assignment.datetime) }}</td>
                         <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
                         <td>{{ assignment.assignment.deadline }}</td>
-                        <td>{{ assignment.assignment.datetime }}</td>
+                        <td>{{ Amend.datetime(assignment.assignment.datetime) }}</td>
                     </tr>
             {% endfor %}
         </tbody>

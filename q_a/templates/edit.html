@@ -12,7 +12,7 @@
                             {{ question }}
                         </dd>
                     {% endif %}
-                        {% if session.get('status') == 2 %}
+                        {% if session.get('status') == 2 and question_author %}
                             <dt class="col-sm-2">Автор вопроса</dt>
                             <dd class="col-sm-10">
                                 {{ question_author }}

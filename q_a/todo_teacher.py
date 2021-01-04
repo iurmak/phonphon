@@ -11,13 +11,15 @@ def todo_teacher(page=1):
         return Check.login()
     if session.get('status') == 2:
         try:
-            page_of_assignments = Handed_assignment.query.filter_by(is_checked=1).order_by(Handed_assignment.datetime.desc()).paginate(page, 10)
+            page_of_assignments = Handed_assignment.query.filter(Handed_assignment.is_checked == 0, Handed_assignment.status_id.in_([2, 3]), Handed_assignment.grade == None).order_by(Handed_assignment.datetime.desc()).paginate(page, 10)
         except:
             return Check.page(url_for('todo_teacher'))
         assignments = page_of_assignments.items
         for n in range(len(assignments)):
             assignments[n].assignment.title = Amend.md(assignments[n].assignment.title)
-            if not assignments[n].assignment.deadline:
+            if assignments[n].assignment.deadline and assignments[n].assignment.deadline != 'нет':
+                assignments[n].assignment.deadline = Amend.datetime(assignments[n].assignment.deadline)
+            else:
                 assignments[n].assignment.deadline = 'нет'
         return render_template('todo_teacher.html',
                                assignments=assignments,

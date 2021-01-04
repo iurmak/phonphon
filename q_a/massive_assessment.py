@@ -1,10 +1,8 @@
 from q_a import app
 from flask import request, render_template, \
     url_for, session, make_response
-from q_a.models import Assignment, db, Handed_assignment, User
-from time import localtime, strftime
+from q_a.models import Assignment, db, Handed_assignment, Ping
 from q_a.supplement import Amend, Check
-import cx_Oracle
 import csv
 import io
 
@@ -33,13 +31,20 @@ def massive_assessment(id):
                 for student in Handed_assignment.query.filter_by(source_assignment_id=id).all():
                     cw.writerow([student.user.surname, student.user.firstname, student.user.group.group, student.grade])
                 response = make_response(si.getvalue())
-                response.headers['Content-Disposition'] = f'attachment; filename=grades.csv'
+                response.headers['Content-Disposition'] = f'attachment; filename={Amend.datetime(Check.time())}.csv'
                 response.headers["Content-type"] = "text/csv"
                 return response
             for student in request.form.items():
-                student_id = User.query.filter_by(email=student[0].split('_')[-1]).first().id
+                student_id = student[0]
                 grade = student[-1]
-                Handed_assignment.query.filter_by(assignee=student_id, source_assignment_id=id).update({'grade': grade})
+                if grade:
+                    Handed_assignment.query.filter_by(assignee=student_id, source_assignment_id=id).update({'grade': grade})
+                    db.session.add(Ping(datetime=Check.time(),
+                                        actor_id=session.get('user_id'),
+                                        action_id=3,
+                                        target_id=student_id,
+                                        result_url=url_for('assignment', id=id)
+                                        ))
             db.session.commit()
             return Amend.flash('Отметки обновлены.', 'success', url_for('assignment', id=id))
 

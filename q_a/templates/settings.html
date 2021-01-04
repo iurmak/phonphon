@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Настройки{% endblock %}
+{% block content %}
+    <div class="container-md">
+        <form action="" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <p>Добавьте новые элементы через <b>/</b>. Удалить или изменить существующие элементы нельзя.</p>
+                    <dl class="row">
+                        <dt class="col-sm-2"><label for="tags">Рубрики</label></dt>
+                        <dd class="col-sm-10">
+                            <textarea class="form-control" name="tags" id="tags" placeholder="{% for tag in Tags.query.all() %}{{ tag.text }}/{% endfor %}"></textarea>
+                        </dd>
+                        <dt class="col-sm-2"><label for="assignments">Типы заданий</label></dt>
+                        <dd class="col-sm-10">
+                            <textarea class="form-control" name="assignments" id="assignments" placeholder="{% for type in Assignment_types.query.all() %}{{ type.text }}/{% endfor %}"></textarea>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <div class="row justify-content-end">
+                        <div class="col-3 align-self-center text-end">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

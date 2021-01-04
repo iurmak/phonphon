@@ -28,7 +28,7 @@
                                             <label>Отписаться от новых ответов</label>
                                             <ul>
                                                 {% for subscription in Subscription.query.filter_by(user_id=session.get('user_id')).all() %}
-                                                    {% set question=Question.query.get(subscription.event.target_id) %}
+                                                    {% set question=Question.query.get(subscription.question_id) %}
                                                     <li>
                                                         <label class="form-check-label" for="question_{{ question.question_id }}"><a class="link-dark" href="{{ url_for('question', question_id=question.question_id) }}">{{ question.title }}</a></label>
                                                         <input class="form-check-input" type="checkbox" name="{{ question.question_id }}" id="question_{{ question.question_id }}">
@@ -43,7 +43,7 @@
                         <div class="modal-footer">
                             <div class="row">
                                 <div class="col-8 align-self-start">
-                                    <button type="submit" class="btn btn-primary" form="new_settings">Сохранить настройки</button>
+                                    <button type="submit" class="btn btn-primary" form="new_settings" name="email_settings" value="1">Сохранить настройки</button>
                                 </div>
                                 <div class="col-4 align-self-end">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -55,8 +55,60 @@
             </div>
         </div>
     {% else %}
-        <div class="container">
-            <p>Вы не подтвердили имейл. Нажмите <a href="{{ url_for('notification', user_id=session.get('user_id')) }}">сюда</a>, чтобы выслать ссылку повторно.</p>
+        <div class="container text-center">
+            Вы не подтвердили имейл. Нажмите <a href="{{ url_for('notification', user_id=session.get('user_id')) }}">сюда</a>, чтобы выслать ссылку повторно.
         </div>
-    {% endif %}
+    {% endif %}<br>
+    <div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <span class="col h5 text-center">Уведомления на {{ Amend.datetime(Check.time()) }}</span>
+            </div>
+        </div>
+        <div class="card-body">
+            {% set present = {'present': False} %}
+            <ul class="list-group list-group-flush">
+                {% for notification in notifications %}
+                    {% if not notification.seen %}
+                        {% if present.update({'present': True}) %}{% endif %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <span class="col align-self-center">
+                                    <b>{{ Amend.datetime(notification.datetime) }}</b>
+                                </span>
+                                <span class="col align-self-center">{{ Action_types.query.get(notification.action_id).type }}</span>
+                                <form class="btn-group-sm col align-self-center" action="" method="post" id="{{ notification.ping_id }}">
+                                    <button type="button" class="btn btn-outline-primary"><a href="{{ notification.result_url }}" style="text-decoration: none">подробнее</a></button>
+                                    <button type="submit" class="btn btn-outline-danger" name="{{ notification.ping_id }}" form="{{ notification.ping_id }}">удалить</button>
+                                </form>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% if not present['present'] %}
+                Отсутствуют.
+            {% endif %}
+        </div>
+        {% if items.has_prev or items.has_next %}
+            <div class="card-footer">
+                <div class="container text-center">
+                    <div class="row justify-content-center">
+                        {% if items.has_prev %}
+                            <div class="col">
+                                <a class="btn btn-outline-secondary" href="{{ url_for('notification', page=items.prev_num) }}">Предыдущие уведомления</a>
+                            </div>
+                        {% endif %}
+                        {% if items.has_next %}
+                            <div class="col">
+                                <a class="btn btn-outline-secondary" href="{{ url_for('notification', page=items.next_num) }}">Следующие уведомления</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    </div>
 {% endblock %}
