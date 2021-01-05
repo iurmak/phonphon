@@ -43,8 +43,9 @@ class Group(db.Model):
 class Email(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     confirmed = db.Column(db.Boolean, default=False)
-    new_assignments = db.Column(db.Boolean, default=True)
     new_mentions = db.Column(db.Boolean, default=True)
+    new_answers = db.Column(db.Boolean, default=True)
+
 
 
 class Subscription(db.Model):

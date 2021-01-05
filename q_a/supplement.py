@@ -4,7 +4,7 @@ from q_a.models import User, Assignment_status, Ping, Handed_assignment
 from flask_mail import Mail, Message
 from q_a import app
 from bs4 import BeautifulSoup
-from time import localtime, strftime, gmtime
+from time import strftime, gmtime
 from calendar import timegm
 
 mail = Mail(app)
@@ -57,7 +57,7 @@ class Amend:
         if url:
             return redirect(url)
     def datetime(self):
-        return strftime('%d.%m.%Y %H:%M', localtime(self))
+        return strftime('%d.%m.%Y %H:%M', gmtime(self+10800))
 
 class Check():
     def time(self=None):

@@ -6,8 +6,7 @@
             <div class="card-header">
                 <div class="row justify-content-between">
                     <span class="h5 col align-self-center">{{ user }}: сведения о профиле</span>
-                    <div class="row justify-content-end col-4">
-                        <div class="col text-end">
+                    <div class="btn-group col" role="group">
                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#questions">
                                 Вопросы
                             </button>
@@ -35,8 +34,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col text-end">
                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#answers">
                                 Ответы
                             </button>
@@ -64,8 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {% if role_id != 2 %}<div class="col text-end">
+                        {% if role_id != 2 %}
                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#grades">
                                 Отметки
                             </button>
@@ -102,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>{% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>

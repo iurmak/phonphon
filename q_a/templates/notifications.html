@@ -4,24 +4,24 @@
     {% if Email.query.get(session.get('user_id')).confirmed %}
         <div class="container text-center">
             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#settings">
-                Настроить имейл-уведомления
+                Настроить уведомления
             </button>
             <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Настройка имейл-уведомлений</h5>
+                            <h5 class="modal-title">Настройка уведомлений</h5>
                         </div>
                         <div class="modal-body text-start">
                             <form action="" method="post" id="new_settings">
                                 <ul>
                                     <li>
-                                        <label class="form-check-label" for="new_assignments">Новые задания</label>
-                                        <input {% if Email.query.get(session.get('user_id')).new_assignments %}checked{% endif %} class="form-check-input" type="checkbox" name="new_assignments" id="new_assignments">
+                                        <label class="form-check-label" for="new_mentions">Новые упоминания (имейл)</label>
+                                        <input {% if Email.query.get(session.get('user_id')).new_mentions %}checked{% endif %} class="form-check-input" type="checkbox" name="new_mentions" id="new_mentions">
                                     </li>
                                     <li>
-                                        <label class="form-check-label" for="new_mentions">Новые упоминания</label>
-                                        <input {% if Email.query.get(session.get('user_id')).new_mentions %}checked{% endif %} class="form-check-input" type="checkbox" name="new_mentions" id="new_mentions">
+                                        <label class="form-check-label" for="new_answers">Новые ответы (имейл)</label>
+                                        <input {% if Email.query.get(session.get('user_id')).new_answers %}checked{% endif %} class="form-check-input" type="checkbox" name="new_answers" id="new_answers">
                                     </li>
                                     {% if Subscription.query.filter_by(user_id=session.get('user_id')).first() %}
                                         <li>

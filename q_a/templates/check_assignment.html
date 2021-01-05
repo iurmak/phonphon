@@ -44,11 +44,11 @@
                         </dd>
                     </dl>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer">
                     <div class="row">
-                        <span class="col align-self-center container border border-danger rounded">Дедлайн: <b>{{ assignment.assignment.deadline }}</b></span>
-                        <div class="col align-self-center">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
-                        <div class="col">
+                        <span class="col align-self-center text-center align-content-start border border-danger rounded">Дедлайн: <b>{{ assignment.assignment.deadline }}</b></span>
+                        <div class="col align-self-center text-center">Сейчас: {{ Amend.datetime(Check.time()) }}</div>
+                        <div class="col text-center">
                             <button class="btn btn-primary" type="submit" form="check">Завершить проверку</button>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                 <div class="card-footer">
                     {% for comment in assignment.discussion %}
                         <div class="row">
-                            <div class="col">
+                            <div class="col align-self-center">
                                 <blockquote class="blockquote">
                                     {{ Amend.md(comment.text) }}
                                 </blockquote>
@@ -82,15 +82,15 @@
                                 </figcaption>
                             </div>
                             {% if session.get('status') == 2 %}
-                                <div class="col-2">
+                                <div class="col align-self-center text-end">
                                     <form action="" method="post" id="comment_actions" class="btn-group">
-                                        <button class="btn btn-outline-danger" type="submit" form="comment_actions" name="delete_comment" value="{{ comment.comment_id }}">удалить</button>
-                                        <button class="btn btn-outline-warning" type="submit" form="comment_actions" name="edit_comment" value="{{ comment.comment_id }}">править</button>
+                                        <button class="btn btn-danger" type="submit" form="comment_actions" name="delete_comment" value="{{ comment.comment_id }}">удалить</button>
+                                        <button class="btn btn-warning" type="submit" form="comment_actions" name="edit_comment" value="{{ comment.comment_id }}">править</button>
                                     </form>
                                 </div>
                             {% endif %}
+                        </div>
                     {% endfor %}
-                </div>
             {% endif %}
         </div>
     </div>

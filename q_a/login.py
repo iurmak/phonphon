@@ -33,7 +33,7 @@ def login(token=None):
                     [email, request.form.get('new_password')])
                 Email.send('Восстановление пароля',
                            f'''<p>Здравствуйте!</p>
-<p>Если вы запрашивали изменение пароля, перейдите по ссылке: 
+<p>Если вы запрашивали изменение пароля, перейдите по ссылке:
 <a href="{url_for('login', token=token, _external=True)}">{url_for('login', token=token, _external=True)}</a>.</p>
 <p>Если это письмо пришло по ошибке, проигнорируйте его.</p>''',
                            email

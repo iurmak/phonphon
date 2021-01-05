@@ -14,6 +14,17 @@
             </tr>
           </thead>
         <tbody>
+            <tr>
+                <form action="" method="post">
+                    <td><input name="id" class="form-control" type="number"></td>
+                    <td><input name="group" class="form-control" type="number"></td>
+                    <td><input name="username" class="form-control" type="text"></td>
+                    <td><input name="surname" class="form-control" type="text"></td>
+                    <td><input name="firsname" class="form-control" type="text"></td>
+                    <td><input name="email" class="form-control" type="text"></td>
+                </form>
+            </tr>
+                </form>
             {% for profile in profiles %}
                     <tr>
                         <td>{{ profile.id }}</td>

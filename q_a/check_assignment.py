@@ -1,9 +1,9 @@
 from q_a import app
 from flask import request, render_template, \
     url_for, session, redirect
-from q_a.models import db, Handed_assignment, Comment, User, Ping
+from q_a.models import db, Handed_assignment, Comment, User, Ping, Email
 from time import localtime, strftime
-from q_a.supplement import Amend, Check
+from q_a.supplement import Amend, Check, Emails
 from re import sub
 
 @app.route('/assignments/check/<int:id>', methods=['GET', 'POST'])
@@ -74,18 +74,22 @@ def check_assignment(id):
             if request.form.get('new_comment'):
                 text = request.form.get('new_comment')
                 user_id = session.get('user_id')
-                url = url_for('assignment', id=id)
+                url = url_for('assignment', id=id, _external=True)
                 if '@' in text:
                     for token in text.split():
                         if token.startswith('@'):
                             username = sub(r'\W', '', token)
                             if User.query.filter_by(username=username).first():
+                                if User.query.filter_by(username=username).first().role.role == 2:
+                                    url = url_for('check_assignment', id=id, _external=True)
                                 db.session.add(Ping(datetime=Check.time(),
                                                     actor_id=user_id,
                                                     action_id=2,
                                                     target_id=User.query.filter_by(username=username).first().id,
                                                     result_url=url
                                                     ))
+                                if Email.query.get(User.query.filter_by(username=username).first().id).confirmed and Email.query.get(User.query.filter_by(username=username).first().id).new_mentions:
+                                    Emails.send('Новое упоминание', f'Здравствуйте. Вас упомянули на сайте курса фонетики и фонологии. Вероятно, стоит обратить внимание: {url}.', User.query.filter_by(username=username).first().email)
                 db.session.add(Comment(assignment_id=handed_assignment.assignment_id,
                                        user_id=session.get('user_id'),
                                        datetime=Check.time(),

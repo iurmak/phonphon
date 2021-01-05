@@ -1,9 +1,9 @@
 from q_a import app
 from flask import request, render_template, redirect, \
     url_for, Markup, session
-from q_a.models import db, Question, Answer, Ping, Subscription, User
+from q_a.models import db, Question, Answer, Ping, Subscription, User, Email
 from time import localtime, strftime
-from q_a.supplement import Amend, Check
+from q_a.supplement import Amend, Check, Emails
 from re import sub
 
 @app.route('/question/<int:question_id>', methods=['GET', 'POST'])
@@ -50,7 +50,7 @@ def question(question_id, page=1):
         if request.form.get('new_answer'):
             if session.get('user_id'):
                 user_id = session.get('user_id')
-                url = url_for('question', question_id=question_id)
+                url = url_for('question', question_id=question_id, _external=True)
                 if request.form.get('anon'):
                     anon = True
                 else:
@@ -67,6 +67,8 @@ def question(question_id, page=1):
                                                     target_id=User.query.filter_by(username=username).first().id,
                                                     result_url=url
                                 ))
+                                if Email.query.get(User.query.filter_by(username=username).first().id).confirmed and Email.query.get(User.query.filter_by(username=username).first().id).new_mentions:
+                                    Emails.send('Новое упоминание', f'Здравствуйте. Вас упомянули на сайте курса фонетики и фонологии. Вероятно, стоит обратить внимание: {url}.', User.query.filter_by(username=username).first().email)
                 db.session.add(Answer(user_id=user_id,
                                       question_id=question_id,
                                       text=text,
@@ -79,6 +81,10 @@ def question(question_id, page=1):
                                         target_id=user.user_id,
                                         result_url=url
                                         ))
+                    if Email.query.get(user.user_id).confirmed and Email.query.get(user.user_id).new_mentions:
+                        Emails.send('Новый ответ',
+                                    f'Здравствуйте. Вы отслеживаете вопрос «{Question.query.get(question_id).title}» на сайте курса фонетики и фонологии. Вероятно, стоит обратить внимание на новый ответ: {url}.',
+                                    User.query.get(user.user_id).email)
                 db.session.commit()
                 return redirect(url_for('question', question_id=question_id))
             else:

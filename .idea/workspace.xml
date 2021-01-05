@@ -224,9 +224,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.setup" />
         <item itemvalue="Flask server.Flask (q_a/__init__.py)" />
         <item itemvalue="Python.app (1)" />
-        <item itemvalue="Python.setup" />
         <item itemvalue="Python.create_all" />
         <item itemvalue="Flask server.Flask (app.py)" />
       </list>
@@ -242,7 +242,7 @@
       <updated>1608771008833</updated>
       <workItem from="1608771027829" duration="332000" />
       <workItem from="1608771877310" duration="2535000" />
-      <workItem from="1608797048198" duration="243981000" />
+      <workItem from="1608797048198" duration="256308000" />
     </task>
     <servers />
   </component>
@@ -250,45 +250,46 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="192" y="84" width="1013" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608922853469">
-      <screen x="0" y="25" width="1440" height="799" />
+    <state x="192" y="84" width="1013" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609807426393">
+      <screen x="0" y="25" width="1440" height="803" />
     </state>
     <state x="192" y="84" width="1013" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1440.799@0.25.1440.799" timestamp="1608922853469" />
+    <state x="192" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1440.803@0.25.1440.803" timestamp="1609807426393" />
     <state x="555" y="171" key="EnvironmentVariablesDialog" timestamp="1608922767557">
       <screen x="0" y="25" width="1440" height="799" />
     </state>
     <state x="555" y="171" key="EnvironmentVariablesDialog/0.25.1440.799@0.25.1440.799" timestamp="1608922767556" />
-    <state width="1227" height="203" key="GridCell.Tab.0.bottom" timestamp="1609802313967">
-      <screen x="0" y="25" width="1440" height="805" />
+    <state width="1227" height="203" key="GridCell.Tab.0.bottom" timestamp="1609859245966">
+      <screen x="0" y="25" width="1440" height="803" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.bottom/0.25.1440.799@0.25.1440.799" timestamp="1609328103079" />
-    <state width="1248" height="203" key="GridCell.Tab.0.bottom/0.25.1440.800@0.25.1440.800" timestamp="1609346668151" />
-    <state width="1183" height="203" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1609799989668" />
-    <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1609802313967" />
+    <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.800@0.25.1440.800" timestamp="1609855015667" />
+    <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1609859245966" />
+    <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1609808022568" />
     <state width="1293" height="203" key="GridCell.Tab.0.bottom/0.25.1440.806@0.25.1440.806" timestamp="1609792857778" />
-    <state width="1227" height="203" key="GridCell.Tab.0.center" timestamp="1609802313966">
-      <screen x="0" y="25" width="1440" height="805" />
+    <state width="1227" height="203" key="GridCell.Tab.0.center" timestamp="1609859245965">
+      <screen x="0" y="25" width="1440" height="803" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.center/0.25.1440.799@0.25.1440.799" timestamp="1609328103078" />
-    <state width="1248" height="203" key="GridCell.Tab.0.center/0.25.1440.800@0.25.1440.800" timestamp="1609346668150" />
-    <state width="1183" height="203" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1609799989665" />
-    <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1609802313966" />
+    <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.800@0.25.1440.800" timestamp="1609855015666" />
+    <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1609859245965" />
+    <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1609808022567" />
     <state width="1293" height="203" key="GridCell.Tab.0.center/0.25.1440.806@0.25.1440.806" timestamp="1609792857777" />
-    <state width="1227" height="203" key="GridCell.Tab.0.left" timestamp="1609802313965">
-      <screen x="0" y="25" width="1440" height="805" />
+    <state width="1227" height="203" key="GridCell.Tab.0.left" timestamp="1609859245965">
+      <screen x="0" y="25" width="1440" height="803" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.left/0.25.1440.799@0.25.1440.799" timestamp="1609328103077" />
-    <state width="1248" height="203" key="GridCell.Tab.0.left/0.25.1440.800@0.25.1440.800" timestamp="1609346668149" />
-    <state width="1183" height="203" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1609799989664" />
-    <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1609802313965" />
+    <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.800@0.25.1440.800" timestamp="1609855015664" />
+    <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1609859245965" />
+    <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1609808022566" />
     <state width="1293" height="203" key="GridCell.Tab.0.left/0.25.1440.806@0.25.1440.806" timestamp="1609792857776" />
-    <state width="1227" height="203" key="GridCell.Tab.0.right" timestamp="1609802313966">
-      <screen x="0" y="25" width="1440" height="805" />
+    <state width="1227" height="203" key="GridCell.Tab.0.right" timestamp="1609859245966">
+      <screen x="0" y="25" width="1440" height="803" />
     </state>
     <state width="1394" height="203" key="GridCell.Tab.0.right/0.25.1440.799@0.25.1440.799" timestamp="1609328103079" />
-    <state width="1248" height="203" key="GridCell.Tab.0.right/0.25.1440.800@0.25.1440.800" timestamp="1609346668150" />
-    <state width="1183" height="203" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1609799989666" />
-    <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.805@0.25.1440.805" timestamp="1609802313966" />
+    <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.800@0.25.1440.800" timestamp="1609855015666" />
+    <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1609859245966" />
+    <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.805@0.25.1440.805" timestamp="1609808022567" />
     <state width="1293" height="203" key="GridCell.Tab.0.right/0.25.1440.806@0.25.1440.806" timestamp="1609792857777" />
     <state x="300" y="60" key="SettingsEditor" timestamp="1609341069376">
       <screen x="0" y="25" width="1440" height="800" />
@@ -319,11 +320,11 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/q_a$setup.coverage" NAME="setup Coverage Results" MODIFIED="1608922235933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/q_a$Flask__q_a___init___py_.coverage" NAME="Flask (q_a/__init__.py) Coverage Results" MODIFIED="1608925150497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/q_a$setup.coverage" NAME="setup Coverage Results" MODIFIED="1609852540038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/q_a$Flask__q_a___init___py_.coverage" NAME="Flask (q_a/__init__.py) Coverage Results" MODIFIED="1609807451972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1608819592134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$app.coverage" NAME="app Coverage Results" MODIFIED="1608922241893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1609801744848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1609859245935" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$create_all.coverage" NAME="create_all Coverage Results" MODIFIED="1608840404118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1608922256734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/q_a" />
   </component>

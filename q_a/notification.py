@@ -40,14 +40,14 @@ def notification(token=None, user_id=None, page=1):
     if request.method == 'POST':
         print(list(request.form.items()))
         if request.form.get('email_settings'):
-            if request.form.get('new_assignments'):
-                Email.query.filter_by(user_id=session.get('user_id')).update({'new_assignments': True})
-            else:
-                Email.query.filter_by(user_id=session.get('user_id')).update({'new_assignments': False})
             if request.form.get('new_mentions'):
                 Email.query.filter_by(user_id=session.get('user_id')).update({'new_mentions': True})
             else:
                 Email.query.filter_by(user_id=session.get('user_id')).update({'new_mentions': False})
+            if request.form.get('new_answers'):
+                Email.query.filter_by(user_id=session.get('user_id')).update({'new_answers': True})
+            else:
+                Email.query.filter_by(user_id=session.get('user_id')).update({'new_answers': False})
             for question in list(request.form.items()):
                 if not question[0].startswith('e') and not question[0].startswith('n'):
                     question_id = int(question[0])

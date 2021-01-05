@@ -3,18 +3,18 @@
 {% block content %}
 <div class="container-md">
     <div class="row">
-    <div class="{% if session.get('status') == 2 or session.get('user_id') == question.user_id %}col-10{% else %}col-12{% endif %}">
+    <div class="col-10">
         <div class="card">
             <div class="card-header">
-                <div class="row justify-content-between">
-                    <span class="col h6 align-self-center">{{ Amend.md(question.title) }}</span>
+                <div class="row">
+                    <span class="col h6 align-self-center text-start">{{ Amend.md(question.title) }}</span>
                     {% if Subscription.query.filter_by(user_id=session.get('user_id'), question_id=question.question_id).first() %}
-                        <form class="col-2 align-self-center" action="" method="post" id="unsubscribe">
-                            <input class="btn btn-outline-danger" type="submit" form="unsubscribe" name="unsubscribe" value="Отписаться">
+                        <form class="col align-self-center text-end" action="" method="post" id="unsubscribe">
+                            <input class="btn btn-danger" type="submit" form="unsubscribe" name="unsubscribe" value="Отписаться">
                         </form>
                     {% else %}
-                        <form class="col-2 align-self-center" action="" method="post" id="subscribe">
-                            <input class="btn btn-outline-primary" type="submit" form="subscribe" name="subscribe" value="Подписаться">
+                        <form class="col align-self-center text-end" action="" method="post" id="subscribe">
+                            <input class="btn btn-primary" type="submit" form="subscribe" name="subscribe" value="Подписаться">
                         </form>
                     {% endif %}
                 </div>
@@ -32,14 +32,14 @@
         </div>
     </div>
     {% if session.get('status') == 2 or session.get('user_id') == question.user_id %}
-                <div class="col-2">
-                    <form action="" method="post" id="question_actions">
-                        <p><input class="btn btn-outline-danger" type="submit" form="question_actions" name="delete_question" value="удалить">
-                        <p><input class="btn btn-outline-warning" type="submit" form="question_actions" name="edit_question" value="править">
+                <div class="col">
+                    <form action="" method="post" id="question_actions" class="btn-group-vertical">
+                        <button class="btn btn-danger" type="submit" form="question_actions" name="delete_question" value="1">удалить</button>
+                        <button class="btn btn-warning" type="submit" form="question_actions" name="edit_question" value="1">править</button>
                         {% if question.is_pinned %}
-                            <p><input class="btn btn-outline-success" type="submit" form="question_actions" name="pin_question" value="открепить">
+                            <button class="btn btn-success" type="submit" form="question_actions" name="pin_question" value="1">открепить</button>
                         {% else %}
-                            <p><input class="btn btn-outline-success" type="submit" form="question_actions" name="pin_question" value="закрепить">
+                            <button class="btn btn-success" type="submit" form="question_actions" name="pin_question" value="1">закрепить</button>
                         {% endif %}
                     </form>
                 </div>
@@ -48,7 +48,7 @@
         {% for answer in answers %}
             <figure>
                 <div class="row">
-                    <div class="{% if session.get('status') == 2 or session.get('user_id') == answer.user_id %}col-10{% else %}col-12{% endif %}">
+                    <div class="col-10">
                         <blockquote class="blockquote">
                             {{ answer.text }}
                         </blockquote>
@@ -58,13 +58,13 @@
                     </div>
                         {% if session.get('status') == 2 or session.get('user_id') == answer.user_id %}
                             <div class="col-2">
-                            <form action="" method="post">
-                                <p><button class="btn btn-outline-danger" type="submit" name="delete_answer" value="{{ answer.answer_id }}">удалить</button>
-                                <p><button class="btn btn-outline-warning" type="submit" name="edit_answer" value="{{ answer.answer_id }}">править</button>
-                                {% if (session.get('status') == 2 and answer.answerer.role.role != 2) or (session.get('status') == 2 and answer.answerer.role.role == 2 and answer.is_anon) %}
-                                    <p><button class="btn btn-outline-success" type="submit" name="praise_answer" value="{{ answer.answer_id }}">{% if answer.is_praised %}снять выделение{% else %}выделить{% endif %}</button>
-                                {% endif %}
-                            </form>
+                                <form action="" method="post" class="btn-group-vertical">
+                                    <button class="btn btn-danger" type="submit" name="delete_answer" value="{{ answer.answer_id }}">удалить</button>
+                                    <button class="btn btn-warning" type="submit" name="edit_answer" value="{{ answer.answer_id }}">править</button>
+                                    {% if (session.get('status') == 2 and answer.answerer.role.role != 2) or (session.get('status') == 2 and answer.answerer.role.role == 2 and answer.is_anon) %}
+                                        <button class="btn btn-success" type="submit" name="praise_answer" value="{{ answer.answer_id }}">{% if answer.is_praised %}снять выделение{% else %}выделить{% endif %}</button>
+                                    {% endif %}
+                                </form>
                             </div>
                         {% endif %}
                 </div>
@@ -75,12 +75,12 @@
                 <div class="row justify-content-center">
                     {% if items.has_prev %}
                         <div class="col-4">
-                            <a class="btn btn-outline-secondary" href="{{ url_for('question', page=items.prev_num, question_id=question.question_id) }}">Предыдущие ответы</a>
+                            <a class="btn btn-secondary" href="{{ url_for('question', page=items.prev_num, question_id=question.question_id) }}">Предыдущие ответы</a>
                         </div>
                     {% endif %}
                     {% if items.has_next %}
                         <div class="col-4">
-                            <a class="btn btn-outline-secondary" href="{{ url_for('question', page=items.next_num, question_id=question.question_id) }}">Следующие ответы</a>
+                            <a class="btn btn-secondary" href="{{ url_for('question', page=items.next_num, question_id=question.question_id) }}">Следующие ответы</a>
                         </div>
                     {% endif %}
                 </div>
@@ -91,7 +91,7 @@
             <form action="" method="post" id="submit_answer">
                 <dl class="row">
                     <dt class="col-1">Ваш ответ</dt>
-                    <dd class="col-11">
+                    <dd class="col-9">
                         <textarea required class="form-control" name="new_answer" maxlength="10000"></textarea>
                         <div class="mb-3 form-check">
                             <label class="form-check-label" for="anon">Опубликовать анонимно</label>
