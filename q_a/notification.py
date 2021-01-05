@@ -26,7 +26,7 @@ def notification(token=None, user_id=None, page=1):
                         what=f'''<p>Вы зарегистрировались на сайте курса фонетики и фонологии.</p><p>Ссылка для подтверждения имейла – <b><a href="{url_for('notification', token=new_token, _external=True)}">{url_for('notification', token=new_token, _external=True)}</a></b>.</p>''',
                         emails=User.query.get(user_id).email)
             return Amend.flash('Письмо отправлено.', 'success', url_for('notification'))
-        page_of_notifications = Ping.query.filter_by(target_id=session.get('user_id')).order_by(Ping.datetime.desc()).paginate(page, 3)
+        page_of_notifications = Ping.query.filter_by(target_id=session.get('user_id')).order_by(Ping.datetime.desc()).paginate(page, 10)
         notifications = page_of_notifications.items
         return render_template('notifications.html',
                                Email=Email,
@@ -48,6 +48,10 @@ def notification(token=None, user_id=None, page=1):
                 Email.query.filter_by(user_id=session.get('user_id')).update({'new_answers': True})
             else:
                 Email.query.filter_by(user_id=session.get('user_id')).update({'new_answers': False})
+            if request.form.get('assignments'):
+                Email.query.filter_by(user_id=session.get('user_id')).update({'assignments': True})
+            else:
+                Email.query.filter_by(user_id=session.get('user_id')).update({'assignments': False})
             for question in list(request.form.items()):
                 if not question[0].startswith('e') and not question[0].startswith('n'):
                     question_id = int(question[0])

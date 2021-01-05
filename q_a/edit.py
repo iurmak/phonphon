@@ -103,7 +103,8 @@ def edit(type, id):
             if request.form.get('is_grade') and changed_assignment.is_grade is False:
                 changed_assignment.is_grade = True
                 Handed_assignment.query.filter_by(source_assignment_id=id).update({"status_id": 4})
-            if not changed_assignment.datetime:
+            if changed_assignment.datetime:
+                print(list(request.form))
                 if request.form.get('assignees'):
                     if changed_assignment.is_grade:
                         status_id = 4
@@ -159,7 +160,7 @@ def edit(type, id):
                                     return Amend.flash('Адресаты указаны неверно.', 'danger', url_for('edit', type='assignment', id=id))
                         else:
                             return Amend.flash('Здание уже адресовано этим студентам.', 'warning', url_for('edit', type='assignment', id=id))
-            if not request.form.get('is_draft'):
+            if not request.form.get('is_draft') and not changed_assignment.datetime:
                 changed_assignment.datetime = Check.time()
                 if changed_assignment.is_grade:
                     status_id = 4

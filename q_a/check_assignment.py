@@ -53,6 +53,10 @@ def check_assignment(id):
                                     target_id=handed_assignment.assignee,
                                     result_url=url_for('assignment', id=id)
                                     ))
+                if Email.query.get(handed_assignment.assignee).confirmed and Email.query.get(handed_assignment.assignee).assignments:
+                    Emails.send(f'Задание «{handed_assignment.assignment.title}» проверено',
+                                f'''Здравствуйте. Ваш ответ на задание «{handed_assignment.assignment.title}» проверен. Подробности: {url_for('assignment', id=id)}.''',
+                                User.query.get(handed_assignment.assignee).email)
                 if request.form.get('grade') != '':
                     handed_assignment.grade = request.form.get('grade')
                 if request.form.get('main_comment'):
@@ -69,6 +73,10 @@ def check_assignment(id):
                                     target_id=handed_assignment.assignee,
                                     result_url=url_for('assignment', id=id)
                                     ))
+                if Email.query.get(handed_assignment.assignee).confirmed and Email.query.get(handed_assignment.assignee).assignments:
+                    Emails.send(f'Задание «{handed_assignment.assignment.title}» проверено',
+                                f'''Здравствуйте. Ваш ответ на задание «{handed_assignment.assignment.title}» проверен. Подробности: {url_for('assignment', id=id)}.''',
+                                User.query.get(handed_assignment.assignee).email)
                 db.session.commit()
                 return Amend.flash('Зачёт поставлен.', 'success', url_for('check_assignment', id=id))
             if request.form.get('new_comment'):

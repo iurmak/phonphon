@@ -38,7 +38,7 @@
                         <dd class="col-sm-9">
                             <p>{{ Amend.md(assignment.answer) }}</p>
                         </dd>
-                        <dt class="col-sm-3"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}({{ Amend.username(User.query.get(assignment.is_checked).username) }}, {{ Amend.datetime(assignment.when_checked) }}){% endif %}</label></dt>
+                        <dt class="col-sm-3"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}({{ Amend.username(User.query.get(assignment.checked_by).username) }}, {{ Amend.datetime(assignment.when_checked) }}){% endif %}</label></dt>
                         <dd class="col-sm-9">
                             <p><textarea class="form-control" id="main_comment" name="main_comment">{{ assignment.main_comment }}</textarea></p>
                         </dd>
@@ -91,6 +91,7 @@
                             {% endif %}
                         </div>
                     {% endfor %}
+                </div>
             {% endif %}
         </div>
     </div>

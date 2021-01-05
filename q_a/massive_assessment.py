@@ -32,7 +32,7 @@ def massive_assessment(id):
                     cw.writerow([student.user.surname, student.user.firstname, student.user.group.group, student.grade])
                 response = make_response(si.getvalue())
                 response.headers['Content-Disposition'] = f'attachment; filename={Amend.datetime(Check.time())}.csv'
-                response.headers["Content-type"] = "text/csv"
+                response.headers["Content-type"] = "text/csv; charset=utf-8"
                 return response
             for student in request.form.items():
                 student_id = student[0]

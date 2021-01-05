@@ -35,10 +35,10 @@ def all_grades():
                                                                   assignee=value).first().grade)
                             else:
                                 result.append('N/A')
-                    cw.writerow([student.surname, student.firstname, student.group.group] + result)
+                        cw.writerow([student.surname, student.firstname, student.group.group] + result)
                 response = make_response(si.getvalue())
                 response.headers['Content-Disposition'] = f'attachment; filename=all_grades_{Amend.datetime(Check.time())}.csv'
-                response.headers["Content-type"] = "text/csv"
+                response.headers["Content-type"] = "text/csv; charset=utf-8"
                 return response
             for student in request.form.items():
                 id = int(student[0].split('_')[-1])

@@ -45,8 +45,7 @@ class Email(db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     new_mentions = db.Column(db.Boolean, default=True)
     new_answers = db.Column(db.Boolean, default=True)
-
-
+    assignments = db.Column(db.Boolean, default=True)
 
 class Subscription(db.Model):
     subscription_id = db.Column(db.Integer, primary_key=True)

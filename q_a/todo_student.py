@@ -17,7 +17,7 @@ def todo_student(page=1):
         assignments = page_of_assignments.items
         for n in range(len(assignments)):
             assignments[n].assignment.title = Amend.md(assignments[n].assignment.title)
-            if assignments[n].assignment.deadline:
+            if assignments[n].assignment.deadline != 'нет' and assignments[n].assignment.deadline:
                 assignments[n].assignment.deadline = Amend.datetime(assignments[n].assignment.deadline)
             else:
                 assignments[n].assignment.deadline = 'нет'

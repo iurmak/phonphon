@@ -30,18 +30,22 @@ def assignment(id):
                                    Check=Check)
         else:
             assignment = Handed_assignment.query.filter_by(source_assignment_id=id, assignee=session.get('user_id')).first()
-            assignment.assignment.title = Amend.md(assignment.assignment.title)
-            assignment.assignment.description = Amend.md(assignment.assignment.description)
-            assignment.assignment.datetime = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.datetime))
-            if assignment.assignment.deadline:
-                assignment.assignment.deadline = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.deadline))
+            if assignment:
+                assignment.assignment.title = Amend.md(assignment.assignment.title)
+                assignment.assignment.description = Amend.md(assignment.assignment.description)
+                assignment.assignment.datetime = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.datetime))
+                if assignment.assignment.deadline:
+                    assignment.assignment.deadline = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.deadline))
+                else:
+                    assignment.assignment.deadline = 'нет'
+                return render_template('hand_in.html',
+                                       assignment=assignment,
+                                       Amend=Amend,
+                                       Check=Check,
+                                       Comment=Comment)
             else:
-                assignment.assignment.deadline = 'нет'
-            return render_template('hand_in.html',
-                                   assignment=assignment,
-                                   Amend=Amend,
-                                   Check=Check,
-                                   Comment=Comment)
+                return Check.status()
+
     if request.method == 'POST':
         if session.get('status') == 2:
             if request.form.get('delete'):
@@ -69,7 +73,7 @@ def assignment(id):
             if request.form.get('new_comment'):
                 text = request.form.get('new_comment')
                 user_id = session.get('user_id')
-                url = url_for('check_assignment', id=handed_assignment.assignment_id)
+                url = url_for('check_assignment', id=handed_assignment.assignment_id, _external=True)
                 if handed_assignment.checked_by:
                     teacher = handed_assignment.checked_by
                 else:
