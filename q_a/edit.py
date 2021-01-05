@@ -31,14 +31,32 @@ def edit(type, id):
                                    question_author=Amend.username(Question.query.get(id).user.username),
                                    answer_author=None
                                    )
-        if type == 'q':
-            if session.get('status') != 2 and session.get('user_id') != Question.query.get(id).user_id:
+        if type == 'assignment':
+            if session.get('status') != 2:
                 return Check.status()
-            return render_template('edit.html',
-                                   question=None,
-                                   current_text=Question.query.get(id).text,
-                                   question_author=Amend.username(Question.query.get(id).user.username),
-                                   answer_author=None
+            assignment = Assignment.query.get(id)
+            if assignment.datetime:
+                datetime = assignment.datetime
+                is_draft = False
+            else:
+                datetime = None
+                is_draft = True
+            if assignment.deadline:
+                deadline = Amend.datetime(assignment.deadline)
+            else:
+                deadline = ''
+            return render_template('edit_assignment.html',
+                                   title=assignment.title,
+                                   description=assignment.description,
+                                   datetime=datetime,
+                                   deadline=deadline,
+                                   assignees=assignment.assignees,
+                                   types=Assignment_types.query.all(),
+                                   current_type=assignment.type_id,
+                                   is_grade=assignment.is_grade,
+                                   is_draft=is_draft,
+                                   Check=Check,
+                                   Amend=Amend
                                    )
         if type == 'comment':
             if session.get('status') != 2:
