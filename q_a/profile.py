@@ -67,6 +67,10 @@ def profile(user_id=None):
             Email.query.filter_by(user_id=user_id).update({'confirmed': False})
             user.email = updates.get('email')
             Amend.flash('Вам было выслано письмо для подтверждения нового имейла.', 'warning')
+        if updates.get('firstname'):
+            user.firstname = updates.get('firstname')
+        if updates.get('surname'):
+            user.surname = updates.get('surname')
         if updates.get('group'):
             user.group.group = updates.get('group')
         if updates.get('role'):
