@@ -44,7 +44,7 @@ def add_user():
         db.session.commit()
         token = URLSafeSerializer(app.config["SECRET_KEY"], salt='confirm_email').dumps((user_id, email))
         Emails.send(about='Подтверждение имейла',
-                    what=f'''<p>Для вас создан профиль на сайте курса фонетики и фонологии.</p><p>Ссылка для подтверждения имейла – <b><a href="{url_for('mail', token=token, _external=True)}">{url_for('mail', token=token, _external=True)}</a></b>.</p><p>Пароль для входа: <b>{password}</b>.</p><p>Если это письмо пришло вам по ошибке, проигнорируйте его.</p>''',
+                    what=f'''<p>Для вас создан профиль на сайте курса фонетики и фонологии.</p><p>Ссылка для подтверждения имейла – <b><a href="{url_for('notification', token=token, _external=True)}">{url_for('notification', token=token, _external=True)}</a></b>.</p><p>Пароль для входа: <b>{password}</b>.</p><p>Если это письмо пришло вам по ошибке, проигнорируйте его.</p>''',
                     emails=email)
         return Amend.flash('Профиль создан.', 'success',
                            url_for('profiles'))

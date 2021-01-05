@@ -21,12 +21,17 @@
                         <dd class="col-sm-9">
                             <input class="form-control" name="deadline" id="deadline" value="{{ deadline }}" pattern="[0-3]\d\.[01]\d\.20\d\d [0-2]\d:\d\d">
                         </dd>
-                        <dt class="col-sm-3">
+                        {% if not is_draft and assignees != 'all' %}<dt class="col-sm-3">
                             <p title="Всем студентам: all. Группам: 201, 202. Индивидуально: *username."><label for="assignees">Добавить адресатов</label>
                         </dt>
                         <dd class="col-sm-9">
                             <input class="form-control" name="assignees" id="assignees" placeholder="{{ assignees }}">
                         </dd>
+                        {% elif is_draft %}<dt class="col-sm-3">Адресаты</dt>
+                        <dd class="col-sm-9">Чтобы добавить новых адресатов, сначала опубликуйте задание.</dd>
+                        {% else %}<dt class="col-sm-3">Адресаты</dt>
+                        <dd class="col-sm-9">Назначено всем студентам.</dd>
+                        {% endif %}
                         <dt class="col-sm-3"><label for="type">Тип</label></dt>
                         <dd class="col-sm-9">
                             <select class="form-select" name="type_id" id="type">
@@ -55,8 +60,8 @@
                                 <input checked class="form-check-input text-dark" type="checkbox" name="is_draft" id="is_draft">
                             </div>
                         {% endif %}
-                        <div class="col-3">
-                            <button type="submit" class="btn btn-warning">Внести изменения</button>
+                        <div class="col-3 text-center">
+                            <button type="submit" class="btn btn-primary">Внести изменения</button>
                         </div>
                     </div>
                 </div>

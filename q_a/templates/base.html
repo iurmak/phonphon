@@ -45,6 +45,12 @@
                                 <span class="text-info">{{ session.get('notifications') }}</span>{% endif %}</a>
                         </li>
                         {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://ipa.typeit.org/"}>IPA-клавиатура</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('about') }}"}>О курсе и сайте</a>
+                        </li>
                     </ul>
                     {% if session.get('status') == 2 %}
                       <div class="nav-item dropdown">

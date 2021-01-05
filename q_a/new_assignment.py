@@ -44,40 +44,41 @@ def new_assignment():
             assignment.deadline = mktime(strptime(deadline, '%d.%m.%Y %H:%M'))
         db.session.add(assignment)
         db.session.commit()
-        if assignment.is_grade:
-            status_id = 4
-        else:
-            status_id = 1
-        if 'all' in assignment.assignees.split():
-            for user in Role_assignment.query.filter(Role_assignment.role != 2).all():
-                user_assignment = Handed_assignment(
-                    source_assignment_id=assignment.assignment_id,
-                    assignee=user.id,
-                    status_id=status_id)
-                db.session.add(user_assignment)
-                db.session.commit()
-            return Amend.flash('Задание добавлено.', 'success', url_for('assignment', id=assignment.assignment_id))
-        else:
-            for assignee in assignment.assignees.split():
-                if assignee.startswith('*'):
-                    user_assignment = Handed_assignment(source_assignment_id=assignment.assignment_id,
-                                                        assignee=User.query.filter_by(username=assignee.replace('*', '')).first().id,
-                                                        status_id=status_id)
+        if not request.form.get('is_draft'):
+            if assignment.is_grade:
+                status_id = 4
+            else:
+                status_id = 1
+            if 'all' in assignment.assignees.split():
+                for user in Role_assignment.query.filter(Role_assignment.role != 2).all():
+                    user_assignment = Handed_assignment(
+                        source_assignment_id=assignment.assignment_id,
+                        assignee=user.id,
+                        status_id=status_id)
                     db.session.add(user_assignment)
-                else:
-                    try:
-                        if int(assignee) in [i[0] for i in db.session.query(Group.group).all()]:
-                            for user in Group.query.filter_by(group=int(assignee)).all():
-                                user_assignment = Handed_assignment(
-                                    source_assignment_id=assignment.assignment_id,
-                                    assignee=user.id,
-                                    status_id=status_id)
-                                db.session.add(user_assignment)
-                            continue
-                        else:
-                            return Amend.flash('Такой группы не найдено.', 'danger',
-                                               url_for('edit', type='assignment', id=assignment.assignment_id))
-                    except:
-                        return Amend.flash('Адресаты указаны неверно.', 'danger', url_for('new_assignment'))
+                    db.session.commit()
+                return Amend.flash('Задание добавлено.', 'success', url_for('assignment', id=assignment.assignment_id))
+            else:
+                for assignee in assignment.assignees.split():
+                    if assignee.startswith('*'):
+                        user_assignment = Handed_assignment(source_assignment_id=assignment.assignment_id,
+                                                            assignee=User.query.filter_by(username=assignee.replace('*', '')).first().id,
+                                                            status_id=status_id)
+                        db.session.add(user_assignment)
+                    else:
+                        try:
+                            if int(assignee) in [i[0] for i in db.session.query(Group.group).all()]:
+                                for user in Group.query.filter_by(group=int(assignee)).all():
+                                    user_assignment = Handed_assignment(
+                                        source_assignment_id=assignment.assignment_id,
+                                        assignee=user.id,
+                                        status_id=status_id)
+                                    db.session.add(user_assignment)
+                                continue
+                            else:
+                                return Amend.flash('Такой группы не найдено.', 'danger',
+                                                   url_for('edit', type='assignment', id=assignment.assignment_id))
+                        except:
+                            return Amend.flash('Адресаты указаны неверно.', 'danger', url_for('new_assignment'))
         db.session.commit()
         return Amend.flash('Задание добавлено.', 'success', url_for('assignment', id=assignment.assignment_id))

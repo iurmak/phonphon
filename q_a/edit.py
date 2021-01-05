@@ -103,60 +103,100 @@ def edit(type, id):
             if request.form.get('is_grade') and changed_assignment.is_grade is False:
                 changed_assignment.is_grade = True
                 Handed_assignment.query.filter_by(source_assignment_id=id).update({"status_id": 4})
-            if request.form.get('assignees'):
+            if not changed_assignment.datetime:
+                if request.form.get('assignees'):
+                    if changed_assignment.is_grade:
+                        status_id = 4
+                    else:
+                        status_id = 1
+                    if 'all' in changed_assignment.assignees.split():
+                        return Amend.flash('Задание уже назначено всем студентам.', 'warning',
+                                           url_for('edit', type='assignment', id=id))
+                    elif 'all' in request.form.get('assignees').split():
+                        changed_assignment.assignees = 'all'
+                        for user in Role_assignment.query.filter(Role_assignment.role != 2).all():
+                            if Handed_assignment.query.filter_by(assignee=user.id, source_assignment_id=id).first():
+                                continue
+                            user_assignment = Handed_assignment(
+                                source_assignment_id=id,
+                                assignee=user.id,
+                                status_id=status_id)
+                            db.session.add(user_assignment)
+                        db.session.commit()
+                        return Amend.flash('Задание назначено всем студентам.', 'success',
+                                           url_for('edit', type='assignment', id=id))
+                    for assignee in request.form.get('assignees').split():
+                        if assignee not in list(changed_assignment.assignees):
+                            if assignee.startswith('*'):
+                                if User.query.filter_by(username=assignee[1:]).first():
+                                    if Handed_assignment.query.filter_by(assignee=User.query.filter_by(username=assignee[1:]).first().id, source_assignment_id=id).first():
+                                        continue
+                                else:
+                                    return Amend.flash('Такого профиля не существует.', 'danger', url_for('edit', type='assignment', id=id))
+                                changed_assignment.assignees += f' {assignee[1:]}'
+                                user_assignment = Handed_assignment(source_assignment_id=id,
+                                                                    assignee=User.query.filter_by(username=assignee[1:]).first().id,
+                                                                    status_id=status_id)
+                                db.session.add(user_assignment)
+                            else:
+                                try:
+                                    if int(assignee) in [i[0] for i in db.session.query(Group.group).all()]:
+                                        changed_assignment.assignees += f' {assignee}'
+                                        for user in Group.query.filter_by(group=int(assignee)).all():
+                                            if Handed_assignment.query.filter_by(assignee=user.id,
+                                                                                 source_assignment_id=id).first():
+                                                continue
+                                            user_assignment = Handed_assignment(
+                                                source_assignment_id=id,
+                                                assignee=user.id,
+                                                status_id=status_id)
+                                            db.session.add(user_assignment)
+                                        continue
+                                    else:
+                                        return Amend.flash('Такой группы не найдено.', 'danger',
+                                                           url_for('edit', type='assignment', id=id))
+                                except:
+                                    return Amend.flash('Адресаты указаны неверно.', 'danger', url_for('edit', type='assignment', id=id))
+                        else:
+                            return Amend.flash('Здание уже адресовано этим студентам.', 'warning', url_for('edit', type='assignment', id=id))
+            if not request.form.get('is_draft'):
+                changed_assignment.datetime = Check.time()
                 if changed_assignment.is_grade:
                     status_id = 4
                 else:
                     status_id = 1
                 if 'all' in changed_assignment.assignees.split():
-                    return Amend.flash('Задание уже назначено всем студентам.', 'warning',
-                                       url_for('edit', type='assignment', id=id))
-                elif 'all' in request.form.get('assignees').split():
-                    changed_assignment.assignees = 'all'
                     for user in Role_assignment.query.filter(Role_assignment.role != 2).all():
-                        if Handed_assignment.query.filter_by(assignee=user.id, source_assignment_id=id).first():
-                            continue
                         user_assignment = Handed_assignment(
-                            source_assignment_id=id,
+                            source_assignment_id=changed_assignment.assignment_id,
                             assignee=user.id,
                             status_id=status_id)
                         db.session.add(user_assignment)
-                    db.session.commit()
-                    return Amend.flash('Задание назначено всем студентам.', 'success',
-                                       url_for('edit', type='assignment', id=id))
-                for assignee in request.form.get('assignees').split():
-                    if assignee not in list(changed_assignment.assignees):
+                        db.session.commit()
+                    return Amend.flash('Задание добавлено.', 'success',
+                                       url_for('assignment', id=changed_assignment.assignment_id))
+                else:
+                    for assignee in changed_assignment.assignees.split():
                         if assignee.startswith('*'):
-                            if User.query.filter_by(username=assignee[1:]).first():
-                                if Handed_assignment.query.filter_by(assignee=User.query.filter_by(username=assignee[1:]).first().id, source_assignment_id=id).first():
-                                    continue
-                            else:
-                                return Amend.flash('Такого профиля не существует.', 'danger', url_for('edit', type='assignment', id=id))
-                            changed_assignment.assignees += f' {assignee[1:]}'
-                            user_assignment = Handed_assignment(source_assignment_id=id,
-                                                                assignee=User.query.filter_by(username=assignee[1:]).first().id,
+                            user_assignment = Handed_assignment(source_assignment_id=changed_assignment.assignment_id,
+                                                                assignee=User.query.filter_by(
+                                                                    username=assignee.replace('*', '')).first().id,
                                                                 status_id=status_id)
                             db.session.add(user_assignment)
                         else:
                             try:
                                 if int(assignee) in [i[0] for i in db.session.query(Group.group).all()]:
-                                    changed_assignment.assignees += f' {assignee}'
                                     for user in Group.query.filter_by(group=int(assignee)).all():
-                                        if Handed_assignment.query.filter_by(assignee=user.id,
-                                                                             source_assignment_id=id).first():
-                                            continue
                                         user_assignment = Handed_assignment(
-                                            source_assignment_id=id,
+                                            source_assignment_id=changed_assignment.assignment_id,
                                             assignee=user.id,
                                             status_id=status_id)
                                         db.session.add(user_assignment)
                                     continue
                                 else:
                                     return Amend.flash('Такой группы не найдено.', 'danger',
-                                                       url_for('edit', type='assignment', id=id))
+                                                       url_for('edit', type='assignment', id=changed_assignment.assignment_id))
                             except:
-                                return Amend.flash('Адресаты указаны неверно.', 'danger', url_for('edit', type='assignment', id=id))
-                    else:
-                        return Amend.flash('Здание уже адресовано этим студентам.', 'warning', url_for('edit', type='assignment', id=id))
+                                return Amend.flash('Адресаты указаны неверно.', 'danger', url_for('new_assignment'))
             db.session.commit()
             return Amend.flash(f'Задание № {id} изменено.', 'success', url_for('assignment', id=id))

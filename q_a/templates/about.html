@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}О курсе и сайте{% endblock %}
+{% block content %}
+    <div class="container-md text-center">
+            <span class="h3">Фонетика и фонология – 2021</span>
+            <table class="table table-borderless align-top">
+                <thead>
+                    <tr class="text-center">
+                        <th class="col-4">
+                            <span class="h5">Преподаватели</span>
+                        </th>
+                        <th class="col-8">
+                            <span class="h5 text-center">Ассистенты</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>
+                          <div class="row text-center">
+                              <div class="col">
+                                  <img src="https://www.hse.ru/pubs/share/thumb/385932500:c208x208+38+0:r190x190!.jpg" class="rounded" alt="И. А. Зибер"><br>
+                                  <span class="h6">Инна Арнольдовна Зибер</span><br>
+                                  <span>innasieber@gmail.com</span><br>
+                                  <span class="text-secondary">Фонетика</span>
+                              </div>
+                              <div class="col">
+                                  <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев"><br>
+                                  <span class="h6">Александр Владимирович Подобряев</span><br>
+                                  <span>apodobryaev@hse.ru</span><br>
+                                  <span class="text-secondary">Фонология</span>
+                              </div>
+                          </div>
+                      </td>
+                      <td>
+                          <div class="row text-center">
+                              <div class="col">
+                                  <img src="https://sun9-18.userapi.com/impg/mNXRsW9xPxEnASF2Fsr1BPoKh5GQGJCwcEbYcA/Jq3ctrSQWK4.jpg?size=2560x1707&quality=96&proxy=1&sign=b9b1955c9dd170e6729a78146c76f0b8&type=album" class="rounded mx-auto d-block" height="200" width="300"><br>
+                                  <span class="h6">Лёша Бакланов</span><br>
+                                  <a href="https://vk.com/thaumaturghos">vk.com/thaumaturghos</a><br>
+                              </div>
+                              <div class="col">
+                                  <img src="https://sun9-34.userapi.com/impg/c855236/v855236134/16fc6c/1WdS8N2NKqc.jpg?size=2048x2048&quality=96&proxy=1&sign=14888d2955787c0e1c01e83a8d63ffbb&type=album" class="mx-auto d-block" height="200" width="200"><br>
+                                  <span class="h6">Юра Макаров</span><br>
+                                  <a href="https://vk.com/iurmak">vk.com/iurmak</a><br>
+                              </div>
+                              <div class="col">
+                                  <img src="https://sun9-23.userapi.com/impf/c857524/v857524492/42ee2/jpvEDMbgllw.jpg?size=2560x1707&quality=96&proxy=1&sign=45596b5231b55f9a8104908107a0a5c5&type=albumnded" class="rounded mx-auto d-block" height="200" width="300"><br>
+                                  <span class="h6">Тася Чевелёва</span><br>
+                                  <a href="https://vk.com/ancheveleva">vk.com/ancheveleva</a><br>
+                              </div>
+                          </div>
+                      </td>
+                    </tr>
+                  </tbody>
+            </table>
+        <ul class="list-group-flush">
+            <li class="list-group-item h5">О сайте</li>
+            <li class="list-group-item">
+                <p class="h6">Что можно делать на сайте? Зачем он нужен?</p>
+                Если у вас возник вопрос по курсу (технический, научный – любой), задайте его <a href="{{ url_for('create_question') }}">здесь</a>.
+                <br>Если, наоборот, вы сами готовы помочь, выбирайте тему из <a href="{{ url_for('questions') }}">списка вопросов</a>.
+                <br>Помимо этого на сайте вы получаете <a href="{{ url_for('todo_student') }}">задания</a>, которые нужно выполнять. Отметки вы можете отслеживать у себя в <a href="{{ url_for('profile') }}">профиле</a>.
+                <br>На <a href="{{ url_for('main') }}">главной странице</a> буду публиковаться важные объявления, а также, если придётся, ссылки на лекции.
+            </li>
+            <li class="list-group-item">
+                <p class="h6">Как обратить внимание определённого пользователя на своё сообщение?</p>
+                Давая ответ или отвечая на комментарий к заданию, поставьте <b>@</b> перед отображаемым именем, например: <em>@Фонема_Ы, привет! Вот мой вопрос</em>.<br>
+                Если <em>Фонема_Ы</em> существует, ей будет отправлено уведомление.
+            </li>
+            <li class="list-group-item">
+                <p class="h6">Почему некоторые отображаемые имена – зелёные?</p>
+                Это ассистенты и преподаватели. Так вы их не потеряете!
+            </li>
+            <li class="list-group-item">
+                <p class="h6">А что за зелёная рамка вокруг некоторых ответов?</p>
+                Такая рамка означает, что ответ был проверен ассистентами или преподавателями. Ему можно доверять (но мыслите критически!).
+            </li>
+            <li class="list-group-item">
+                <p class="h6">Какое на сайте время?</p>
+                Везде на сайте – московское время. Учтите это, работая с дедлайнами.
+            </li>
+            <li class="list-group-item">
+                <p class="h6">У меня возникли технические проблемы – что делать? А ещё у меня есть предложение, как улучшить сайт!</p>
+                Напишите Юре Макарову: iurmak@bk.ru.
+            </li>
+            <li class="list-group-item">
+                <p class="h6">Я хочу изменить имейл/пароль/etc.</p>
+                Вы можете изменить отображаемое и настоящее имена, фамилию, группу, имейл и пароль у себя в <a href="{{ url_for('profile') }}">профиле</a>.
+            </li>
+            <li class="list-group-item">
+                <p class="h6">Я не хочу получать имейлы с этого сайта.</p>
+                Настройте уведомления в <a href="{{ url_for('notification') }}">соответствующем разделе</a>.
+            </li>
+        </ul>
+    </div>
+{% endblock %}

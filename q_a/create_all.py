@@ -23,47 +23,7 @@ db.session.add(User(id=2,
                     role=Role_assignment(id=2, role=1)))
 db.session.add(Email(user_id=2,
                          confirmed=False))
-for i in range(1,31):
-    db.session.add(User(username=f'Студент_{str(i)}',
-                        firstname='Вася',
-                        surname=f'Пупкин{str(i)}',
-                        email=f'aeretrew{str(i)}@bk.ru',
-                        password='123',
-                        group=Group(id=i, group=201),
-                        role=Role_assignment(id=i, role=1)))
-    db.session.add(Email(user_id=i+2,
-                         confirmed=False))
-for i in range(31,61):
-    db.session.add(User(username=f'Студент_{str(i)}',
-                        firstname='Вася',
-                        surname=f'Пупкин{str(i)}',
-                        email=f'aeretrew{str(i)}@bk.ru',
-                        password='123',
-                        group=Group(id=i, group=202),
-                        role=Role_assignment(id=i, role=1)))
-    db.session.add(Email(user_id=i+2,
-                         confirmed=False))
-for i in range(61,91):
-    db.session.add(User(username=f'Студент_{str(i)}',
-                        firstname='Вася',
-                        surname=f'Пупкин{str(i)}',
-                        email=f'aeretrew{str(i)}@bk.ru',
-                        password='123',
-                        group=Group(id=i, group=203),
-                        role=Role_assignment(id=i, role=1)))
-    db.session.add(Email(user_id=i+2,
-                         confirmed=False))
-for i in range(91,121):
-    db.session.add(User(username=f'Студент_{str(i)}',
-                        firstname='Вася',
-                        surname=f'Пупкин{str(i)}',
-                        email=f'aeretrew{str(i)}@bk.ru',
-                        password='123',
-                        group=Group(id=i, group=204),
-                        role=Role_assignment(id=i, role=1)))
-    db.session.add(Email(user_id=i+2,
-                         confirmed=False))
-for type in ['домашнее задание', 'контрольная работа', 'устный ответ']:
+for type in ['домашнее задание', 'контрольная работа']:
     db.session.add(Assignment_types(text=type))
 for status in ['не сдано', 'сдано', 'сдано с опозданием', 'не требует сдачи']:
     db.session.add(Assignment_status(text=status))

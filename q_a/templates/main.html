@@ -1,73 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
-    <div class="container-md text-center">
-        <span class="h3">Фонетика и фонология – 2021</span>
-        <table class="table table-borderless align-top">
-            <thead>
-                <tr class="text-center">
-                    <th class="col-4">
-                        <span class="h5">Преподаватели</span>
-                    </th>
-                    <th class="col-8">
-                        <span class="h5 text-center">Ассистенты</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <td>
-                      <div class="row text-center">
-                          <div class="col">
-                              <img src="https://www.hse.ru/pubs/share/thumb/385932500:c208x208+38+0:r190x190!.jpg" class="rounded" alt="И. А. Зибер"><br>
-                              <span class="h6">Инна Арнольдовна Зибер</span><br>
-                              <span>innasieber@gmail.com</span><br>
-                              <span class="text-secondary">Фонетика</span>
-                          </div>
-                          <div class="col">
-                              <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев"><br>
-                              <span class="h6">Александр Владимирович Подобряев</span><br>
-                              <span>apodobryaev@hse.ru</span><br>
-                              <span class="text-secondary">Фонология</span>
-                          </div>
-                      </div>
-                  </td>
-                  <td>
-                      <div class="row text-center">
-                          <div class="col">
-                              <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="И. А. Зибер"><br>
-                              <span class="h6">Алексей Бакланов</span><br>
-                              <span>контакты</span><br>
-                              <span class="text-secondary">группы?</span>
-                          </div>
-                          <div class="col">
-                              <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев"><br>
-                              <span class="h6">Юра Макаров</span><br>
-                              <span>контакты</span><br>
-                              <span class="text-secondary">группы?</span>
-                          </div>
-                          <div class="col">
-                              <img src="https://www.hse.ru/pubs/share/thumb/385932500:c208x208+38+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев"><br>
-                              <span class="h6">Тася Чевелева</span><br>
-                              <span>контакты</span><br>
-                              <span class="text-secondary">группы?</span>
-                          </div>
-                      </div>
-                  </td>
-                </tr>
-              </tbody>
-        </table>
-    </div>
     <div class="container-md">
         <h4 class="text-center">Новости курса</h4>
         <ul class="list-group list-group-flush">
             {% for post in posts %}
-                <li class="list-group-item">
-                    <p class="text-end h6">{{ Tags.query.get(post.tag).text }}, {{ Amend.datetime(post.datetime) }}</p>
-                    <p>
-                        {{ Amend.md(post.text) }}
-                    </p>
+                <li class="list-group-item col">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-end h6">{{ Tags.query.get(post.tag).text }}, {{ Amend.datetime(post.datetime) }}</p>
+                            <p>
+                                {{ Amend.md(post.text) }}
+                            </p>
+                        </div>
+                        <form action="" method="post" id="post_actions" class="btn-group-vertical col-md-2">
+                            <button class="btn btn-danger" type="submit" form="post_actions" name="delete_post" value={{ post.post_id }}>удалить</button>
+                            <button class="btn btn-warning" type="submit" form="post_actions" name="edit_post" value={{ post.post_id }}>править</button>
+                        </form>
+                    </div>
                 </li>
+
             {% endfor %}
         </ul>
     </div><br>
