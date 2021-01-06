@@ -14,7 +14,7 @@
                         <dd class="col-sm-10">
                             <select class="form-select" name="tag" id="tag">
                                 {% for tag in Tags.query.all() %}
-                                    {% if tag == Post.tag %}
+                                    {% if tag.id == Post.tag %}
                                         <option selected value="{{ tag.id }}">{{ tag.text }}</option>
                                     {% else %}
                                         <option value="{{ tag.id }}">{{ tag.text }}</option>

@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 {% block title %}Профили{% endblock %}
 {% block content %}
+    <div class="container-md">
+        <form action="" method="post" id="search">
+            <div class="row justify-content-center">
+                <div class="col-md-auto">
+                    <button class="btn btn-outline-primary" type="submit" form="search">Искать</button>
+                </div>
+                <div class="col-md-auto">
+                    <select class="form-select" name="parameter">
+                        <option selected>Параметр поиска</option>
+                        <option value="ID">ID</option>
+                        <option value="group">Группа</option>
+                        <option value="username">Отображаемое имя</option>
+                        <option value="firstname">Настоящее имя</option>
+                        <option value="surname">Настоящая фамилия</option>
+                        <option value="email">Имейл</option>
+                    </select>
+                </div>
+                <div class="col-6"><input required name="query" class="form-control" type="text"></div>
+            </div>
+        </form>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -14,17 +35,6 @@
             </tr>
           </thead>
         <tbody>
-            <tr>
-                <form action="" method="post">
-                    <td><input name="id" class="form-control" type="number"></td>
-                    <td><input name="group" class="form-control" type="number"></td>
-                    <td><input name="username" class="form-control" type="text"></td>
-                    <td><input name="surname" class="form-control" type="text"></td>
-                    <td><input name="firsname" class="form-control" type="text"></td>
-                    <td><input name="email" class="form-control" type="text"></td>
-                </form>
-            </tr>
-                </form>
             {% for profile in profiles %}
                     <tr>
                         <td>{{ profile.id }}</td>

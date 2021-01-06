@@ -24,7 +24,7 @@ def all_grades():
             if request.form.get('download'):
                 si = io.StringIO()
                 cw = csv.writer(si)
-                cw.writerow(['Фамилия', 'Имя', 'Группа'] + [assignment.title + Amend.datetime(assignment.datetime) for assignment in Assignment.query.all()])
+                cw.writerow(['Фамилия', 'Имя', 'Группа'] + [f'{assignment.type.text} {assignment.title} {Amend.datetime(assignment.datetime)}' for assignment in Assignment.query.all()])
                 for student in User.query.all():
                     result = []
                     if student.role.role != 2:
