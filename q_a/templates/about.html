@@ -10,7 +10,7 @@
                 Если у вас возник вопрос по курсу (технический, научный – любой), задайте его <a href="{{ url_for('create_question') }}">здесь</a>.
                 <br>Если, наоборот, вы сами готовы помочь, выбирайте тему из <a href="{{ url_for('questions') }}">списка вопросов</a>.
                 <br>Помимо этого на сайте вы получаете <a href="{{ url_for('todo_student') }}">задания</a>, которые нужно выполнять. Отметки вы можете отслеживать у себя в <a href="{{ url_for('profile') }}">профиле</a>.
-                <br>На <a href="{{ url_for('main') }}">главной странице</a> буду публиковаться важные объявления, а также, если придётся, ссылки на лекции.
+                <br>На <a href="{{ url_for('main') }}">главной странице</a> будут публиковаться важные объявления, а также, если придётся, ссылки на лекции.
             </li>
             <li class="list-group-item">
                 <p class="h5">❓Как обратить внимание определённого пользователя на своё сообщение?</p>
@@ -20,6 +20,16 @@
             <li class="list-group-item">
                 <p class="h5">❓Почему некоторые отображаемые имена – зелёные?</p>
                 Это ассистенты и преподаватели. Так вы их не потеряете!
+            </li>
+            <li class="list-group-item">
+                <p class="h5">❓Зачем указывать настоящие имя и фамилию в профиле?</p>
+                Это нужно, чтобы мы смогли без ошибок выставлять вам отметки.<br>
+                Пожалуйста, указывайте настоящие имена и фамилии <b>как в паспорте</b>. Эти сведения <b>не</b> будут доступны другим студентам.
+            </li>
+            <li class="list-group-item">
+                <p class="h5">❓Видна ли моя успеваемость другим студентам?</p>
+                Нет. Ваши однокурсники не могут просматривать сведения о чужой успеваемости.<br>
+                Отслеживать свои отметки вы можете с соответствующем разделе <a href="{{ url_for('profile') }}">профиля</a>.
             </li>
             <li class="list-group-item">
                 <p class="h5">❓А что за зелёная рамка вокруг некоторых ответов?</p>
@@ -32,8 +42,8 @@
             <li class="list-group-item">
                 <p class="h5">❓Но картинку-то нельзя вставить... Как так-то?!</p>
                 Ещё как можно! В месте вставки картинки оставьте эту конструкцию:<br>
-                ![<em>описание картинки (по желанию)</em>][<b>id</b>].
-                <br>Затем в самом конце сообщения добавьте (id должны совпадать; в каждом случае это какие-то числа):
+                <br>![<em>описание картинки (по желанию)</em>][<b>id</b>]<br>
+                <br>Затем в самом конце сообщения добавьте (id должны совпадать; в каждом случае это какие-то числа):<br>
                 <br>[<b>id</b>]: <em>ссылка на картинку</em><br><br>
                 <b>**Очень**</b> рекомендуем прочитать полную инструкцию к <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a>.
             </li>
@@ -43,7 +53,7 @@
             </li>
             <li class="list-group-item">
                 <p class="h5">❓У меня возникли технические проблемы – что делать? А ещё у меня есть предложение, как улучшить сайт!</p>
-                Напишите Юре Макарову: iurmak@bk.ru.
+                Напишите Юре Макарову: <a href="mailto:iurmak@bk.ru" class="link-primary">iurmak@bk.ru</a>.
             </li>
             <li class="list-group-item">
                 <p class="h5">❓Я хочу изменить имейл/пароль/etc.</p>
@@ -71,13 +81,13 @@
             <td>
                 <div class="row text-center">
                     <div class="col">
-                        <img src="https://www.hse.ru/pubs/share/thumb/385932500:c208x208+38+0:r190x190!.jpg" class="rounded" alt="И. А. Зибер"><br>
+                        <img src="https://www.hse.ru/pubs/share/thumb/385932500:c208x208+38+0:r190x190!.jpg" class="rounded" alt="И. А. Зибер" height="200" width="200"><br>
                         <span class="h6">Инна Арнольдовна Зибер</span><br>
                         <a href="mailto:innasieber@gmail.com"class="link-dark">innasieber@gmail.com</a><br>
                         <span class="text-secondary">Фонетика</span>
                     </div>
                     <div class="col">
-                        <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев"><br>
+                        <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев" height="200" width="200"><br>
                         <span class="h6">Александр Владимирович Подобряев</span><br>
                         <a href="mailto:apodobryaev@hse.ru" class="link-dark">apodobryaev@hse.ru</a><br>
                         <span class="text-secondary">Фонология</span>
@@ -87,17 +97,17 @@
             <td>
                 <div class="row text-center">
                     <div class="col">
-                        <img src="https://sun9-18.userapi.com/impg/mNXRsW9xPxEnASF2Fsr1BPoKh5GQGJCwcEbYcA/Jq3ctrSQWK4.jpg?size=2560x1707&quality=96&proxy=1&sign=b9b1955c9dd170e6729a78146c76f0b8&type=album" class="rounded mx-auto d-block" height="200" width="300"><br>
+                        <img src="/static/Лёша.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Лёша Бакланов</span><br>
                         <a href="https://vk.com/thaumaturghos" class="link-dark">vk.com/thaumaturghos</a><br>
                     </div>
                     <div class="col">
-                        <img src="https://sun9-34.userapi.com/impg/c855236/v855236134/16fc6c/1WdS8N2NKqc.jpg?size=2048x2048&quality=96&proxy=1&sign=14888d2955787c0e1c01e83a8d63ffbb&type=album" class="mx-auto d-block" height="200" width="200"><br>
+                        <img src="/static/Юра.JPG" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Юра Макаров</span><br>
                         <a href="https://vk.com/iurmak" class="link-dark">vk.com/iurmak</a><br>
                     </div>
                     <div class="col">
-                        <img src="https://sun9-23.userapi.com/impf/c857524/v857524492/42ee2/jpvEDMbgllw.jpg?size=2560x1707&quality=96&proxy=1&sign=45596b5231b55f9a8104908107a0a5c5&type=albumnded" class="rounded mx-auto d-block" height="200" width="300"><br>
+                        <img src="/static/Тася.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Тася Чевелёва</span><br>
                         <a href="https://vk.com/ancheveleva" class="link-dark">vk.com/ancheveleva</a><br>
                     </div>
