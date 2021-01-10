@@ -1,6 +1,6 @@
 from q_a.models import db, Email, User, Subscription, Question, Action_types, Ping
 from q_a.supplement import Check, Amend, Emails
-from flask import session, render_template, request, url_for
+from flask import session, render_template, request, url_for, redirect
 from q_a import app
 from itsdangerous import URLSafeSerializer
 
@@ -62,6 +62,8 @@ def notification(token=None, user_id=None, page=1):
                     ).first())
             db.session.commit()
             return Amend.flash('Настройки имейл-уведомлений обновлены.', 'success', url_for('notification'))
+        if request.form.get('url'):
+            return redirect(request.form.get('url'))
         for notification in request.form.items():
             id = notification[0]
             Ping.query.filter_by(ping_id=int(id)).update({'seen': True})

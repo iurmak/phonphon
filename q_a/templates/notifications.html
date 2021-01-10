@@ -82,9 +82,9 @@
                                     <b>{{ Amend.datetime(notification.datetime) }}</b>
                                 </span>
                                 <span class="col align-self-center">{{ Action_types.query.get(notification.action_id).type }}</span>
-                                <form class="btn-group-sm col align-self-center" action="" method="post" id="{{ notification.ping_id }}">
-                                    <button type="button" class="btn btn-outline-primary"><a href="{{ notification.result_url }}" style="text-decoration: none">подробнее</a></button>
-                                    <button type="submit" class="btn btn-outline-danger" name="{{ notification.ping_id }}" form="{{ notification.ping_id }}">удалить</button>
+                                <form method="post" id="{{ notification.ping_id }}" class="btn-group-sm col align-self-center">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm" name="url" value="{{ notification.result_url }}">подробнее</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" name="{{ notification.ping_id }}" form="{{ notification.ping_id }}">удалить</button>
                                 </form>
                             </div>
                         </li>

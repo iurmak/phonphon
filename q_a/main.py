@@ -17,6 +17,19 @@ def main(page=1):
                                Tags=Tags,
                                posts=news)
     elif request.method == 'POST':
+        if request.form.get('parameter'):
+            if request.form.get('parameter'):
+                page_of_news = Post.query.filter_by(tag=int(request.form.get('parameter'))).order_by(Post.datetime.desc()).paginate(page, 10)
+            else:
+                page_of_news = Post.query.order_by(Post.datetime.desc()).paginate(page, 10)
+            news = page_of_news.items
+            return render_template('main.html',
+                                   items=page_of_news,
+                                   Amend=Amend,
+                                   Markup=Markup,
+                                   Tags=Tags,
+                                   posts=news,
+                                   current=int(request.form.get('parameter')))
         if request.form.get('delete_post') and session.get('status') == 2:
             db.session.delete(Post.query.get(request.form.get('delete_post')))
             db.session.commit()

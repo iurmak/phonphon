@@ -94,7 +94,7 @@ def assignment(id):
                 db.session.add(Ping(datetime=Check.time(),
                                     actor_id=user_id,
                                     action_id=4,
-                                    target_id=teacher,
+                                    target_id=User.query.filter_by(username=teacher).first().id,
                                     result_url=url
                                     ))
                 db.session.add(Comment(assignment_id=handed_assignment.assignment_id,

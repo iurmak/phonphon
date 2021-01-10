@@ -98,6 +98,12 @@ def check_assignment(id):
                                                     ))
                                 if Email.query.get(User.query.filter_by(username=username).first().id).confirmed and Email.query.get(User.query.filter_by(username=username).first().id).new_mentions:
                                     Emails.send('Новое упоминание', f'Здравствуйте. Вас упомянули на сайте курса фонетики и фонологии. Вероятно, стоит обратить внимание: {url}.', User.query.filter_by(username=username).first().email)
+                db.session.add(Ping(datetime=Check.time(),
+                                    actor_id=user_id,
+                                    action_id=5,
+                                    target_id=handed_assignment.assignee,
+                                    result_url=url_for('assignment', id=id, _external=True)
+                                    ))
                 db.session.add(Comment(assignment_id=handed_assignment.assignment_id,
                                        user_id=session.get('user_id'),
                                        datetime=Check.time(),

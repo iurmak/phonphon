@@ -23,7 +23,7 @@ def question(question_id, page=1):
             answer.datetime = strftime('%d.%m.%Y %H:%M', localtime(answer.datetime))
             answer.text = Markup(Amend.md(answer.text))
             if answer.answerer.role.role == 2 and not answer.is_anon or answer.is_praised or answer.answerer.role.role == 2 and answer.is_praised:
-                answer.text = Markup(f'<div class="border border-success rounded"><span class="container-md">{answer.text}</span></div>')
+                answer.text = Markup(f'<div class="border border-success rounded"><div class="container-md">{answer.text}</div></div>')
         return render_template('question.html',
                                question=question,
                                answers=answers,

@@ -2,8 +2,19 @@
 {% block title %}Главная страница{% endblock %}
 {% block content %}
     <div class="container-md">
-        <h4 class="text-center">Новости курса</h4>
+        <div class="row">
+            <h4 class="text-center col">Новости курса</h4>
+            <form class="col-auto" method="post" id="sort">
+                <select class="form-select" name="parameter" onchange="this.form.submit()">
+                    {% if not current %}<option selected>Сортировать по рубрике</option>{% endif %}
+                    {% for tag in Tags.query.all() %}
+                        <option {% if current == tag.id %}selected{% endif %} value="{{ tag.id }}">{{ tag.text }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div><br>
         <ul class="list-group list-group-flush">
+            {% if posts == [] %}Отсутствуют.{% endif %}
             {% for post in posts %}
                 <li class="list-group-item col">
                     <div class="row">

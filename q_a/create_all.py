@@ -27,7 +27,7 @@ for type in ['домашнее задание', 'контрольная рабо
     db.session.add(Assignment_types(text=type))
 for status in ['не сдано', 'сдано', 'сдано с опозданием', 'не требует сдачи']:
     db.session.add(Assignment_status(text=status))
-for type in ['ответ на вопрос', 'упоминание', 'задание проверено', 'вопрос по заданию']:
+for type in ['ответ на вопрос', 'упоминание', 'задание проверено', 'вопрос по заданию', 'ответ на вопрос по заданию']:
     db.session.add(Action_types(type=type))
 for type in ['ссылка на лекцию', 'объявление']:
     db.session.add(Tags(host='f',
