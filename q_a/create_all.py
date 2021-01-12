@@ -13,17 +13,7 @@ db.session.add(User(id=1,
                     password='admin',
                     group=Group(id=1, group=None),
                     role=Role_assignment(id=1, role=2)))
-db.session.add(User(id=2,
-                    username='Студент',
-                    firstname='Вася',
-                    surname='Пупкин',
-                    email=f'aeretrew@bk.ru',
-                    password='123',
-                    group=Group(id=2, group=205),
-                    role=Role_assignment(id=2, role=1)))
-db.session.add(Email(user_id=2,
-                         confirmed=False))
-for type in ['домашнее задание', 'контрольная работа']:
+for type in ['тренировочное задание', 'домашнее задание', 'контрольная работа']:
     db.session.add(Assignment_types(text=type))
 for status in ['не сдано', 'сдано', 'сдано с опозданием', 'не требует сдачи']:
     db.session.add(Assignment_status(text=status))

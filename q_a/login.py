@@ -31,7 +31,7 @@ def login(token=None):
             if User.query.filter_by(email=email).first():
                 token = URLSafeTimedSerializer(app.config['SECRET_KEY'], salt='recover_password').dumps(
                     [email, request.form.get('new_password')])
-                Email.send('Восстановление пароля',
+                Emails.send('Восстановление пароля',
                            f'''<p>Здравствуйте!</p>
 <p>Если вы запрашивали изменение пароля, перейдите по ссылке:
 <a href="{url_for('login', token=token, _external=True)}">{url_for('login', token=token, _external=True)}</a>.</p>
@@ -46,7 +46,6 @@ def login(token=None):
                       'alert alert-danger')
                 return redirect(url_for('login'))
         password = request.form.get('password')
-        print(str(User.query.filter_by(email=login).first()))
         if '@' in login and User.query.filter_by(email=login).first() and password == User.query.filter_by(
                 email=login).first().password:
             session['user'] = User.query.filter_by(email=login).first().username
@@ -66,4 +65,4 @@ def login(token=None):
                 'Пользователя с указанными данными не существует.<br>Если вы зарегистрированы, перепроверьте логин и пароль.'),
                   'alert alert-danger')
             return redirect(url_for('login'))
-        return redirect(url_for('questions'))
+        return redirect(url_for('main'))
