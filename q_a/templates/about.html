@@ -22,9 +22,9 @@
                 Это ассистенты и преподаватели. Так вы их не потеряете!
             </li>
             <li class="list-group-item">
-                <p class="h5">❓Зачем указывать настоящие имя и фамилию в профиле?</p>
-                Это нужно, чтобы мы смогли без ошибок выставлять вам отметки.<br>
-                Пожалуйста, указывайте настоящие имена и фамилии <b>как в паспорте</b>. Эти сведения <b>не</b> будут доступны другим студентам.
+                <p class="h5">❓Зачем указывать в профиле имя и фамилию как в паспорте?</p>
+                Чтобы мы смогли без ошибок выставлять вам отметки.<br>
+                Эти сведения <b>не</b> будут доступны другим студентам.
             </li>
             <li class="list-group-item">
                 <p class="h5">❓Видна ли моя успеваемость другим студентам?</p>
@@ -57,7 +57,7 @@
             </li>
             <li class="list-group-item">
                 <p class="h5">❓Я хочу изменить имейл/пароль/etc.</p>
-                Вы можете изменить отображаемое и настоящее имена, фамилию, группу, имейл и пароль у себя в <a href="{{ url_for('profile') }}">профиле</a>.
+                Вы можете изменить отображаемое и паспортные имена, фамилию, группу, имейл и пароль у себя в <a href="{{ url_for('profile') }}">профиле</a>.
             </li>
             <li class="list-group-item">
                 <p class="h5">❓Я не хочу получать имейлы с этого сайта.</p>
@@ -65,14 +65,16 @@
             </li>
         </ul>
     </div>
+    <p class="h4 text-center">Формула оценки</p>
+    <p class="h5 text-center"><span class="container bg-warning rounded">0,1 × <em>тест по артикуляции</em></span> + <span class="container bg-warning rounded">0,2 × <em>д/з по фонетике</em></span> + <span class="container bg-warning rounded">0,3 × <em>д/з по фонологии</em></span> + <span class="container-sm bg-warning rounded">0,4 × <em>экзамен по фонетике и фонологии</em></span></p>
     <table class="table table-borderless align-top">
         <thead>
         <tr class="text-center">
-            <th class="col-4">
-                <span class="h5">Преподаватели</span>
+            <th class="col-6">
+                <span class="h4">Преподаватели</span>
             </th>
-            <th class="col-8">
-                <span class="h5 text-center">Ассистенты</span>
+            <th class="col-6">
+                <span class="h4 text-center">Ассистенты</span>
             </th>
         </tr>
         </thead>
@@ -81,16 +83,20 @@
             <td>
                 <div class="row text-center">
                     <div class="col">
-                        <img src="https://www.hse.ru/pubs/share/thumb/385932500:c208x208+38+0:r190x190!.jpg" class="rounded" alt="И. А. Зибер" height="200" width="200"><br>
+                        <img src="/static/ИАЗибер.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Инна Арнольдовна Зибер</span><br>
-                        <a href="mailto:innasieber@gmail.com"class="link-dark">innasieber@gmail.com</a><br>
-                        <span class="text-secondary">Фонетика</span>
+                        <a href="mailto:innasieber@gmail.com" class="link-dark">innasieber@gmail.com</a><br>
+                        <span class="h6 text-success">@Inna</span>
                     </div>
                     <div class="col">
-                        <img src="https://www.hse.ru/pubs/share/thumb/162427017:c600x600+0+0:r190x190!.jpg" class="rounded" alt="А. В. Подобряев" height="200" width="200"><br>
+                        <img src="/static/АВПодобряев.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Александр Владимирович Подобряев</span><br>
                         <a href="mailto:apodobryaev@hse.ru" class="link-dark">apodobryaev@hse.ru</a><br>
-                        <span class="text-secondary">Фонология</span>
+                    </div>
+                    <div class="col">
+                        <img src="/static/ДМРахман.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
+                        <span class="h6">Денис Михайлович Рахман</span><br>
+                        <a href="mailto:dmrakhman@edu.hse.ru" class="link-dark">dmrakhman@edu.hse.ru</a><br>
                     </div>
                 </div>
             </td>
@@ -100,16 +106,19 @@
                         <img src="/static/Лёша.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Лёша Бакланов</span><br>
                         <a href="https://vk.com/thaumaturghos" class="link-dark">vk.com/thaumaturghos</a><br>
+                        <span class="h6 text-success">@Лёша</span>
                     </div>
                     <div class="col">
                         <img src="/static/Юра.JPG" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Юра Макаров</span><br>
                         <a href="https://vk.com/iurmak" class="link-dark">vk.com/iurmak</a><br>
+                        <span class="h6 text-success">@iurmak</span>
                     </div>
                     <div class="col">
                         <img src="/static/Тася.jpg" class="rounded mx-auto d-block" height="200" width="200"><br>
                         <span class="h6">Тася Чевелёва</span><br>
                         <a href="https://vk.com/ancheveleva" class="link-dark">vk.com/ancheveleva</a><br>
+                        <span class="h6 text-success">@Тася</span>
                     </div>
                 </div>
             </td>

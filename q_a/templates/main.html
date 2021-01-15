@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Главная страница{% endblock %}
+{% block title %}Новости курса{% endblock %}
 {% block content %}
     <div class="container-md">
         <div class="row">
@@ -24,10 +24,10 @@
                                 {{ Amend.md(post.text) }}
                             </p>
                         </div>
-                        {% if session.get('status') == 2%}<form action="" method="post" id="post_actions" class="btn-group-vertical col-md-2">
+                        {% if session.get('status') == 2%}<div class="col-md-2"><form action="" method="post" id="post_actions" class="btn-group-vertical">
                             <button class="btn btn-danger" type="submit" form="post_actions" name="delete_post" value={{ post.post_id }}>удалить</button>
                             <button class="btn btn-warning" type="submit" form="post_actions" name="edit_post" value={{ post.post_id }}>править</button>
-                        </form>{% endif %}
+                        </form></div>{% endif %}
                     </div>
                 </li>
 

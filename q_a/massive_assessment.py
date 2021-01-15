@@ -1,7 +1,7 @@
 from q_a import app
 from flask import request, render_template, \
     url_for, session, make_response
-from q_a.models import Assignment, db, Handed_assignment, Ping
+from q_a.models import Assignment, db, Handed_assignment, Ping, User
 from q_a.supplement import Amend, Check
 import csv
 import io

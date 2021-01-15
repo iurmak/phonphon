@@ -16,11 +16,11 @@ def question(question_id, page=1):
         return Amend.flash('Такого вопроса не существует.', 'danger', url_for('questions'))
     if request.method == 'GET':
         question = Question.query.get(question_id)
-        question.datetime = strftime('%d.%m.%Y %H:%M', localtime(question.datetime))
-        page_of_answers = Answer.query.filter_by(question_id=question_id).order_by(Answer.datetime.desc()).paginate(page, 5)
+        question.datetime = Amend.datetime(question.datetime)
+        page_of_answers = Answer.query.filter_by(question_id=question_id).order_by(Answer.datetime.desc()).paginate(page, 4)
         answers = page_of_answers.items
         for answer in answers:
-            answer.datetime = strftime('%d.%m.%Y %H:%M', localtime(answer.datetime))
+            answer.datetime = Amend.datetime(answer.datetime)
             answer.text = Markup(Amend.md(answer.text))
             if answer.answerer.role.role == 2 and not answer.is_anon or answer.is_praised or answer.answerer.role.role == 2 and answer.is_praised:
                 answer.text = Markup(f'<div class="border border-success rounded"><div class="container-md">{answer.text}</div></div>')
@@ -83,7 +83,7 @@ def question(question_id, page=1):
                                         ))
                     if Email.query.get(user.user_id).confirmed and Email.query.get(user.user_id).new_mentions:
                         Emails.send('Новый ответ',
-                                    f'Здравствуйте. Вы отслеживаете вопрос «{Question.query.get(question_id).title}» на сайте курса фонетики и фонологии. Вероятно, стоит обратить внимание на новый ответ: {url}.',
+                                    f'Здравствуйте. Вы отслеживаете вопрос «{Amend.md(Question.query.get(question_id).title)}» на сайте курса фонетики и фонологии. Вероятно, стоит обратить внимание на новый ответ: {url}.',
                                     User.query.get(user.user_id).email)
                 db.session.commit()
                 return redirect(url_for('question', question_id=question_id))

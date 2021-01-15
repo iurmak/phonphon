@@ -8,11 +8,11 @@
             <div class="card-header">
                 <div class="row">
                     <span class="col h6 align-self-center text-start">{{ Amend.md(question.title) }}</span>
-                    {% if Subscription.query.filter_by(user_id=session.get('user_id'), question_id=question.question_id).first() %}
+                    {% if Subscription.query.filter_by(user_id=session.get('user_id'), question_id=question.question_id).first() and session.get('user') %}
                         <form class="col align-self-center text-end" action="" method="post" id="unsubscribe">
                             <input class="btn btn-danger" type="submit" form="unsubscribe" name="unsubscribe" value="Отписаться">
                         </form>
-                    {% else %}
+                    {% elif session.get('user') %}
                         <form class="col align-self-center text-end" action="" method="post" id="subscribe">
                             <input class="btn btn-primary" type="submit" form="subscribe" name="subscribe" value="Подписаться">
                         </form>

@@ -18,6 +18,7 @@ class Amend:
             string = markdown(Amend.anti_html(self))
             for tag in ['<p>', '</p>']:
                 string = string.replace(tag, '')
+            string = string.replace('  ', '<br>')
             string = string.replace('<img', '<img class="img-fluid"')
             return Markup(string)
     def username(self, question=None, answer=None):
