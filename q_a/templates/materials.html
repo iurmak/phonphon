@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Материалы{% endblock %}
+{% block content %}
+    <div class="container-md">
+        {% if materials %}
+            <div class="row">
+                <div class="list-group col-3" id="myList" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#m_{{ materials[0].post_id }}" role="tab">{{ Amend.md(materials[0].title) }}</a>
+                    {% for m in materials[1:] %}
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#m_{{ m.post_id }}" role="tab">{{ Amend.md(m.title) }}</a>
+                    {% endfor %}
+                </div>
+                <div class="tab-content col-9">
+                    <div class="tab-pane active" id="m_{{ materials[0].post_id }}" role="tabpanel">{{ Amend.md(materials[0].text) }}</div>
+                    {% for m in materials[1:] %}
+                        <div class="tab-pane" id="m_{{ m.post_id }}" role="tabpanel">{{ Amend.md(m.text) }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <p class="h6 align-self-center text-center">Пока ничего нет.</p>
+        {% endif %}
+    </div>
+{% endblock %}
