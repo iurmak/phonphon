@@ -16,4 +16,4 @@ import q_a.login, q_a.questions, q_a.question, \
     q_a.profiles, q_a.new_assignment, q_a.assignments, q_a.assignment, \
     q_a.add_user, q_a.todo_student, q_a.todo_teacher, q_a.check_assignment, \
     q_a.massive_assessment, q_a.all_grades, q_a.main, q_a.new_post, q_a.settings, \
-    q_a.edit_post, q_a.about
+    q_a.edit_post, q_a.about, q_a.materials

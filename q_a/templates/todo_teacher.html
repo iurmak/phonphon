@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Задания на проверку{% endblock %}
 {% block content %}
+    <div class="container-md">
+        <form action="" method="post" id="filter">
+            <div class="row justify-content-center">
+                <div class="col-md-auto">
+                    <button class="btn btn-outline-primary" type="submit" form="filter">Фильтровать</button>
+                </div>
+                <div class="col-md-auto">
+                    <select class="form-select" name="parameter">
+                        <option selected value="group">Параметр фильтрации</option>
+                        <option value="ID">ID задания</option>
+                        <option value="group">Группа</option>
+                    </select>
+                </div>
+                <div class="col-6"><input required name="query" class="form-control" type="text"></div>
+            </div>
+        </form>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
@@ -8,6 +25,7 @@
                 <th scope="col">Тип</th>
                 <th scope="col">Заголовок</th>
                 <th scope="col">Кто сдал</th>
+                <th scope="col">Группа</th>
                 <th scope="col">Когда сдано</th>
                 <th scope="col">Статус</th>
                 <th scope="col">Дедлайн</th>
@@ -15,17 +33,46 @@
             </tr>
           </thead>
         <tbody>
-            {% for assignment in assignments %}
+            {% if group %}
+                {% for assignment in assignments if assignment.user.group.group == group %}
                     <tr>
                         <td>{{ assignment.assignment.type.text }}</td>
-                        <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ assignment.assignment.title }}</a></td>
+                        <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ Amend.md(assignment.assignment.title) }}</a></td>
                         <td>{{ Amend.username(assignment.user.username) }}</td>
+                        <td>{{ assignment.user.group.group }}</td>
                         <td>{{ Amend.datetime(assignment.datetime) }}</td>
                         <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
-                        <td>{{ assignment.assignment.deadline }}</td>
+                        <td>{% if assignment.assignment.deadline %}{{ Amend.datetime(assignment.assignment.deadline) }}{% else %}нет{% endif %}</td>
                         <td>{{ Amend.datetime(assignment.assignment.datetime) }}</td>
                     </tr>
-            {% endfor %}
+                {% endfor %}
+            {% elif ID %}
+                {% for assignment in assignments if assignment.source_assignment_id == ID %}
+                    <tr>
+                        <td>{{ assignment.assignment.type.text }}</td>
+                        <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ Amend.md(assignment.assignment.title) }}</a></td>
+                        <td>{{ Amend.username(assignment.user.username) }}</td>
+                        <td>{{ assignment.user.group.group }}</td>
+                        <td>{{ Amend.datetime(assignment.datetime) }}</td>
+                        <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
+                        <td>{% if assignment.assignment.deadline %}{{ Amend.datetime(assignment.assignment.deadline) }}{% else %}нет{% endif %}</td>
+                        <td>{{ Amend.datetime(assignment.assignment.datetime) }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                {% for assignment in assignments %}
+                    <tr>
+                        <td>{{ assignment.assignment.type.text }}</td>
+                        <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ Amend.md(assignment.assignment.title) }}</a></td>
+                        <td>{{ Amend.username(assignment.user.username) }}</td>
+                        <td>{{ assignment.user.group.group }}</td>
+                        <td>{{ Amend.datetime(assignment.datetime) }}</td>
+                        <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
+                        <td>{% if assignment.assignment.deadline %}{{ Amend.datetime(assignment.assignment.deadline) }}{% else %}нет{% endif %}</td>
+                        <td>{{ Amend.datetime(assignment.assignment.datetime) }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
         </table>
     </div>

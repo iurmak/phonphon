@@ -8,104 +8,111 @@
             <title>{% block title %}{% endblock %}</title>
         {% endblock %}
     </head>
-  <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
-            <div class="container-fluid">
-                <a class="navbar-brand" href={{ url_for('main') }}>Фонетика и фонология</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href={{ url_for('questions') }}>Вопросы</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href={{ url_for('create_question') }}>Задать вопрос</a>
-                        </li>
-                        {% if not session.get('user') %}
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
+                <div class="container-fluid">
+                    <a href="{{ url_for('main') }}"><img src="{{ url_for('main') }}static/logo.png" class="navbar-brand" height="60" width="78"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href={{ url_for('signup') }}>Зарегистрироваться</a>
+                                <a class="nav-link" aria-current="page" href={{ url_for('questions') }}>Вопросы</a>
                             </li>
-                        {% endif %}
-                        {% if session.get('status') != 2 and session.get('user_id') %}
                             <li class="nav-item">
-                                <a class="nav-link" href={{ url_for('todo_student') }}>Мои задания{% if session.get('todo') %}
-                                <span class="text-info">{{ session.get('todo') }}</span>{% endif %}</a>
+                                <a class="nav-link" href={{ url_for('create_question') }}>Задать вопрос</a>
                             </li>
-                        {% elif session.get('status') == 2 %}
+                            {% if not session.get('user') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href={{ url_for('signup') }}>Зарегистрироваться</a>
+                                </li>
+                            {% endif %}
+                            {% if session.get('status') != 2 and session.get('user_id') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href={{ url_for('todo_student') }}>Мои задания{% if session.get('todo') %}
+                                    <span class="text-info">{{ session.get('todo') }}</span>{% endif %}</a>
+                                </li>
+                            {% elif session.get('status') == 2 %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href={{ url_for('todo_teacher') }}>Задания на проверку{% if session.get('todo') %}
+                                    <span class="text-info">{{ session.get('todo') }}</span>{% endif %}</a>
+                                </li>
+                            {% endif %}
+                            {% if session.get('user_id') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url_for('materials') }}"}>Материалы</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href={{ url_for('notification') }}>Уведомления{% if session.get('notifications') %}<span class="text-info"> {{ session.get('notifications') }}</span>{% endif %}</a>
+                                </li>
+                            {% endif %}
                             <li class="nav-item">
-                                <a class="nav-link" href={{ url_for('todo_teacher') }}>Задания на проверку{% if session.get('todo') %}
-                                <span class="text-info">{{ session.get('todo') }}</span>{% endif %}</a>
+                                <a class="nav-link" href="https://ipa.typeit.org/full/" target="_blank"}>IPA-клавиатура</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('about') }}"}>О курсе и сайте</a>
+                            </li>
+                        </ul>
+                        {% if session.get('status') == 2 %}
+                          <div class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Администрирование
+                              </a>
+                              <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="{{ url_for('profiles') }}">Профили</a></li>
+                                  <li><a class="dropdown-item" href="{{ url_for('add_user') }}">Добавить профиль</a></li>
+                                  <li><a class="dropdown-item" href="{{ url_for('assignments') }}">Задания</a></li>
+                                  <li><a class="dropdown-item" href="{{ url_for('new_assignment') }}">Добавить задание</a></li>
+                                  <li><a class="dropdown-item" href="{{ url_for('all_grades') }}">Отметки</a></li>
+                                  <li><a class="dropdown-item" href="{{ url_for('create_post') }}">Добавить пост или материал</a></li>
+                                  <li><a class="dropdown-item" href="{{ url_for('settings') }}">Дополнительные настройки</a></li>
+                              </ul>
+                            </div>
                         {% endif %}
-                        {% if session.get('user_id') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href={{ url_for('notification') }}>Уведомления{% if session.get('notifications') %}
-                                <span class="text-info">{{ session.get('notifications') }}</span>{% endif %}</a>
-                        </li>
-                        {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://ipa.typeit.org/full/" target="_blank"}>IPA-клавиатура</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('about') }}"}>О курсе и сайте</a>
-                        </li>
-                    </ul>
-                    {% if session.get('status') == 2 %}
-                      <div class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Администрирование
-                          </a>
-                          <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="{{ url_for('profiles') }}">Профили</a></li>
-                              <li><a class="dropdown-item" href="{{ url_for('add_user') }}">Добавить профиль</a></li>
-                              <li><a class="dropdown-item" href="{{ url_for('assignments') }}">Задания</a></li>
-                              <li><a class="dropdown-item" href="{{ url_for('new_assignment') }}">Добавить задание</a></li>
-                              <li><a class="dropdown-item" href="{{ url_for('all_grades') }}">Отметки</a></li>
-                              <li><a class="dropdown-item" href="{{ url_for('create_post') }}">Добавить пост</a></li>
-                              <li><a class="dropdown-item" href="{{ url_for('settings') }}">Дополнительные настройки</a></li>
-                          </ul>
-                        </div>
+                    {% if session.get('user') %}
+                        <span class="navbar-text">
+                            <a class="nav-link active" href={{ url_for('profile') }}>{% if session.get('status') == 2 %}<span class="text-success">{{ session.get('user') }}</span>{% else %}{{ session.get('user') }}{% endif %}</a>
+                        </span>
                     {% endif %}
-                {% if session.get('user') %}
-                    <span class="navbar-text">
-                        <a class="nav-link active" href={{ url_for('profile') }}>{% if session.get('status') == 2 %}<span class="text-success">{{ session.get('user') }}</span>{% else %}{{ session.get('user') }}{% endif %}</a>
-                    </span>
-                {% endif %}
-            <span>
-                <a class="nav-link text-secondary" href={{ url_for('login') }}>{% if session.get('user') %}Выйти{% else %}Войти{% endif %}</a>
-            </span>
-            </div>
-          </div>
-        </nav>
-    </header><br>
-    <main role="main" class="container-fluid">
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="container">
-                        <div class="{{ category }} rounded text-center" role="alert">
-                            {{ message }}
+                <span>
+                    <a class="nav-link text-secondary" href={{ url_for('login') }}>{% if session.get('user') %}Выйти{% else %}Войти{% endif %}</a>
+                </span>
+                </div>
+              </div>
+            </nav>
+        </header><br>
+        <main role="main" class="container-fluid">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="container">
+                            <div class="{{ category }} rounded text-center" role="alert">
+                                {{ message }}
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </main>
-    <br>
-    <footer class="footer">
-            <div class="container-fluid">
-                {% block footer %}
-                    &copy; Yury Makarov, 2021
-                {% endblock %}
-            </div>
-    </footer>
-  <script src="/static/js/jquery-3.2.1.slim.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="/static/js/jquery-slim.min.js"><\/script>')</script>
-  <script src="/static/js/js_vendor_popper.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
-  </body>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+        <br>
+        <footer class="footer">
+                <div class="container-fluid">
+                    {% block footer %}
+                        &copy; Yury Makarov, 2021
+                    {% endblock %}
+                </div>
+        </footer>
+        <script src="/static/js/jquery-3.2.1.slim.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="/static/js/jquery-slim.min.js"><\/script>')</script>
+        <script src="/static/js/js_vendor_popper.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script>
+            $('#myList a').on('click', function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+        })
+        </script>
 </html>

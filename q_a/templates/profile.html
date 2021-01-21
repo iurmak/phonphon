@@ -7,60 +7,60 @@
                 <div class="row justify-content-between">
                     <span class="h5 col align-self-center">{{ user }}: сведения о профиле</span>
                     <div class="btn-group col" role="group">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#questions">
-                                Вопросы
-                            </button>
-                            <div class="modal fade" id="questions" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{ user }}: заданные вопросы</h5>
-                                        </div>
-                                        <div class="modal-body text-start">
-                                            {% for question in questions %}
-                                                <ul>
-                                                    <li>
-                                                        <a href="{{ url_for('question', question_id=question.question_id) }}">{{ question.title }}</a>
-                                                    </li>
-                                                </ul>
-                                            {% endfor %}
-                                            {% if questions == [] %}
-                                                <p>Отсутствуют.</p>
-                                            {% endif %}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                                        </div>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#questions">
+                            Вопросы
+                        </button>
+                        <div class="modal fade" id="questions" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">{{ user }}: заданные вопросы</h5>
+                                    </div>
+                                    <div class="modal-body text-start">
+                                        {% for question in questions %}
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ url_for('question', question_id=question.question_id) }}">{{ question.title }}</a>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
+                                        {% if questions == [] %}
+                                            <p>Отсутствуют.</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#answers">
-                                Ответы
-                            </button>
-                            <div class="modal fade" id="answers" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">{{ user }}: данные ответы</h5>
-                                        </div>
-                                        <div class="modal-body text-start">
-                                            {% for answer in answers %}
-                                                <ul>
-                                                    <li>
-                                                        <a href="{{ url_for('question', question_id=answer.question_id) }}">{{ answer.question.title }}</a>
-                                                    </li>
-                                                </ul>
-                                            {% endfor %}
-                                            {% if answers == [] %}
-                                                <p>Отсутствуют.</p>
-                                            {% endif %}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                                        </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#answers">
+                            Ответы
+                        </button>
+                        <div class="modal fade" id="answers" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">{{ user }}: данные ответы</h5>
+                                    </div>
+                                    <div class="modal-body text-start">
+                                        {% for answer in answers %}
+                                            <ul>
+                                                <li>
+                                                    <a href="{{ url_for('question', question_id=answer.question_id) }}">{{ answer.question.title }}</a>
+                                                </li>
+                                            </ul>
+                                        {% endfor %}
+                                        {% if answers == [] %}
+                                            <p>Отсутствуют.</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         {% if role_id != 2 %}
                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#grades">
                                 Отметки
@@ -79,29 +79,29 @@
                                                         <th scope="col-2">Задание</th>
                                                         <th scope="col-1">Отметка</th>
                                                     </tr>
-                                                  </thead>
-                                                <tbody>
-                                                    {% for assignment in handed_assignments %}
-                                                        {% set value = assignment.user.surname + assignment.user.firstname %}
-                                                        <tr>
-                                                            <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{% if session.get('status') == 2 %}{{ url_for('check_assignment', id=assignment.assignment_id) }}{% else %}{{ url_for('assignment', id=assignment.source_assignment_id) }}{% endif %}">{{ assignment.assignment.title }}</a></label></td>
-                                                            <td class="col-1"><span class="text-dark h6">{{ assignment.grade }}</span></td>
-                                                        </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                                </table>
-                                            </div>{% else %}<p>Отсутствуют.</p>{% endif %}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for assignment in handed_assignments %}
+                                                            {% set value = assignment.user.surname + assignment.user.firstname %}
+                                                            <tr>
+                                                                <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{% if session.get('status') == 2 %}{{ url_for('check_assignment', id=assignment.assignment_id) }}{% else %}{{ url_for('assignment', id=assignment.source_assignment_id) }}{% endif %}">{{ Amend.md(assignment.assignment.title) }}</a></label></td>
+                                                                <td class="col-1"><span class="text-dark h6">{{ assignment.grade }}</span></td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                    </table>
+                                                </div>{% else %}<p>Отсутствуют.</p>{% endif %}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="card-body">
                     <form action="" method="post" id="profile_changes">
                         <dl class="row">

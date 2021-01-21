@@ -49,7 +49,8 @@ def profile(user_id=None):
                                answers=answers,
                                date=date,
                                emails=Email,
-                               handed_assignments=Handed_assignment.query.filter_by(assignee=user_id).all())
+                               handed_assignments=Handed_assignment.query.filter_by(assignee=user_id).all(),
+                               Amend=Amend)
     if request.method == 'POST':
         updates = dict(request.form)
         user = User.query.get(user_id)

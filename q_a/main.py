@@ -8,7 +8,7 @@ from q_a.supplement import Amend, Check
 def main(page=1):
     Check.update()
     if request.method == 'GET':
-        page_of_news = Post.query.order_by(Post.datetime.desc()).paginate(page, 10)
+        page_of_news = Post.query.filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 10)
         news = page_of_news.items
         return render_template('main.html',
                                items=page_of_news,
@@ -19,9 +19,9 @@ def main(page=1):
     elif request.method == 'POST':
         if request.form.get('parameter'):
             if request.form.get('parameter'):
-                page_of_news = Post.query.filter_by(tag=int(request.form.get('parameter'))).order_by(Post.datetime.desc()).paginate(page, 10)
+                page_of_news = Post.query.filter_by(tag=int(request.form.get('parameter'))).filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 10)
             else:
-                page_of_news = Post.query.order_by(Post.datetime.desc()).paginate(page, 10)
+                page_of_news = Post.query.filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 10)
             news = page_of_news.items
             return render_template('main.html',
                                    items=page_of_news,

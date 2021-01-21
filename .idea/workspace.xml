@@ -22,18 +22,37 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b65f410-16d6-4658-b8c5-7df8c379035b" name="Default Changelist" comment="beta 9">
+    <list default="true" id="1b65f410-16d6-4658-b8c5-7df8c379035b" name="Default Changelist" comment="release">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/massive_assessment.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/massive_assessment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/phon_questions.db" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/phon_questions.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/question.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/question.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/supplement.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/supplement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/assignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/check_assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/check_assignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/edit_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/edit_post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/new_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/new_post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/new_question.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/new_question.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/notification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/phon_questions.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/static/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/static/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/static/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/all_grades.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/all_grades.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q_a/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/check_assignment.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/check_assignment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/edit_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/edit_post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/hand_in.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/hand_in.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/massive_assessment.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/massive_assessment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/new_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/new_post.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q_a/templates/notifications.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/notifications.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q_a/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/profiles.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/profiles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/todo_student.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/todo_student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/todo_teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/todo_teacher.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/todo_student.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/todo_student.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/todo_teacher.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/todo_teacher.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +63,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -65,7 +84,9 @@
   </component>
   <component name="JupyterTrust" id="76e6bafc-08db-4e79-8e93-146d8acef1e9" />
   <component name="ProjectId" id="1m56GPEYsyDfda9gfkaPB4lX9Bm" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -74,19 +95,22 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/q_a/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/q_a/static/css" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/q_a/static/css" />
+      <recent name="$PROJECT_DIR$/q_a" />
+      <recent name="$PROJECT_DIR$/q_a/static" />
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/q_a/static/css" />
+      <recent name="$PROJECT_DIR$/q_a" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/static/js" />
       <recent name="$PROJECT_DIR$/static/css" />
-      <recent name="$PROJECT_DIR$/static" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/q_a/static" />
-      <recent name="$PROJECT_DIR$/templates" />
     </key>
   </component>
   <component name="RunManager" selected="Python.flask run">
@@ -305,7 +329,15 @@
       <workItem from="1610280295943" duration="7042000" />
       <workItem from="1610306891952" duration="201000" />
       <workItem from="1610467291596" duration="2532000" />
-      <workItem from="1610616136126" duration="8181000" />
+      <workItem from="1610616136126" duration="8219000" />
+      <workItem from="1610921413932" duration="1131000" />
+      <workItem from="1610922563256" duration="29000" />
+      <workItem from="1610975493930" duration="451000" />
+      <workItem from="1610976274704" duration="512000" />
+      <workItem from="1610976926088" duration="201000" />
+      <workItem from="1611094029362" duration="8435000" />
+      <workItem from="1611143635737" duration="747000" />
+      <workItem from="1611230202324" duration="8212000" />
     </task>
     <task id="LOCAL-00001" summary="beta 9">
       <created>1610284153948</created>
@@ -314,7 +346,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610284153948</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="release">
+      <created>1610713430185</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610713430185</updated>
+    </task>
+    <task id="LOCAL-00003" summary="release">
+      <created>1610713438746</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610713438746</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +380,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="beta 9" />
-    <option name="LAST_COMMIT_MESSAGE" value="beta 9" />
+    <MESSAGE value="release" />
+    <option name="LAST_COMMIT_MESSAGE" value="release" />
   </component>
   <component name="WindowStateProjectService">
     <state x="192" y="84" width="1013" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609807426393">
@@ -346,36 +393,36 @@
       <screen x="0" y="25" width="1440" height="799" />
     </state>
     <state x="555" y="171" key="EnvironmentVariablesDialog/0.25.1440.799@0.25.1440.799" timestamp="1608922767556" />
-    <state width="1344" height="203" key="GridCell.Tab.0.bottom" timestamp="1610628908963">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1374" height="203" key="GridCell.Tab.0.bottom" timestamp="1611239738410">
+      <screen x="0" y="25" width="1440" height="799" />
     </state>
-    <state width="1344" height="203" key="GridCell.Tab.0.bottom/0.25.1440.799@0.25.1440.799" timestamp="1610618139974" />
+    <state width="1374" height="203" key="GridCell.Tab.0.bottom/0.25.1440.799@0.25.1440.799" timestamp="1611239738410" />
     <state width="1344" height="203" key="GridCell.Tab.0.bottom/0.25.1440.800@0.25.1440.800" timestamp="1610625330924" />
-    <state width="1344" height="203" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1610628908963" />
+    <state width="1344" height="203" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1610713458778" />
     <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.805@0.25.1440.805" timestamp="1609874370776" />
     <state width="1227" height="203" key="GridCell.Tab.0.bottom/0.25.1440.806@0.25.1440.806" timestamp="1609862432842" />
-    <state width="1344" height="203" key="GridCell.Tab.0.center" timestamp="1610628908962">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1374" height="203" key="GridCell.Tab.0.center" timestamp="1611239738409">
+      <screen x="0" y="25" width="1440" height="799" />
     </state>
-    <state width="1344" height="203" key="GridCell.Tab.0.center/0.25.1440.799@0.25.1440.799" timestamp="1610618139973" />
+    <state width="1374" height="203" key="GridCell.Tab.0.center/0.25.1440.799@0.25.1440.799" timestamp="1611239738409" />
     <state width="1344" height="203" key="GridCell.Tab.0.center/0.25.1440.800@0.25.1440.800" timestamp="1610625330921" />
-    <state width="1344" height="203" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1610628908962" />
+    <state width="1344" height="203" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1610713458777" />
     <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.805@0.25.1440.805" timestamp="1609874370771" />
     <state width="1227" height="203" key="GridCell.Tab.0.center/0.25.1440.806@0.25.1440.806" timestamp="1609862432841" />
-    <state width="1344" height="203" key="GridCell.Tab.0.left" timestamp="1610628908962">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1374" height="203" key="GridCell.Tab.0.left" timestamp="1611239738409">
+      <screen x="0" y="25" width="1440" height="799" />
     </state>
-    <state width="1344" height="203" key="GridCell.Tab.0.left/0.25.1440.799@0.25.1440.799" timestamp="1610618139973" />
+    <state width="1374" height="203" key="GridCell.Tab.0.left/0.25.1440.799@0.25.1440.799" timestamp="1611239738409" />
     <state width="1344" height="203" key="GridCell.Tab.0.left/0.25.1440.800@0.25.1440.800" timestamp="1610625330920" />
-    <state width="1344" height="203" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1610628908962" />
+    <state width="1344" height="203" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1610713458777" />
     <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.805@0.25.1440.805" timestamp="1609874370768" />
     <state width="1227" height="203" key="GridCell.Tab.0.left/0.25.1440.806@0.25.1440.806" timestamp="1609862432841" />
-    <state width="1344" height="203" key="GridCell.Tab.0.right" timestamp="1610628908963">
-      <screen x="0" y="25" width="1440" height="803" />
+    <state width="1374" height="203" key="GridCell.Tab.0.right" timestamp="1611239738410">
+      <screen x="0" y="25" width="1440" height="799" />
     </state>
-    <state width="1344" height="203" key="GridCell.Tab.0.right/0.25.1440.799@0.25.1440.799" timestamp="1610618139974" />
+    <state width="1374" height="203" key="GridCell.Tab.0.right/0.25.1440.799@0.25.1440.799" timestamp="1611239738410" />
     <state width="1344" height="203" key="GridCell.Tab.0.right/0.25.1440.800@0.25.1440.800" timestamp="1610625330922" />
-    <state width="1344" height="203" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1610628908963" />
+    <state width="1344" height="203" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1610713458777" />
     <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.805@0.25.1440.805" timestamp="1609874370775" />
     <state width="1227" height="203" key="GridCell.Tab.0.right/0.25.1440.806@0.25.1440.806" timestamp="1609862432841" />
     <state x="300" y="60" key="SettingsEditor" timestamp="1609341069376">
@@ -386,10 +433,10 @@
       <screen x="0" y="25" width="1440" height="799" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.25.1440.799@0.25.1440.799" timestamp="1609071052027" />
-    <state x="321" y="164" key="Vcs.Push.Dialog.v2" timestamp="1610284161782">
+    <state x="321" y="164" key="Vcs.Push.Dialog.v2" timestamp="1610713447235">
       <screen x="0" y="25" width="1440" height="803" />
     </state>
-    <state x="321" y="164" key="Vcs.Push.Dialog.v2/0.25.1440.803@0.25.1440.803" timestamp="1610284161782" />
+    <state x="321" y="164" key="Vcs.Push.Dialog.v2/0.25.1440.803@0.25.1440.803" timestamp="1610713447235" />
     <state x="522" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610467299118">
       <screen x="0" y="25" width="1440" height="800" />
     </state>
@@ -403,24 +450,13 @@
     </state>
     <state x="383" y="149" width="670" height="676" key="search.everywhere.popup/0.25.1440.800@0.25.1440.800" timestamp="1609329801591" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="jinja2-line">
-          <url>file://$PROJECT_DIR$/q_a/templates/questions.html</url>
-          <line>21</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/q_a$setup.coverage" NAME="setup Coverage Results" MODIFIED="1609852540038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$Flask__q_a___init___py_.coverage" NAME="Flask (q_a/__init__.py) Coverage Results" MODIFIED="1609807451972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1608819592134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$q_a.coverage" NAME="q_a Coverage Results" MODIFIED="1610121024032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/q_a$app.coverage" NAME="app Coverage Results" MODIFIED="1608922241893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1610628908941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1611239738399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$create_all.coverage" NAME="create_all Coverage Results" MODIFIED="1608840404118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1608922256734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/q_a" />
   </component>

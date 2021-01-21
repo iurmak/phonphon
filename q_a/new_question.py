@@ -2,7 +2,7 @@ from q_a import app
 from flask import request, render_template, redirect, \
     url_for, session
 from q_a.supplement import Amend, Check
-from q_a.models import db, Question
+from q_a.models import db, Question, Subscription
 
 @app.route('/new/question', methods=['POST', 'GET'])
 def create_question():
@@ -27,5 +27,11 @@ def create_question():
                             is_anon=anon,
                             datetime=Check.time())
         db.session.add(question)
+        db.session.commit()
+        user_id = session.get('user_id')
+        db.session.add(Subscription(
+            user_id=user_id,
+            question_id=question.question_id
+        ))
         db.session.commit()
         return redirect(url_for('questions'))

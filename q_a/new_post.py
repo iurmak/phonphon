@@ -16,12 +16,14 @@ def create_post():
                                Tags=Tags)
     elif request.method == 'POST':
         text = request.form.get('text')
+        title = request.form.get('title')
         tag_id = request.form.get('tag')
         user_id = session.get('user_id')
         post = Post(text=text,
                     tag=tag_id,
                     user_id=user_id,
-                    datetime=Check.time())
+                    datetime=Check.time(),
+                    title=title)
         db.session.add(post)
         db.session.commit()
         return Amend.flash('Пост опубликован.', 'success', url_for('main'))

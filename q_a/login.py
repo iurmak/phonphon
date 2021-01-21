@@ -20,7 +20,7 @@ def login(token=None):
                 return redirect(url_for('login'))
             User.query.filter_by(email=email).first().password = password
             db.session.commit()
-            return Amend.flash('Пароль изменён.)', 'success', url_for('login'))
+            return Amend.flash('Пароль изменён.', 'success', url_for('login'))
         if session.get('user'):
             session.clear()
         return render_template('login.html')

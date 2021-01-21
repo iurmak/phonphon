@@ -71,27 +71,25 @@
             </div>
         </div>
         <div class="card-body">
-            {% set present = {'present': False} %}
             <ul class="list-group list-group-flush">
                 {% for notification in notifications %}
-                    {% if not notification.seen %}
-                        {% if present.update({'present': True}) %}{% endif %}
-                        <li class="list-group-item">
-                            <div class="row">
-                                <span class="col align-self-center">
-                                    <b>{{ Amend.datetime(notification.datetime) }}</b>
-                                </span>
-                                <span class="col align-self-center">{{ Action_types.query.get(notification.action_id).type }}</span>
-                                <form method="post" id="{{ notification.ping_id }}" class="btn-group-sm col align-self-center">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm" name="url" value="{{ notification.result_url }}">подробнее</button>
-                                    <button type="submit" class="btn btn-outline-danger btn-sm" name="{{ notification.ping_id }}" form="{{ notification.ping_id }}">удалить</button>
-                                </form>
-                            </div>
-                        </li>
-                    {% endif %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <span class="col align-self-center">
+                                <b>{{ Amend.datetime(notification.datetime) }}</b>
+                            </span>
+                            <span class="col align-self-center">
+                                {{ Action_types.query.get(notification.action_id).type }}
+                            </span>
+                            <form method="post" id="{{ notification.ping_id }}" class="btn-group btn-group-sm col align-self-center">
+                                <button type="submit" class="btn btn-outline-primary btn-sm" name="url" value="{{ notification.result_url }}">подробнее</button>
+                                <button type="submit" class="btn btn-outline-secondary btn-sm" name="{{ notification.ping_id }}" form="{{ notification.ping_id }}">просмотрено</button>
+                            </form>
+                        </div>
+                    </li>
                 {% endfor %}
             </ul>
-            {% if not present['present'] %}
+            {% if not notifications %}
                 Отсутствуют.
             {% endif %}
         </div>

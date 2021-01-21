@@ -631,6 +631,30 @@ progress {
     max-width: 1320px;
   }
 }
+@font-face {
+    font-family: 'Charis SIL';
+    src: url("CharisSIL-R.woff") format("woff");
+    font-weight:normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Charis SIL';
+    src:url('CharisSIL-I.woff') format("woff");
+    font-weight:normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Charis SIL';
+    src:url('CharisSIL-B.woff') format("woff");
+    font-weight:bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Charis SIL';
+    src:url('CharisSIL-BI.woff') format("woff");
+    font-weight:bold;
+    font-style: italic;
+}
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;

@@ -18,8 +18,8 @@
                 {% if assignment.assignment.datetime %}
                     <tr>
                         <td>{{ Amend.datetime(assignment.assignment.datetime) }}</td>
-                        <td>{{ assignment.assignment.deadline }}</td>
-                        <td><a href="{{ url_for('assignment', id=assignment.source_assignment_id) }}">{{ assignment.assignment.title }}</a></td>
+                        <td>{% if assignment.assignment.deadline %}{{ Amend.datetime(assignment.assignment.deadline) }}{% else %}нет{% endif %}</td>
+                        <td><a href="{{ url_for('assignment', id=assignment.source_assignment_id) }}">{{ Amend.md(assignment.assignment.title) }}</a></td>
                         <td>{{ assignment.assignment.type.text }}</td>
                         <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
                         <td>{{ assignment.grade }}</td>

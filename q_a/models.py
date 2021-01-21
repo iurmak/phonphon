@@ -141,6 +141,7 @@ class Ping(db.Model):
 
 class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.Text)
     datetime = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     text = db.Column(db.Text)

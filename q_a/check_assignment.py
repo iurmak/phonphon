@@ -2,7 +2,6 @@ from q_a import app
 from flask import request, render_template, \
     url_for, session, redirect
 from q_a.models import db, Handed_assignment, Comment, User, Ping, Email
-from time import localtime, strftime
 from q_a.supplement import Amend, Check, Emails
 from re import sub
 
@@ -18,12 +17,15 @@ def check_assignment(id):
             assignment = Handed_assignment.query.get(id)
             assignment.assignment.title = Amend.md(assignment.assignment.title)
             assignment.assignment.description = Amend.md(assignment.assignment.description)
-            assignment.assignment.datetime = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.datetime))
-            assignment.datetime = strftime('%d.%m.%Y %H:%M', localtime(assignment.datetime))
+            assignment.assignment.datetime = Amend.datetime(assignment.assignment.datetime)
+            if assignment.datetime:
+                assignment.datetime = Amend.datetime(assignment.datetime)
+            else:
+                assignment.datetime = 'ещё не сдано'
             if not assignment.main_comment:
                 assignment.main_comment = ''
             if assignment.assignment.deadline:
-                assignment.assignment.deadline = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.deadline))
+                assignment.assignment.deadline = Amend.datetime(assignment.assignment.deadline)
             else:
                 assignment.assignment.deadline = 'нет'
             return render_template('check_assignment.html',
@@ -44,23 +46,24 @@ def check_assignment(id):
                 return redirect(url_for('edit', id=request.form.get('edit_comment'), type='comment'))
             handed_assignment = Handed_assignment.query.get(id)
             if request.form.get('grade') or request.form.get('main_comment'):
+                if not handed_assignment.is_checked:
+                    db.session.add(Ping(datetime=Check.time(),
+                                        actor_id=session.get('user_id'),
+                                        action_id=3,
+                                        target_id=handed_assignment.assignee,
+                                        result_url=url_for('assignment', id=handed_assignment.assignment.assignment_id)
+                                        ))
+                if Email.query.get(handed_assignment.assignee).confirmed and Email.query.get(handed_assignment.assignee).assignments and not handed_assignment.is_checked:
+                    Emails.send(f'Задание проверено',
+                                f'''Здравствуйте. Ваш ответ на задание «{Amend.md(handed_assignment.assignment.title)}» проверен. Подробности: {url_for('assignment', id=handed_assignment.assignment.assignment_id, _external=True)}.''',
+                                User.query.get(handed_assignment.assignee).email)
                 handed_assignment.is_checked = True
                 handed_assignment.checked_by = session.get('user_id')
                 handed_assignment.when_checked = Check.time()
-                db.session.add(Ping(datetime=Check.time(),
-                                    actor_id=session.get('user_id'),
-                                    action_id=3,
-                                    target_id=handed_assignment.assignee,
-                                    result_url=url_for('assignment', id=id)
-                                    ))
-                if Email.query.get(handed_assignment.assignee).confirmed and Email.query.get(handed_assignment.assignee).assignments:
-                    Emails.send(f'Задание «{handed_assignment.assignment.title}» проверено',
-                                f'''Здравствуйте. Ваш ответ на задание «{handed_assignment.assignment.title}» проверен. Подробности: {url_for('assignment', id=id)}.''',
-                                User.query.get(handed_assignment.assignee).email)
                 if request.form.get('grade') != '':
                     handed_assignment.grade = request.form.get('grade')
                 if request.form.get('main_comment'):
-                    handed_assignment.main_comment = Amend.md(request.form.get('main_comment'))
+                    handed_assignment.main_comment = request.form.get('main_comment')
                 db.session.commit()
                 return Amend.flash('Информация обновлена.', 'success', url_for('check_assignment', id=id))
             elif not request.form.get('new_comment'):

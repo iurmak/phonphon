@@ -12,7 +12,7 @@ def assignment(id):
     if not session.get('user_id'):
         return Check.login()
     if not Assignment.query.get(id):
-        return Check.page(url_for('assignments'))
+        return Check.page()
     if request.method == 'GET':
         if session.get('status') == 2:
             assignment = Assignment.query.get(id)
@@ -33,9 +33,9 @@ def assignment(id):
             if assignment:
                 assignment.assignment.title = Amend.md(assignment.assignment.title)
                 assignment.assignment.description = Amend.md(assignment.assignment.description)
-                assignment.assignment.datetime = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.datetime))
+                assignment.assignment.datetime = Amend.datetime(assignment.assignment.datetime)
                 if assignment.assignment.deadline:
-                    assignment.assignment.deadline = strftime('%d.%m.%Y %H:%M', localtime(assignment.assignment.deadline))
+                    assignment.assignment.deadline = Amend.datetime(assignment.assignment.deadline)
                 else:
                     assignment.assignment.deadline = 'нет'
                 return render_template('hand_in.html',

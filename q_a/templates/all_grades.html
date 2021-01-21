@@ -20,7 +20,7 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Группа</th>
                 {% for assignment in Assignment.query.all() %}
-                    <th scope="col"><a tabindex="-1" class="link-dark" href="{{ url_for('assignment', id=assignment.assignment_id) }}">{{ assignment.title }}</a>, {{ Amend.datetime(assignment.datetime) }}</th>
+                    <th scope="col"><a tabindex="-1" class="link-dark" href="{{ url_for('assignment', id=assignment.assignment_id) }}">{{ Amend.md(assignment.title) }}</a>, {{ Amend.datetime(assignment.datetime) }}</th>
                 {% endfor %}
             </tr>
           </thead>

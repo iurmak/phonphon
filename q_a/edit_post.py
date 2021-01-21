@@ -17,8 +17,9 @@ def edit_post(post_id):
                                Post=Post.query.get(post_id))
     elif request.method == 'POST':
         text = request.form.get('text')
+        title = request.form.get('title')
         tag_id = request.form.get('tag')
         user_id = session.get('user_id')
-        Post.query.filter_by(post_id=post_id).update({'text': text, 'tag': tag_id, 'user_id': user_id, 'datetime': Check.time()})
+        Post.query.filter_by(post_id=post_id).update({'text': text, 'tag': tag_id, 'user_id': user_id, 'datetime': Check.time(), 'title': title})
         db.session.commit()
         return Amend.flash('Пост изменён.', 'success', url_for('main'))

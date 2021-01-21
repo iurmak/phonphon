@@ -2,7 +2,7 @@
 {% block title %}Массовое выставление отметок{% endblock %}
 {% block content %}
     <div class="row justify-content-between">
-        <div class="col h5">Задание «{{ assignment.title }}» от {{ Amend.datetime(assignment.datetime) }}</div>
+        <div class="col h5">Задание «{{ Amend.md(assignment.title) }}» от {{ Amend.datetime(assignment.datetime) }}</div>
         <div class="col-2">
             <form action="" method="post" id="download">
                 <input class="btn btn-outline-primary" type="submit" form="download" name="download" value="Скачать">

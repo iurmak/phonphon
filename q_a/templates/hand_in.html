@@ -36,13 +36,13 @@
                     {% if assignment.answer %}
                         <dt class="col-sm-3">Ваш ответ</dt>
                         <dd class="col-sm-9">
-                            <p>{{ Amend.md(assignment.answer) }}</p>
+                            <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.answer) }}</p>
                         </dd>
                     {% elif not assignment.is_checked and not assignment.assignment.is_grade %}
                         <dt class="col-sm-3"><label for="answer">Ваш ответ</label></dt>
                         <dd class="col-sm-9">
                             <form id="add_answer" action="" method="post">
-                                <textarea required class="form-control" id="answer" name="answer"></textarea>
+                                <textarea required class="form-control" id="answer" name="answer" style="font-family:Charis SIL;font-size:larger"></textarea>
                             </form>
                         </dd>
                     {% endif %}
@@ -50,7 +50,7 @@
                             <dt class="col-sm-3">Комментарий проверяющего</dt>
                             <dd class="col-sm-9">
                                 <div class="container-md border border-success rounded align-self-center">
-                                    <span class="text-start">{{ Amend.md(assignment.main_comment) }}</span>
+                                    <span class="text-start" style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.main_comment) }}</span>
                                 </div>
                             </dd>
                     {% endif %}
