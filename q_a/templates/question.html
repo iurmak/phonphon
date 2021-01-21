@@ -1,107 +1,115 @@
 {% extends "base.html" %}
 {% block title %}Вопрос № {{ question.question_id }}{% endblock %}
 {% block content %}
-<div class="container-md">
-    <div class="row">
-    <div class="col-10">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <span class="col h6 align-self-center text-start">{{ Amend.md(question.title) }}</span>
-                    {% if Subscription.query.filter_by(user_id=session.get('user_id'), question_id=question.question_id).first() and session.get('user') %}
-                        <form class="col align-self-center text-end" action="" method="post" id="unsubscribe">
-                            <input class="btn btn-danger" type="submit" form="unsubscribe" name="unsubscribe" value="Отписаться">
-                        </form>
-                    {% elif session.get('user') %}
-                        <form class="col align-self-center text-end" action="" method="post" id="subscribe">
-                            <input class="btn btn-primary" type="submit" form="subscribe" name="subscribe" value="Подписаться">
-                        </form>
+    <div class="container-md">
+        <div class="row">
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <span class="col align-self-center text-start" style="font-size: x-large;">{{ Amend.md(question.title) }}</span>
+                            {% if Subscription.query.filter_by(user_id=session.get('user_id'), question_id=question.question_id).first() and session.get('user') %}
+                                <form class="col align-self-center text-end" action="" method="post" id="unsubscribe">
+                                    <input class="btn btn-danger" type="submit" form="unsubscribe" name="unsubscribe" value="Отписаться">
+                                </form>
+                            {% elif session.get('user') %}
+                                <form class="col align-self-center text-end" action="" method="post" id="subscribe">
+                                    <input class="btn btn-sm btn-primary" type="submit" form="subscribe" name="subscribe" value="Подписаться">
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="align-self-center">
+                            <span class="align-middle">
+                                {{ Amend.md(question.text) }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="align-middle text-secondary">
+                            {{ Amend.username(question.user.username, question=question) }}, {{ question.datetime }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% if session.get('status') == 2 or session.get('user_id') == question.user_id %}
+                        <div class="col-md-1">
+                            <form action="" method="post" id="question_actions" class="btn-group-vertical btn-group-sm">
+                                <button class="btn btn-danger" type="submit" form="question_actions" name="delete_question" value="1">удалить</button>
+                                <button class="btn btn-warning" type="submit" form="question_actions" name="edit_question" value="1">править</button>
+                                {% if question.is_pinned %}
+                                    <button class="btn btn-success" type="submit" form="question_actions" name="pin_question" value="1">открепить</button>
+                                {% else %}
+                                    <button class="btn btn-success" type="submit" form="question_actions" name="pin_question" value="1">закрепить</button>
+                                {% endif %}
+                            </form>
+                        </div>
+            {% endif %}</div><br>
+        {% if True %}
+            {% for answer in answers %}
+                <p><div class="row">
+                    <div class="col-md">
+                        <div class="container-md{% if answer.is_praised or answer.answerer.role.role == 2 and not answer.is_anon %} border border-success rounded{% endif %}">
+                            <span>
+                                {{ Amend.md(answer.text) }}
+                            </span>
+                        </div>
+                        <span class="text-secondary align-middle">
+                            {{ Amend.username(answer.answerer.username, answer=answer) }}, {{ Amend.datetime(answer.datetime) }}
+                        </span>
+                    </div>
+                    {% if session.get('status') == 2 or session.get('user_id') == answer.user_id %}
+                        <div class="col-md-1">
+                            <form action="" method="post" class="btn-group-vertical btn-group-sm">
+                                <button class="btn btn-danger" type="submit" name="delete_answer" value="{{ answer.answer_id }}">удалить</button>
+                                <button class="btn btn-warning" type="submit" name="edit_answer" value="{{ answer.answer_id }}">править</button>
+                                {% if (session.get('status') == 2 and answer.answerer.role.role != 2) or (session.get('status') == 2 and answer.answerer.role.role == 2 and answer.is_anon) %}
+                                    <button class="btn btn-success" type="submit" name="praise_answer" value="{{ answer.answer_id }}">{% if answer.is_praised %}из рамки{% else %}в рамку{% endif %}</button>
+                                {% endif %}
+                            </form>
+                        </div>
                     {% endif %}
                 </div>
-            </div>
-            <div class="card-body">
-                <figure>
-                    <blockquote class="blockquote">
-                        {{ Amend.md(question.text) }}
-                    </blockquote>
-                    <figcaption class="blockquote-footer">
-                        {{ Amend.username(question.user.username, question=question) }}, {{ question.datetime }}
-                    </figcaption>
-                </figure>
-            </div>
-        </div>
-    </div>
-    {% if session.get('status') == 2 or session.get('user_id') == question.user_id %}
-                <div class="col">
-                    <form action="" method="post" id="question_actions" class="btn-group-vertical">
-                        <button class="btn btn-danger" type="submit" form="question_actions" name="delete_question" value="1">удалить</button>
-                        <button class="btn btn-warning" type="submit" form="question_actions" name="edit_question" value="1">править</button>
-                        {% if question.is_pinned %}
-                            <button class="btn btn-success" type="submit" form="question_actions" name="pin_question" value="1">открепить</button>
-                        {% else %}
-                            <button class="btn btn-success" type="submit" form="question_actions" name="pin_question" value="1">закрепить</button>
-                        {% endif %}
-                    </form>
-                </div>
-    {% endif %}</div><br>
-    {% if session.get('user') or True %} <!--todo всем -- или никому-->
-        {% for answer in answers %}
-            <figure>
-                <div class="row">
-                    <div class="col-10">
-                        <blockquote class="blockquote">
-                            {{ answer.text }}
-                        </blockquote>
-                        <figcaption class="blockquote-footer">
-                            {{ Amend.username(answer.answerer.username, answer=answer) }}, {{ answer.datetime }}
-                        </figcaption>
-                    </div>
-                        {% if session.get('status') == 2 or session.get('user_id') == answer.user_id %}
-                            <div class="col-2">
-                                <form action="" method="post" class="btn-group-vertical">
-                                    <button class="btn btn-danger" type="submit" name="delete_answer" value="{{ answer.answer_id }}">удалить</button>
-                                    <button class="btn btn-warning" type="submit" name="edit_answer" value="{{ answer.answer_id }}">править</button>
-                                    {% if (session.get('status') == 2 and answer.answerer.role.role != 2) or (session.get('status') == 2 and answer.answerer.role.role == 2 and answer.is_anon) %}
-                                        <button class="btn btn-success" type="submit" name="praise_answer" value="{{ answer.answer_id }}">{% if answer.is_praised %}снять выделение{% else %}выделить{% endif %}</button>
-                                    {% endif %}
-                                </form>
+            {% endfor %}
+            {% if items.has_prev or items.has_next %}
+                <div class="container text-center">
+                    <div class="row justify-content-center">
+                        {% if items.has_prev %}
+                            <div class="col-4">
+                                <a class="btn btn-secondary" href="{{ url_for('question', page=items.prev_num, question_id=question.question_id) }}">Предыдущие ответы</a>
                             </div>
                         {% endif %}
+                        {% if items.has_next %}
+                            <div class="col-4">
+                                <a class="btn btn-secondary" href="{{ url_for('question', page=items.next_num, question_id=question.question_id) }}">Следующие ответы</a>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-            </figure>
-        {% endfor %}
-        {% if items.has_prev or items.has_next %}
-            <div class="container text-center">
-                <div class="row justify-content-center">
-                    {% if items.has_prev %}
-                        <div class="col-4">
-                            <a class="btn btn-secondary" href="{{ url_for('question', page=items.prev_num, question_id=question.question_id) }}">Предыдущие ответы</a>
-                        </div>
-                    {% endif %}
-                    {% if items.has_next %}
-                        <div class="col-4">
-                            <a class="btn btn-secondary" href="{{ url_for('question', page=items.next_num, question_id=question.question_id) }}">Следующие ответы</a>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-            <br>
+                <br>
+            {% endif %}
+            {% if session.get('user') %}
+                <form action="" method="post" id="submit_answer">
+                    <dl class="row">
+                        <dt class="col-md-1">Ваш ответ</dt>
+                        <dd class="col-md">
+                            <div class="row">
+                                <div class="col-md">
+                                    <textarea required class="form-control" name="new_answer" maxlength="10000"></textarea>
+                                    <div class="mb-3 form-check">
+                                        <label class="form-check-label" for="anon">Опубликовать анонимно</label>
+                                        <input type="checkbox" class="form-check-input" name="anon" id="anon">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-primary" form="submit_answer">Ответить</button>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </form>
+            {% endif %}
         {% endif %}
-        {% if session.get('user') %}
-            <form action="" method="post" id="submit_answer">
-                <dl class="row">
-                    <dt class="col-1">Ваш ответ</dt>
-                    <dd class="col-9">
-                        <textarea required class="form-control" name="new_answer" maxlength="10000"></textarea>
-                        <div class="mb-3 form-check">
-                            <label class="form-check-label" for="anon">Опубликовать анонимно</label>
-                            <input type="checkbox" class="form-check-input" name="anon" id="anon">
-                        </div>
-                        <button type="submit" class="btn btn-primary" form="submit_answer">Ответить</button>
-                    </dd>
-                </dl>
-            </form>
-        {% endif %}
-    {% endif %}
-</div>
+    </div>
 {% endblock %}

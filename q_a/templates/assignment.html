@@ -11,32 +11,32 @@
             </div>
             <div class="card-body">
                 <dl class="row">
-                    <dt class="col-sm-3">Описание</dt>
-                    <dd class="col-sm-9">
+                    <dt class="col-md-2">Описание</dt>
+                    <dd class="col-md-10">
                         <p>{{ assignment.description }}</p>
                     </dd>
                     {% if assignment.datetime %}
-                        <dt class="col-sm-3">Когда опубликовано</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Когда опубликовано</dt>
+                        <dd class="col-md-10">
                             <p><span class="text-dark">{{ Amend.datetime(assignment.datetime) }}</span></p>
                         </dd>
                     {% endif %}
-                    <dt class="col-sm-3">Дедлайн</dt>
-                    <dd class="col-sm-9">
+                    <dt class="col-md-2">Дедлайн</dt>
+                    <dd class="col-md-10">
                         <p class="text-info">{{ assignment.deadline }}</p>
                     </dd>
                     {% if session.get('status') == 2 %}
-                        <dt class="col-sm-3">Кто добавил</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Кто добавил</dt>
+                        <dd class="col-md-10">
                             <p>{{ assignment.assigner }}</p>
                         </dd>
-                        <dt class="col-sm-3">Кому адресовано</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Кому адресовано</dt>
+                        <dd class="col-md-10">
                             <p>{{ assignment.assignees }}</p>
                         </dd>
                     {% endif %}
-                    <dt class="col-sm-3">Тип</dt>
-                    <dd class="col-sm-9">
+                    <dt class="col-md-2">Тип</dt>
+                    <dd class="col-md-10">
                         <p>{{ assignment.type.text }}{% if assignment.is_grade %} <span class="text-info">(не требует выполнения)</span>{% endif %}</p>
                     </dd>
                 </dl>

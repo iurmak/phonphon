@@ -11,9 +11,29 @@
                     {% endfor %}
                 </div>
                 <div class="tab-content col-9">
-                    <div class="tab-pane active" id="m_{{ materials[0].post_id }}" role="tabpanel">{{ Amend.md(materials[0].text) }}</div>
+                    <div class="tab-pane active" id="m_{{ materials[0].post_id }}" role="tabpanel">
+                        {% if session.get('status') == 2 %}
+                            <p>
+                                <form class="btn-group btn-group-sm" action="" method="post" id="actions">
+                                    <button class="btn btn-danger" type="submit" form="actions" name="delete" value="{{ materials[0].post_id }}">удалить</button>
+                                    <button class="btn btn-warning" type="submit" form="actions" name="edit" value="{{ materials[0].post_id }}">править</button>
+                                </form>
+                            </p>
+                        {% endif %}
+                        <p style="font-family: 'Charis SIL'">{{ Amend.md(materials[0].text) }}</p>
+                    </div>
                     {% for m in materials[1:] %}
-                        <div class="tab-pane" id="m_{{ m.post_id }}" role="tabpanel">{{ Amend.md(m.text) }}</div>
+                        <div class="tab-pane" id="m_{{ m.post_id }}" role="tabpanel">
+                            {% if session.get('status') == 2 %}
+                                <p>
+                                    <form class="btn-group btn-group-sm" action="" method="post" id="actions">
+                                        <button class="btn btn-danger" type="submit" form="actions" name="delete" value="{{ m.post_id }}">удалить</button>
+                                        <button class="btn btn-warning" type="submit" form="actions" name="edit" value="{{ m.post_id }}">править</button>
+                                    </form>
+                                </p>
+                            {% endif %}
+                            <p style="font-family: 'Charis SIL'">{{ Amend.md(m.text) }}</p>
+                        </div>
                     {% endfor %}
                 </div>
             </div>

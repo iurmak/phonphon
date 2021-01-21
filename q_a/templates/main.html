@@ -8,7 +8,9 @@
                 <select class="form-select" name="parameter" onchange="this.form.submit()">
                     {% if not current %}<option selected>Сортировать по рубрике</option>{% endif %}
                     {% for tag in Tags.query.all() %}
-                        <option {% if current == tag.id %}selected{% endif %} value="{{ tag.id }}">{{ tag.text }}</option>
+                        {% if tag.id != 3 %}
+                            <option {% if current == tag.id %}selected{% endif %} value="{{ tag.id }}">{{ tag.text }}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </form>
@@ -24,7 +26,7 @@
                                 {{ Amend.md(post.text) }}
                             </p>
                         </div>
-                        {% if session.get('status') == 2%}<div class="col-md-2"><form action="" method="post" id="post_actions" class="btn-group-vertical">
+                        {% if session.get('status') == 2%}<div class="col-md-1"><form action="" method="post" id="post_actions" class="btn-group-vertical btn-group-sm">
                             <button class="btn btn-danger" type="submit" form="post_actions" name="delete_post" value={{ post.post_id }}>удалить</button>
                             <button class="btn btn-warning" type="submit" form="post_actions" name="edit_post" value={{ post.post_id }}>править</button>
                         </form></div>{% endif %}

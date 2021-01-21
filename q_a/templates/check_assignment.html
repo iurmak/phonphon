@@ -14,32 +14,32 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
-                        <dt class="col-sm-3">Описание</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Описание</dt>
+                        <dd class="col-md-10">
                             <p>{{ assignment.assignment.description }}</p>
                         </dd>
-                        <dt class="col-sm-3">Тип и статус</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Тип и статус</dt>
+                        <dd class="col-md-10">
                             <p>{{ assignment.assignment.type.text }}, {{ Amend.assignment_status(assignment.status_id) }}</p>
                         </dd>
-                        <dt class="col-sm-3">Когда опубликовано</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Когда опубликовано</dt>
+                        <dd class="col-md-10">
                             <p>{{ assignment.assignment.datetime }}</p>
                         </dd>
-                        <dt class="col-sm-3">Когда сдано</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Когда сдано</dt>
+                        <dd class="col-md-10">
                             <p>{{ assignment.datetime }}</p>
                         </dd>
-                        <dt class="col-sm-3">Студент</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Студент</dt>
+                        <dd class="col-md-10">
                             <p>{{ Amend.username(assignment.user.username) }}</p>
                         </dd>
-                        <dt class="col-sm-3">Ответ студента</dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2">Ответ студента</dt>
+                        <dd class="col-md-10">
                             <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.answer) }}</p>
                         </dd>
-                        <dt class="col-sm-3"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}({{ Amend.username(User.query.get(assignment.checked_by).username) }}, {{ Amend.datetime(assignment.when_checked) }}){% endif %}</label></dt>
-                        <dd class="col-sm-9">
+                        <dt class="col-md-2"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}<br><span class="text-secondary">{{ Amend.username(User.query.get(assignment.checked_by).username) }}, {{ Amend.datetime(assignment.when_checked) }}</span>{% endif %}</label></dt>
+                        <dd class="col-md-10">
                             <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.main_comment) }}</p>
                             <p><textarea class="form-control" id="main_comment" name="main_comment" style="font-family:Charis SIL;font-size:larger">{{ assignment.main_comment }}</textarea></p>
                         </dd>
@@ -74,22 +74,20 @@
                 <div class="card-footer">
                     {% for comment in assignment.discussion %}
                         <div class="row">
-                            <div class="col align-self-center">
-                                <blockquote class="blockquote">
+                            <div class="col-md-10">
+                                <span class="align-middle">
                                     {{ Amend.md(comment.text) }}
-                                </blockquote>
-                                <figcaption class="blockquote-footer">
+                                </span><br>
+                                <span class="text-secondary align-middle">
                                     {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
-                                </figcaption>
+                                </span>
                             </div>
-                            {% if session.get('status') == 2 %}
-                                <div class="col align-self-center text-end">
-                                    <form action="" method="post" id="comment_actions" class="btn-group">
-                                        <button class="btn btn-danger" type="submit" form="comment_actions" name="delete_comment" value="{{ comment.comment_id }}">удалить</button>
-                                        <button class="btn btn-warning" type="submit" form="comment_actions" name="edit_comment" value="{{ comment.comment_id }}">править</button>
-                                    </form>
-                                </div>
-                            {% endif %}
+                            <div class="col-md align-self-center text-end">
+                                <form action="" method="post" id="comment_actions" class="btn-group btn-group-sm">
+                                    <button class="btn btn-danger" type="submit" form="comment_actions" name="delete_comment" value="{{ comment.comment_id }}">удалить</button>
+                                    <button class="btn btn-warning" type="submit" form="comment_actions" name="edit_comment" value="{{ comment.comment_id }}">править</button>
+                                </form>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

@@ -2,7 +2,6 @@ from q_a import app
 from flask import request, render_template, redirect, \
     url_for, Markup, session
 from q_a.models import db, Question, Answer, Ping, Subscription, User, Email
-from time import localtime, strftime
 from q_a.supplement import Amend, Check, Emails
 from re import sub
 
@@ -19,11 +18,6 @@ def question(question_id, page=1):
         question.datetime = Amend.datetime(question.datetime)
         page_of_answers = Answer.query.filter_by(question_id=question_id).order_by(Answer.datetime.desc()).paginate(page, 4)
         answers = page_of_answers.items
-        for answer in answers:
-            answer.datetime = Amend.datetime(answer.datetime)
-            answer.text = Markup(Amend.md(answer.text))
-            if answer.answerer.role.role == 2 and not answer.is_anon or answer.is_praised or answer.answerer.role.role == 2 and answer.is_praised:
-                answer.text = Markup(f'<div class="border border-success rounded"><div class="container-md">{answer.text}</div></div>')
         return render_template('question.html',
                                question=question,
                                answers=answers,

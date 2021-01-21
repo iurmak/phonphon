@@ -40,7 +40,7 @@ class Amend:
             if answer.is_anon and session.get('status') == 2:
                 username = Markup(str(username).replace(f'{self}</a>', f'{self}</a> (анонимно)'))
             elif answer.is_anon:
-                username = Markup(str(username).replace(self, 'Аноним').replace('"text-success"', '"text-dark"'))
+                username = Markup(str(username).replace(self, 'Аноним').replace('"text-success"', ''))
         return username
     def assignment_status(self):
         if self == 1:
