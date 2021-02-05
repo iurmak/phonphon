@@ -22,4 +22,7 @@ def edit_post(post_id):
         user_id = session.get('user_id')
         Post.query.filter_by(post_id=post_id).update({'text': text, 'tag': tag_id, 'user_id': user_id, 'datetime': Check.time(), 'title': title})
         db.session.commit()
-        return Amend.flash('Пост изменён.', 'success', url_for('main'))
+        if title:
+            return Amend.flash('Пост изменён.', 'success', url_for('materials'))
+        else:
+            return Amend.flash('Пост изменён.', 'success', url_for('main'))

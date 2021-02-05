@@ -1,7 +1,7 @@
 from q_a import app
 from flask import request, render_template, redirect, \
     url_for, session
-from q_a.supplement import Amend, Check
+from q_a.supplement import Amend, Check, Emails
 from q_a.models import db, Question, Subscription
 
 @app.route('/new/question', methods=['POST', 'GET'])
@@ -34,4 +34,5 @@ def create_question():
             question_id=question.question_id
         ))
         db.session.commit()
+        Emails.send('Новый вопрос на сайте', f'На сайте задали новый вопрос: <a href="{url_for("question", question_id=question.question_id, _external=True)}">{Amend.md(question.title)}</a>. Его содержание:<br><br>{Amend.md(question.text)}', 'iurmak@bk.ru')
         return redirect(url_for('questions'))

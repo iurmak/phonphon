@@ -21,9 +21,9 @@
                 <li class="list-group-item col">
                     <div class="row">
                         <div class="col">
-                            <p class="text-end h6">{{ Tags.query.get(post.tag).text }}, {{ Amend.datetime(post.datetime) }}</p>
+                            <p class="text-end h6"><b>{{ Tags.query.get(post.tag).text }}</b>, {{ Amend.datetime(post.datetime) }}</p>
                             <p>
-                                {{ Amend.md(post.text) }}
+                                {{ Amend.md(post.text, html=True) }}
                             </p>
                         </div>
                         {% if session.get('status') == 2%}<div class="col-md-1"><form action="" method="post" id="post_actions" class="btn-group-vertical btn-group-sm">

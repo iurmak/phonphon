@@ -21,18 +21,17 @@ def todo_teacher(page=1):
                                    items=page_of_assignments,
                                    Amend=Amend)
         elif request.method == 'POST':
-            print(request.form)
             if request.form.get('parameter') == 'ID':
-                page_of_assignments = Handed_assignment.query.filter(Handed_assignment.is_checked == 0, Handed_assignment.status_id.in_([2, 3]), Handed_assignment.grade == None).order_by(Handed_assignment.datetime.desc()).paginate(page, 10)
-                assignments = page_of_assignments.items
+                assignments = Handed_assignment.query.filter(Handed_assignment.is_checked == 0, Handed_assignment.status_id.in_([2, 3]), Handed_assignment.grade == None).order_by(Handed_assignment.datetime.desc()).all()
+                page_of_assignments = None
                 return render_template('todo_teacher.html',
                                        assignments=assignments,
                                        items=page_of_assignments,
                                        Amend=Amend,
                                        ID=int(request.form.get('query')))
             elif request.form.get('parameter') == 'group':
-                page_of_assignments = Handed_assignment.query.filter(Handed_assignment.is_checked == 0, Handed_assignment.status_id.in_([2, 3]), Handed_assignment.grade == None).order_by(Handed_assignment.datetime.desc()).paginate(page, 10)
-                assignments = page_of_assignments.items
+                assignments = Handed_assignment.query.filter(Handed_assignment.is_checked == 0, Handed_assignment.status_id.in_([2, 3]), Handed_assignment.grade == None).order_by(Handed_assignment.datetime.desc()).all()
+                page_of_assignments = None
                 return render_template('todo_teacher.html',
                                        assignments=assignments,
                                        items=page_of_assignments,

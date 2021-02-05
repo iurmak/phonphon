@@ -11,9 +11,10 @@ from re import sub
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'GET':
-        if session.get('user'):
-            return Amend.flash(f"Вы уже вошли как {session.get('user')}.", 'warning', url_for('questions'))
-        return render_template('signup.html')
+        #if session.get('user'):
+            #return Amend.flash(f"Вы уже вошли как {session.get('user')}.", 'warning', url_for('questions'))
+        #return render_template('signup.html')
+        return Amend.flash('Регистрация закрыта. Пишите Юре Макарову', 'danger', url_for('about'))
     elif request.method == 'POST':
         email = request.form.get('email')
         username = sub(r'[^А-ЯЁа-яё\w_]', '', request.form.get('username'))

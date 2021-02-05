@@ -47,6 +47,7 @@ class Email(db.Model):
     new_answers = db.Column(db.Boolean, default=True)
     assignments = db.Column(db.Boolean, default=True)
 
+
 class Subscription(db.Model):
     subscription_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -65,7 +66,7 @@ class Question(db.Model):
     title = db.Column(db.Text(150), nullable=False)
     text = db.Column(db.Text(20000), nullable=False)
     is_anon = db.Column(db.Boolean())
-    is_pinned = db.Column(db.Boolean())
+    is_pinned = db.Column(db.Boolean(), default=False)
     answers = db.relationship('Answer', backref='question', cascade='all, delete, delete-orphan', lazy='dynamic')
     subscriptions = db.relationship('Subscription', backref='question', cascade='all, delete, delete-orphan')
 

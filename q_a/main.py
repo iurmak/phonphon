@@ -19,12 +19,11 @@ def main(page=1):
     elif request.method == 'POST':
         if request.form.get('parameter'):
             if request.form.get('parameter'):
-                page_of_news = Post.query.filter_by(tag=int(request.form.get('parameter'))).filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 10)
+                news = Post.query.filter_by(tag=int(request.form.get('parameter'))).filter(Post.tag != 3).order_by(Post.datetime.desc()).all()
             else:
-                page_of_news = Post.query.filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 10)
-            news = page_of_news.items
+                news = Post.query.filter(Post.tag != 3).order_by(Post.datetime.desc()).all()
             return render_template('main.html',
-                                   items=page_of_news,
+                                   items=None,
                                    Amend=Amend,
                                    Markup=Markup,
                                    Tags=Tags,

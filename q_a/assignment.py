@@ -19,7 +19,7 @@ def assignment(id):
             assignment.title = Amend.md(assignment.title)
             assignment.description = Amend.md(assignment.description)
             if assignment.deadline:
-                assignment.deadline = strftime('%d.%m.%Y %H:%M', localtime(assignment.deadline))
+                assignment.deadline = Amend.datetime(assignment.deadline)
             else:
                 assignment.deadline = 'нет'
             assignment.assigner = Amend.username(assignment.author.username)
@@ -75,7 +75,7 @@ def assignment(id):
                 user_id = session.get('user_id')
                 url = url_for('check_assignment', id=handed_assignment.assignment_id, _external=True)
                 if handed_assignment.checked_by:
-                    teacher = handed_assignment.checked_by
+                    teacher = User.query.get(handed_assignment.checked_by).username
                 else:
                     teacher = handed_assignment.assignment.author.username
                 if '@' in text:

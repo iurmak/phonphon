@@ -8,7 +8,7 @@ def materials():
     Check.update()
     if request.method == 'GET':
         if not session.get('user_id'):
-            Check.login()
+            return Check.login()
         materials = Post.query.filter_by(tag=3).all()
         return render_template('materials.html',
                                Amend=Amend,

@@ -35,13 +35,13 @@
                             <p>{{ Amend.username(assignment.user.username) }}</p>
                         </dd>
                         <dt class="col-md-2">Ответ студента</dt>
-                        <dd class="col-md-10">
-                            <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.answer) }}</p>
+                        <dd class="col-md-10" style="font-family:Charis SIL;font-size:larger">
+                            {{ Amend.md(assignment.answer) }}
                         </dd>
-                        <dt class="col-md-2"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}<br><span class="text-secondary">{{ Amend.username(User.query.get(assignment.checked_by).username) }}, {{ Amend.datetime(assignment.when_checked) }}</span>{% endif %}</label></dt>
-                        <dd class="col-md-10">
-                            <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.main_comment) }}</p>
-                            <p><textarea class="form-control" id="main_comment" name="main_comment" style="font-family:Charis SIL;font-size:larger">{{ assignment.main_comment }}</textarea></p>
+                        <dt class="col-lg-2"><label for="main_comment">Комментарий проверяющего {% if assignment.is_checked %}<br><span class="text-secondary">{{ Amend.username(User.query.get(assignment.checked_by).username) }}, {{ Amend.datetime(assignment.when_checked) }}</span>{% endif %}</label></dt>
+                        <dd class="col-md-10" style="font-family:Charis SIL;font-size:larger">
+                            {{ Amend.md(assignment.main_comment) }}
+                            <p><textarea class="form-control" id="main_comment" name="main_comment" style="font-family:Charis SIL;font-size:large">{{ assignment.main_comment }}</textarea></p>
                         </dd>
                     </dl>
                 </div>
@@ -58,7 +58,7 @@
         </div><br>
         <div class="card">
             <div class="card-header">
-                <div class="align-self-center"><span class="h6">Переписка со студентом</span></div>
+                <div class="align-self-center"><span style="font-weight: bold; font-size: large">Обсуждение задания</span></div>
             </div>
             <div class="card-body">
                 <form action="" method="post" id="add_comment">
@@ -71,8 +71,11 @@
                 </form>
             </div>
             {% if assignment.discussion %}
+                {% set break = {'break': False} %}
                 <div class="card-footer">
                     {% for comment in assignment.discussion %}
+                        {% if break['break'] %}<br>{% endif %}
+                        {% if break.update({'break': True}) %}{% endif %}
                         <div class="row">
                             <div class="col-md-10">
                                 <span class="align-middle">

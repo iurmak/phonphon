@@ -26,4 +26,7 @@ def create_post():
                     title=title)
         db.session.add(post)
         db.session.commit()
-        return Amend.flash('Пост опубликован.', 'success', url_for('main'))
+        if title:
+            return Amend.flash('Пост опубликован.', 'success', url_for('materials'))
+        else:
+            return Amend.flash('Пост опубликован.', 'success', url_for('main'))

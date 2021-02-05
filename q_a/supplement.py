@@ -13,13 +13,17 @@ class Amend:
     def anti_html(self):
         if self:
             return BeautifulSoup(self, features='html.parser').get_text()
-    def md(self):
+    def md(self, html=False):
         if self:
-            string = markdown(Amend.anti_html(self))
+            if html:
+                string = markdown(self)
+            else:
+                string = markdown(Amend.anti_html(self))
             for tag in ['<p>', '</p>']:
                 string = string.replace(tag, '')
             string = string.replace('  ', '<br>')
             string = string.replace('<img', '<img class="img-fluid"')
+            string = string.replace('--', '–')
             return Markup(string)
     def username(self, question=None, answer=None):
         if session.get('status') == 2:

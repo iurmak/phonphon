@@ -24,8 +24,8 @@ def profiles(page=1):
         if request.form.get('query'):
             if request.form.get('parameter') == 'ID':
                 try:
-                    page_of_profiles = User.query.filter_by(id=int(request.form.get('query'))).order_by(User.id.desc()).paginate(page, 20)
-                    profiles = page_of_profiles.items
+                    profiles = User.query.filter_by(id=int(request.form.get('query'))).order_by(User.id.desc()).all()
+                    page_of_profiles = None
                     for n in range(len(profiles)):
                         profiles[n].username = Amend.username(profiles[n].username)
                 except:
@@ -33,30 +33,30 @@ def profiles(page=1):
             elif request.form.get('parameter') == 'group':
                 try:
                     users = [user.id for user in Group.query.all() if user.group == int(request.form.get('query'))]
-                    page_of_profiles = User.query.filter(User.id.in_(users)).order_by(User.id.desc()).paginate(page, 20)
-                    profiles = page_of_profiles.items
+                    profiles = User.query.filter(User.id.in_(users)).order_by(User.id.desc()).all()
+                    page_of_profiles = None
                     for n in range(len(profiles)):
                         profiles[n].username = Amend.username(profiles[n].username)
                 except:
                     return Amend.flash('Введите число.', 'danger', url_for('profiles'))
             elif request.form.get('parameter') == 'username':
-                page_of_profiles = User.query.filter_by(username=request.form.get('query')).order_by(User.id.desc()).paginate(page, 20)
-                profiles = page_of_profiles.items
+                profiles = User.query.filter_by(username=request.form.get('query')).order_by(User.id.desc()).all()
+                page_of_profiles = None
                 for n in range(len(profiles)):
                     profiles[n].username = Amend.username(profiles[n].username)
             elif request.form.get('parameter') == 'firstname':
-                page_of_profiles = User.query.filter_by(firstname=request.form.get('query')).order_by(User.id.desc()).paginate(page, 20)
-                profiles = page_of_profiles.items
+                profiles = User.query.filter_by(firstname=request.form.get('query')).order_by(User.id.desc()).all()
+                page_of_profiles = None
                 for n in range(len(profiles)):
                     profiles[n].username = Amend.username(profiles[n].username)
             elif request.form.get('parameter') == 'surname':
-                page_of_profiles = User.query.filter_by(surname=request.form.get('query')).order_by(User.id.desc()).paginate(page, 20)
-                profiles = page_of_profiles.items
+                profiles = User.query.filter_by(surname=request.form.get('query')).order_by(User.id.desc()).all()
+                page_of_profiles = None
                 for n in range(len(profiles)):
                     profiles[n].username = Amend.username(profiles[n].username)
             elif request.form.get('parameter') == 'email':
-                page_of_profiles = User.query.filter_by(email=request.form.get('query')).order_by(User.id.desc()).paginate(page, 20)
-                profiles = page_of_profiles.items
+                profiles = User.query.filter_by(email=request.form.get('query')).order_by(User.id.desc()).all()
+                page_of_profiles = None
                 for n in range(len(profiles)):
                     profiles[n].username = Amend.username(profiles[n].username)
             return render_template('profiles.html',

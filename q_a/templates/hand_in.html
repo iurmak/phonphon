@@ -87,14 +87,17 @@
                 </form>
             </div>
             {% if assignment.discussion %}
+                {% set break = {'break': False} %}
                 <div class="card-footer">
                     {% for comment in assignment.discussion %}
-                            <span>
-                                {{ Amend.md(comment.text) }}
-                            </span><br>
-                            <span class="text-secondary">
-                                {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
-                            </span><br>
+                        {% if break['break'] %}<br>{% endif %}
+                        {% if break.update({'break': True}) %}{% endif %}
+                        <span>
+                            {{ Amend.md(comment.text) }}
+                        </span><br>
+                        <span class="text-secondary">
+                            {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
+                        </span><br>
                     {% endfor %}
                 </div>
             {% endif %}

@@ -634,26 +634,34 @@ progress {
 @font-face {
     font-family: 'Charis SIL';
     src: url("CharisSIL-R.woff") format("woff");
+    src: url("CharisSIL-R.ttf") format("truetype");
     font-weight:normal;
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Charis SIL';
-    src:url('CharisSIL-I.woff') format("woff");
+    src: url('CharisSIL-I.woff') format("woff");
+    src: url("CharisSIL-I.ttf") format("truetype");
     font-weight:normal;
     font-style: italic;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Charis SIL';
-    src:url('CharisSIL-B.woff') format("woff");
+    src: url('CharisSIL-B.woff') format("woff");
+    src: url("CharisSIL-B.ttf") format("truetype");
     font-weight:bold;
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Charis SIL';
-    src:url('CharisSIL-BI.woff') format("woff");
+    src: url('CharisSIL-BI.woff') format("woff");
+    src: url("CharisSIL-BI.ttf") format("truetype");
     font-weight:bold;
     font-style: italic;
+    font-display: swap;
 }
 .row {
   --bs-gutter-x: 1.5rem;
