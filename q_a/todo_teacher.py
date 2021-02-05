@@ -37,3 +37,11 @@ def todo_teacher(page=1):
                                        items=page_of_assignments,
                                        Amend=Amend,
                                        group=int(request.form.get('query')))
+            elif request.form.get('parameter') == 'surname':
+                assignments = Handed_assignment.query.filter(Handed_assignment.is_checked == 0, Handed_assignment.status_id.in_([2, 3]), Handed_assignment.grade == None).order_by(Handed_assignment.datetime.desc()).all()
+                page_of_assignments = None
+                return render_template('todo_teacher.html',
+                                       assignments=assignments,
+                                       items=page_of_assignments,
+                                       Amend=Amend,
+                                       surname=request.form.get('query'))

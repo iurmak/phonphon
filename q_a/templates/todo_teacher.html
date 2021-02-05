@@ -12,6 +12,7 @@
                         <option selected value="group">Параметр фильтрации</option>
                         <option value="ID">ID задания</option>
                         <option value="group">Группа</option>
+                        <option value="surname">Фамилия по паспорту</option>
                     </select>
                 </div>
                 <div class="col-6"><input required name="query" class="form-control" type="text"></div>
@@ -48,6 +49,19 @@
                 {% endfor %}
             {% elif ID %}
                 {% for assignment in assignments if assignment.source_assignment_id == ID %}
+                    <tr>
+                        <td>{{ assignment.assignment.type.text }}</td>
+                        <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ Amend.md(assignment.assignment.title) }}</a></td>
+                        <td>{{ Amend.username(assignment.user.username) }}</td>
+                        <td>{{ assignment.user.group.group }}</td>
+                        <td>{{ Amend.datetime(assignment.datetime) }}</td>
+                        <td>{{ Amend.assignment_status(assignment.status_id) }}</td>
+                        <td>{% if assignment.assignment.deadline %}{{ Amend.datetime(assignment.assignment.deadline) }}{% else %}нет{% endif %}</td>
+                        <td>{{ Amend.datetime(assignment.assignment.datetime) }}</td>
+                    </tr>
+                {% endfor %}
+            {% elif surname %}
+                {% for assignment in assignments if assignment.user.surname == surname %}
                     <tr>
                         <td>{{ assignment.assignment.type.text }}</td>
                         <td><a href="{{ url_for('check_assignment', id=assignment.assignment_id) }}">{{ Amend.md(assignment.assignment.title) }}</a></td>

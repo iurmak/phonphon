@@ -22,28 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b65f410-16d6-4658-b8c5-7df8c379035b" name="Default Changelist" comment="release3">
+    <list default="true" id="1b65f410-16d6-4658-b8c5-7df8c379035b" name="Default Changelist" comment="release4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/assignment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/edit_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/edit_post.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/materials.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/materials.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/new_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/new_post.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/new_question.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/new_question.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/phon_questions.db" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/phon_questions.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/profiles.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/profiles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/signup.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/signup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/static/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/supplement.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/supplement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/check_assignment.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/check_assignment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/edit_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/edit_post.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/hand_in.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/hand_in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/materials.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/materials.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q_a/templates/question.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/question.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q_a/templates/todo_teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/templates/todo_teacher.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q_a/todo_teacher.py" beforeDir="false" afterPath="$PROJECT_DIR$/q_a/todo_teacher.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -338,7 +319,8 @@
       <workItem from="1611515092188" duration="5627000" />
       <workItem from="1612358476645" duration="231000" />
       <workItem from="1612361696972" duration="597000" />
-      <workItem from="1612365079324" duration="2084000" />
+      <workItem from="1612365079324" duration="2277000" />
+      <workItem from="1612541084466" duration="287000" />
     </task>
     <task id="LOCAL-00001" summary="beta 9">
       <created>1610284153948</created>
@@ -382,7 +364,21 @@
       <option name="project" value="LOCAL" />
       <updated>1611258927800</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="release4">
+      <created>1612538228715</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1612538228716</updated>
+    </task>
+    <task id="LOCAL-00008" summary="release4">
+      <created>1612538243975</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1612538243975</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -405,7 +401,8 @@
     <MESSAGE value="release" />
     <MESSAGE value="release2" />
     <MESSAGE value="release3" />
-    <option name="LAST_COMMIT_MESSAGE" value="release3" />
+    <MESSAGE value="release4" />
+    <option name="LAST_COMMIT_MESSAGE" value="release4" />
   </component>
   <component name="WindowStateProjectService">
     <state x="192" y="84" width="1013" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609807426393">
@@ -457,10 +454,11 @@
       <screen x="0" y="25" width="1440" height="799" />
     </state>
     <state width="500" height="445" key="SwitcherDM/0.25.1440.799@0.25.1440.799" timestamp="1609071052027" />
-    <state x="321" y="163" key="Vcs.Push.Dialog.v2" timestamp="1611258930564">
-      <screen x="0" y="25" width="1440" height="799" />
+    <state x="520" y="162" key="Vcs.Push.Dialog.v2" timestamp="1612538246781">
+      <screen x="0" y="25" width="1440" height="800" />
     </state>
     <state x="321" y="163" key="Vcs.Push.Dialog.v2/0.25.1440.799@0.25.1440.799" timestamp="1611258930564" />
+    <state x="520" y="162" key="Vcs.Push.Dialog.v2/0.25.1440.800@0.25.1440.800" timestamp="1612538246781" />
     <state x="321" y="164" key="Vcs.Push.Dialog.v2/0.25.1440.803@0.25.1440.803" timestamp="1610713447235" />
     <state x="522" y="342" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1610467299118">
       <screen x="0" y="25" width="1440" height="800" />
@@ -481,7 +479,7 @@
     <SUITE FILE_PATH="coverage/q_a$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1608819592134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$q_a.coverage" NAME="q_a Coverage Results" MODIFIED="1610121024032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/q_a$app.coverage" NAME="app Coverage Results" MODIFIED="1608922241893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1611581297664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/q_a$flask_run.coverage" NAME="flask run Coverage Results" MODIFIED="1612541175603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$create_all.coverage" NAME="create_all Coverage Results" MODIFIED="1608840404118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/q_a$app__1_.coverage" NAME="app (1) Coverage Results" MODIFIED="1608922256734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/q_a" />
   </component>
