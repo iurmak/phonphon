@@ -86,6 +86,9 @@ class Check():
 
 class Emails():
     def send(about, what, emails):
-        msg = Message(about, sender="yurmkrv@gmail.com", recipients=[emails])
+        if isinstance(emails, list):
+            msg = Message(about, sender="yurmkrv@gmail.com", recipients=emails)
+        else:
+            msg = Message(about, sender="yurmkrv@gmail.com", recipients=[emails])
         msg.html = what
         mail.send(msg)
