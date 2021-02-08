@@ -26,7 +26,7 @@
           </thead>
         <tbody>
             <form action="" method="post" id="grades">
-                {% for student in User.query.all() %}
+                {% for student in User.query.join(Group, User.id==Group.id).order_by(Group.group.asc()).order_by(User.surname.asc()).all() %}
                     {% if student.role.role != 2 %}
                         {% set value = student.id %}
                         <tr>

@@ -18,6 +18,8 @@
             <tr>
                 <th scope="col-2">Фамилия</th>
                 <th scope="col-2">Имя</th>
+                <th scope="col-2">Отображаемое имя</th>
+                <th scope="col-2">Группа</th>
                 <th scope="col-1">Отметка</th>
             </tr>
           </thead>
@@ -26,9 +28,11 @@
                 {% for student in handed_assignments %}
                     {% set value = student.user.id %}
                     <tr>
-                            <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{{ url_for('check_assignment', id=student.assignment_id) }}">{{ student.user.surname }}</a></label></td>
-                            <td class="col-2">{{ student.user.firstname }}</td>
-                            <td class="col-1"><input class="form-control" id="{{ value }}" type="number" name="{{ value }}" value="{{ student.grade }}"></td>
+                        <td class="col-2"><label for="{{ value }}">{{ student.user.surname }}</label></td>
+                        <td class="col-2"><label for="{{ value }}">{{ student.user.firstname }}</label></td>
+                        <td class="col-2"><label for="{{ value }}"><a tabindex="-1" class="link-dark" href="{{ url_for('check_assignment', id=student.assignment_id) }}">{{ student.user.username }}</a></label></td>
+                        <td class="col-2"><label for="{{ value }}">{{ student.user.group.group }}</label></td>
+                        <td class="col-1"><input class="form-control" id="{{ value }}" type="number" name="{{ value }}" value="{{ student.grade }}"></td>
                     </tr>
                 {% endfor %}
             </form>

@@ -1,7 +1,7 @@
 from q_a import app
 from flask import request, render_template, \
     url_for, session, make_response
-from q_a.models import Assignment, db, Handed_assignment, User, Ping
+from q_a.models import Assignment, db, Handed_assignment, User, Ping, Group
 from q_a.supplement import Amend, Check
 import csv
 import io
@@ -17,6 +17,7 @@ def all_grades():
                                    Assignment=Assignment,
                                    Handed_assignment=Handed_assignment,
                                    User=User,
+                                   Group=Group,
                                    Amend=Amend,
                                    Check=Check)
     if request.method == 'POST':
@@ -25,7 +26,7 @@ def all_grades():
                 si = io.StringIO()
                 cw = csv.writer(si)
                 cw.writerow(['Фамилия', 'Имя', 'Группа'] + [f'{assignment.type.text} {assignment.title} {Amend.datetime(assignment.datetime)}' for assignment in Assignment.query.all()])
-                for student in User.query.all():
+                for student in User.query.join(Group, User.id==Group.id).order_by(Group.group.asc()).order_by(User.surname.asc()).all():
                     result = []
                     if student.role.role != 2:
                         value = student.id
