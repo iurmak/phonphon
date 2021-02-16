@@ -26,7 +26,7 @@ def edit(type, id):
             if session.get('status') != 2 and session.get('user_id') != Question.query.get(id).user_id:
                 return Check.status()
             return render_template('edit.html',
-                                   question=None,
+                                   question=Question.query.get(id).title,
                                    current_text=Question.query.get(id).text,
                                    question_author=Amend.username(Question.query.get(id).user.username),
                                    answer_author=None
@@ -72,6 +72,7 @@ def edit(type, id):
             changed_text = request.form.get('changed_text')
             answer = Answer.query.get(id)
             answer.text = changed_text
+            answer.last_edited = Check.time()
             db.session.commit()
             return redirect(url_for('question',
                                     question_id=answer.question_id))
@@ -79,6 +80,8 @@ def edit(type, id):
             changed_text = request.form.get('changed_text')
             question = Question.query.get(id)
             question.text = changed_text
+            question.title = request.form.get('changed_title')
+            question.last_edited = Check.time()
             db.session.commit()
             return redirect(url_for('question',
                                     question_id=question.question_id))
@@ -86,6 +89,7 @@ def edit(type, id):
             changed_text = request.form.get('changed_text')
             comment = Comment.query.get(id)
             comment.text = changed_text
+            comment.last_edited = Check.time()
             db.session.commit()
             return Amend.flash('Сообщение изменено.', 'success', url_for('check_assignment', id=comment.assignment_id))
         if type == 'assignment' and session.get('status') == 2:
@@ -104,7 +108,6 @@ def edit(type, id):
                 changed_assignment.is_grade = True
                 Handed_assignment.query.filter_by(source_assignment_id=id).update({"status_id": 4})
             if changed_assignment.datetime:
-                print(list(request.form))
                 if request.form.get('assignees'):
                     if changed_assignment.is_grade:
                         status_id = 4

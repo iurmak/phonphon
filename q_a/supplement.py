@@ -7,23 +7,23 @@ from bs4 import BeautifulSoup
 from time import strftime, gmtime
 from calendar import timegm
 
+
 mail = Mail(app)
 
 class Amend:
     def anti_html(self):
         if self:
             return BeautifulSoup(self, features='html.parser').get_text()
-    def md(self, html=False):
+    def md(self, html=False, p=True):
         if self:
             if html:
-                string = markdown(self)
+                string = markdown(self, extensions=['nl2br'])
             else:
-                string = markdown(Amend.anti_html(self))
-            for tag in ['<p>', '</p>']:
-                string = string.replace(tag, '')
-            string = string.replace('  ', '<br>')
-            string = string.replace('<img', '<img class="img-fluid"')
-            string = string.replace('--', '–')
+                string = markdown(Amend.anti_html(self), extensions=['nl2br'])
+            if p:
+                for tag in ['<p>', '</p>']:
+                    string = string.replace(tag, '')
+            string = string.replace('<img', '<img class="img-fluid"').replace('--', '–')
             return Markup(string)
     def username(self, question=None, answer=None):
         if session.get('status') == 2:

@@ -21,14 +21,16 @@
                     </div>
                     <div class="card-body">
                         <div class="align-self-center">
+                            <br>
                             <span class="align-middle">
-                                {{ Amend.md(question.text) }}
+                                {{ Amend.md(question.text, p=False) }}
                             </span>
                         </div>
                     </div>
                     <div class="card-footer">
                         <span class="align-middle text-secondary">
                             {{ Amend.username(question.user.username, question=question) }}, {{ question.datetime }}
+                            {% if question.last_edited != question.datetime %}<br><span><em>обновлён {{ Amend.datetime(question.last_edited) }}</em></span>{% endif %}
                         </span>
                     </div>
                 </div>
@@ -51,12 +53,13 @@
                 <p><div class="row">
                     <div class="col-md">
                         <div class="container-md{% if answer.is_praised or answer.answerer.role.role == 2 and not answer.is_anon %} border border-success rounded{% endif %}">
+                            <br>
                             <span>
-                                {{ Amend.md(answer.text) }}
+                                {{ Amend.md(answer.text, p=False) }}
                             </span>
                         </div>
                         <span class="text-secondary align-middle">
-                            {{ Amend.username(answer.answerer.username, answer=answer) }}, {{ Amend.datetime(answer.datetime) }}
+                            {{ Amend.username(answer.answerer.username, answer=answer) }}, {{ Amend.datetime(answer.datetime) }}{% if answer.last_edited != answer.datetime %}<br><span><em>обновлён {{ Amend.datetime(answer.last_edited) }}</em></span>{% endif %}
                         </span>
                     </div>
                     {% if session.get('status') == 2 or session.get('user_id') == answer.user_id %}

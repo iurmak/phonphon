@@ -22,8 +22,9 @@
                     <div class="row">
                         <div class="col">
                             <p class="text-end h6"><b>{{ Tags.query.get(post.tag).text }}</b>, {{ Amend.datetime(post.datetime) }}</p>
+                            {% if post.last_edited != post.datetime %}<p class="text-end h6"><em>обновлено {{ Amend.datetime(post.last_edited) }}</em></p>{% endif %}
                             <p>
-                                {{ Amend.md(post.text, html=True) }}
+                                {{ Amend.md(post.text, html=True, p=False) }}
                             </p>
                         </div>
                         {% if session.get('status') == 2%}<div class="col-md-1"><form action="" method="post" id="post_actions" class="btn-group-vertical btn-group-sm">

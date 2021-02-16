@@ -3,6 +3,7 @@ from flask import request, render_template, \
     url_for, session
 from q_a.supplement import Check, Amend
 from q_a.models import db, Post, Tags
+from re import sub
 
 @app.route('/new/post', methods=['POST', 'GET'])
 def create_post():
@@ -23,6 +24,7 @@ def create_post():
                     tag=tag_id,
                     user_id=user_id,
                     datetime=Check.time(),
+                    last_edited=Check.time(),
                     title=title)
         db.session.add(post)
         db.session.commit()

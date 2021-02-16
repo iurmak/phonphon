@@ -7,7 +7,7 @@ from q_a.supplement import Amend, Check
 @app.route('/questions/<int:page>', methods=['GET', 'POST'])
 def questions(page=1):
     Check.update()
-    page_of_questions = Question.query.order_by(Question.is_pinned.desc()).order_by(Question.datetime.desc()).paginate(page, 10)
+    page_of_questions = Question.query.order_by(Question.is_pinned.desc()).order_by(Question.last_edited.desc()).paginate(page, 10)
     questions = page_of_questions.items
     answerers = dict()
     for question in questions:

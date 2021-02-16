@@ -8,7 +8,7 @@ from q_a.supplement import Amend, Check
 def main(page=1):
     Check.update()
     if request.method == 'GET':
-        page_of_news = Post.query.filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 10)
+        page_of_news = Post.query.filter(Post.tag != 3).order_by(Post.datetime.desc()).paginate(page, 5)
         news = page_of_news.items
         return render_template('main.html',
                                items=page_of_news,

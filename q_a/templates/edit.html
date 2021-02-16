@@ -4,38 +4,37 @@
     <div class="container-md">
         <div class="card">
             <div class="card-body">
-                <dl class="row">
-                    {% if question %}
-                        <dt class="col-sm-2">Вопрос</dt>
-                        <dd class="col-sm-10">
-                            {{ question }}
-                        </dd>
-                    {% endif %}
-                        {% if session.get('status') == 2 and question_author %}
-                            <dt class="col-sm-2">Автор вопроса</dt>
-                            <dd class="col-sm-10">
-                                {{ question_author }}
+                <form action="" method="post" id="edited">
+                    <dl class="row">
+                        {% if question %}
+                            <dt class="col-md-2">Заголовок</dt>
+                            <dd class="col-md-10">
+                                <input required class="form-control" name="changed_title" value="{{ question }}" id="new_title" type="text">
                             </dd>
-                            {% if question %}<hr>{% endif %}
                         {% endif %}
-
-                        <dt class="col-sm-2"><label for="new_text">Изменяемое сообщение</label></dt>
-                        <dd class="col-sm-10">
-                            <form action="" method="post" id="edited">
+                            {% if session.get('status') == 2 and question_author %}
+                                <dt class="col-md-2">Автор вопроса</dt>
+                                <dd class="col-md-10">
+                                    {{ question_author }}
+                                </dd>
+                                {% if question %}<hr>{% endif %}
+                            {% endif %}
+                            <dt class="col-md-2"><label for="new_text">Изменяемое сообщение</label></dt>
+                            <dd class="col-md-10">
                                 <textarea required class="form-control" name="changed_text" id="new_text">{{ current_text }}</textarea>
-                            </form>
-                        </dd>
+                            </dd>
                         {% if session.get('status') == 2 and answer_author %}
-                            <dt class="col-sm-2">Автор сообщения</dt>
-                            <dd class="col-sm-10">
+                            <dt class="col-md-2">Автор сообщения</dt>
+                            <dd class="col-md-10">
                                 {{ answer_author }}
                             </dd>
                         {% endif %}
                     </dl>
-                </div>
-                <div class="card-footer text-end">
-                    <button type="submit" class="btn btn-primary" form="edited">Внести изменения</button>
-                </div>
+                </form>
+            </div>
+            <div class="card-footer text-end">
+                <button type="submit" class="btn btn-primary" form="edited">Внести изменения</button>
+            </div>
         </div>
     </div>
 {% endblock %}
