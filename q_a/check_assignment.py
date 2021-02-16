@@ -16,7 +16,7 @@ def check_assignment(id):
         if session.get('status') == 2:
             assignment = Handed_assignment.query.get(id)
             assignment.assignment.title = Amend.md(assignment.assignment.title)
-            assignment.assignment.description = Amend.md(assignment.assignment.description)
+            assignment.assignment.description = Amend.md(assignment.assignment.description, p=False, html=True)
             assignment.assignment.datetime = Amend.datetime(assignment.assignment.datetime)
             if assignment.datetime:
                 assignment.datetime = Amend.datetime(assignment.datetime)

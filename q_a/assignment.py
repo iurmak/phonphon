@@ -17,7 +17,7 @@ def assignment(id):
         if session.get('status') == 2:
             assignment = Assignment.query.get(id)
             assignment.title = Amend.md(assignment.title)
-            assignment.description = Amend.md(assignment.description)
+            assignment.description = Amend.md(assignment.description, html=True, p=False)
             if assignment.deadline:
                 assignment.deadline = Amend.datetime(assignment.deadline)
             else:
@@ -32,7 +32,7 @@ def assignment(id):
             assignment = Handed_assignment.query.filter_by(source_assignment_id=id, assignee=session.get('user_id')).first()
             if assignment:
                 assignment.assignment.title = Amend.md(assignment.assignment.title)
-                assignment.assignment.description = Amend.md(assignment.assignment.description)
+                assignment.assignment.description = Amend.md(assignment.assignment.description, p=False)
                 assignment.assignment.datetime = Amend.datetime(assignment.assignment.datetime)
                 if assignment.assignment.deadline:
                     assignment.assignment.deadline = Amend.datetime(assignment.assignment.deadline)

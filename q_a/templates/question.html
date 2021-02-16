@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-footer">
                         <span class="align-middle text-secondary">
-                            {{ Amend.username(question.user.username, question=question) }}, {{ question.datetime }}
+                            {{ Amend.username(question.user.username, question=question) }}, {{ Amend.datetime(question.datetime) }}
                             {% if question.last_edited != question.datetime %}<br><span><em>обновлён {{ Amend.datetime(question.last_edited) }}</em></span>{% endif %}
                         </span>
                     </div>
@@ -53,7 +53,6 @@
                 <p><div class="row">
                     <div class="col-md">
                         <div class="container-md{% if answer.is_praised or answer.answerer.role.role == 2 and not answer.is_anon %} border border-success rounded{% endif %}">
-                            <br>
                             <span>
                                 {{ Amend.md(answer.text, p=False) }}
                             </span>

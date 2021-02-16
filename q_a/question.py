@@ -15,7 +15,6 @@ def question(question_id, page=1):
         return Amend.flash('Такого вопроса не существует.', 'danger', url_for('questions'))
     if request.method == 'GET':
         question = Question.query.get(question_id)
-        question.datetime = Amend.datetime(question.datetime)
         page_of_answers = Answer.query.filter_by(question_id=question_id).order_by(Answer.datetime.desc()).paginate(page, 4)
         answers = page_of_answers.items
         return render_template('question.html',
@@ -67,7 +66,8 @@ def question(question_id, page=1):
                                       question_id=question_id,
                                       text=text,
                                       is_anon=anon,
-                                      datetime=Check.time()))
+                                      datetime=Check.time(),
+                                      last_edited=Check.time()))
                 for user in Subscription.query.filter_by(question_id=question_id).all():
                     db.session.add(Ping(datetime=Check.time(),
                                         actor_id=user_id,

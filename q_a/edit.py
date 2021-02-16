@@ -97,12 +97,12 @@ def edit(type, id):
             changed_assignment.title = request.form.get('title')
             changed_assignment.description = request.form.get('description')
             if request.form.get('deadline'):
-                if changed_assignment.deadline != mktime(strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M')):
+                if changed_assignment.deadline != mktime(strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))-10800:
                     Handed_assignment.query.filter(Handed_assignment.datetime < mktime(
-                        strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))).update({"status_id": 2})
+                        strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))-10800).update({"status_id": 2})
                     Handed_assignment.query.filter(Handed_assignment.datetime > mktime(
-                        strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))).update({"status_id": 3})
-                    changed_assignment.deadline = mktime(strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))
+                        strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))-10800).update({"status_id": 3})
+                    changed_assignment.deadline = mktime(strptime(request.form.get('deadline'), '%d.%m.%Y %H:%M'))-10800
             changed_assignment.type_id = request.form.get('type_id')
             if request.form.get('is_grade') and changed_assignment.is_grade is False:
                 changed_assignment.is_grade = True

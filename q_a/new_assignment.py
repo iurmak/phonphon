@@ -41,7 +41,7 @@ def new_assignment():
                                 datetime=datetime
                                 )
         if deadline:
-            assignment.deadline = mktime(strptime(deadline, '%d.%m.%Y %H:%M'))
+            assignment.deadline = mktime(strptime(deadline, '%d.%m.%Y %H:%M')) - 10800
         db.session.add(assignment)
         db.session.commit()
         if not request.form.get('is_draft'):

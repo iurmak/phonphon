@@ -36,7 +36,7 @@
                     {% if assignment.answer %}
                         <dt class="col-md-2">Ваш ответ</dt>
                         <dd class="col-sm-10">
-                            <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.answer) }}</p>
+                            <p style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.answer, p=False) }}</p>
                         </dd>
                     {% elif not assignment.is_checked and not assignment.assignment.is_grade %}
                         <dt class="col-md-2"><label for="answer">Ваш ответ</label></dt>
@@ -50,7 +50,7 @@
                             <dt class="col-md-2">Комментарий проверяющего</dt>
                             <dd class="col-sm-10">
                                 <div class="container-md border border-success rounded align-self-center">
-                                    <span class="text-start" style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.main_comment) }}</span>
+                                    <span class="text-start" style="font-family:Charis SIL;font-size:larger">{{ Amend.md(assignment.main_comment, p=False, html=True) }}</span>
                                 </div>
                             </dd>
                     {% endif %}
@@ -93,8 +93,8 @@
                         {% if break['break'] %}<br>{% endif %}
                         {% if break.update({'break': True}) %}{% endif %}
                         <span>
-                            {{ Amend.md(comment.text) }}
-                        </span><br>
+                            {{ Amend.md(comment.text, p=False) }}
+                        </span>
                         <span class="text-secondary">
                             {{ Amend.username(comment.user.username) }}, {{ Amend.datetime(comment.datetime) }}
                         </span><br>

@@ -25,7 +25,8 @@ def create_question():
                             title=title,
                             text=text,
                             is_anon=anon,
-                            datetime=Check.time())
+                            datetime=Check.time(),
+                            last_edited=Check.time())
         db.session.add(question)
         db.session.commit()
         user_id = session.get('user_id')
