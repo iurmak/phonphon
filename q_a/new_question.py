@@ -35,5 +35,5 @@ def create_question():
             question_id=question.question_id
         ))
         db.session.commit()
-        Emails.send('Новый вопрос на сайте', f'На сайте задали новый вопрос: <a href="{url_for("question", question_id=question.question_id, _external=True)}">{Amend.md(question.title)}</a>. Его содержание:<br><br>{Amend.md(question.text)}', 'iurmak@bk.ru')
+        #Emails.send('Новый вопрос на сайте', f'На сайте задали новый вопрос: <a href="{url_for("question", question_id=question.question_id, _external=True)}">{Amend.md(question.title)}</a>. Его содержание:<br><br>{Amend.md(question.text)}', 'iurmak@bk.ru')
         return redirect(url_for('questions'))
