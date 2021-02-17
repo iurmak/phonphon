@@ -37,7 +37,7 @@ def questions(page=1):
                 for token in punct.sub('', q.text).split():
                     res[q.question_id].append(morph.parse(token)[0].normal_form.lower())
             for q in res:
-                if query in res[q]:
+                if query in res[q][0]:
                     questions.append(Question.query.get(q))
             answerers = dict()
             for question in questions:
@@ -54,7 +54,7 @@ def questions(page=1):
                 for token in punct.sub('', q.title).split():
                     res[q.question_id].append(morph.parse(token)[0].normal_form.lower())
             for q in res:
-                if query in res[q]:
+                if query in res[q][0]:
                     questions.append(Question.query.get(q))
             answerers = dict()
             for question in questions:
