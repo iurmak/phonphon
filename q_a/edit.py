@@ -17,7 +17,7 @@ def edit(type, id):
             if session.get('status') != 2 and session.get('user_id') != Answer.query.get(id).user_id:
                 return Check.status()
             return render_template('edit.html',
-                                   question=Markup(Amend.md(Answer.query.get(id).question.text)),
+                                   #question=Markup(Amend.md(Answer.query.get(id).question.text)),
                                    current_text=Answer.query.get(id).text,
                                    question_author=Amend.username(Answer.query.get(id).question.user.username),
                                    answer_author=Amend.username(Answer.query.get(id).answerer.username)
